@@ -13,7 +13,7 @@ So, before diving into the code, and learn how to use the `ft_regex` function, w
 # How a regular expression works ?
 
 As told earlier, a regular expression is just a bunch of charcaters that are either a metacharacter or a literal character.
-A metacharacter do not define itself, and controls how the matching is done. Where a literal character define itself.
+A metacharacter do not define itself, and controls how the matching is done where a literal character define itself.
 For example the regex `abc.` *abc* are literal characters, which matches just *abc*, while *.* is a metacharacter, which matches any single character. So this regex might match different strings that starts with *abc* and ends with any single character. This regex engine would rather define the regex as `abc?`.
 
 Well i wont give a hole tutorial on how regular expression works as it is defenitely not the goal of this. But you could check [this website](https://www.regular-expressions.info/tutorial.html) to learn more.
