@@ -30,7 +30,7 @@ Something else to know that i forgot to mention, is that there is no such as bac
 
 But how would you match these metacharacters you ask me ? Well i will go straight to the answer : `?[?]`.
 
-Here we used the braces '[]' to have more control on what should match, we specify inside the braces the only characters that shall match, in this case the question mark. If you remembered the question mark means match only once, so the wildcard (`*[?]`) awaits any number of question marks and will eventually match strings that only contains question marks.
+Here we used the braces '[]' to have more control on what should match, we specifed inside the braces the only characters that shall match, in this case the question mark. If you remember the question mark means match only once, so the wildcard (`*[?]`) awaits any number of question marks and will eventually match strings that only contains question marks.
 
 So as i said earlier this regex follow the same 'idea', and in this context the braces works the same, so to specify a range for example, `*[A-Z0-9?*]` will match any character between A-Z, so uppercase letters, or between 0-9, so digits, or the characters question mark or wildcard, and we used the wildcard which means that it wont stop after the first match and will continue if possible.
 
@@ -60,3 +60,15 @@ There is a question that has not been raised yet which concerns how the braces w
 We would get something of this shape `?[{{...}}]`, and here we reached the limitation of not using backslashes, because with this solution how would you have a character set that starts with an opening curly bracket ? You may think that this question does not make any sense as the order of a character set shall not change it's behaviour, well it is true for this context but not for the context of rules, that are going to be seen in the next part (finally). To counter this other problem, backslashing is coming back but stays only for the very first character, and it just cancel the meaning of the '\\' and the '{' characters. So the solution of the problem is `?[{\{...}]` or `?[{{{{\\....}}}}]` or `?[{...]...}]`. The '@' sign should always appair before whatever closing has been used: `?[{{...@=3}}]`.
 
 At this point we solve the backslashing problem.
+
+## The concept of rules
+
+We finally get to the main power of the `ft_regex` engine. The rules.
+
+A rule is no more than the equivalent of a function in programming languages. It takes an input (the string), and gives an output (does it match and how many times). A rule is just a way to group other regexes, for example we could imagine a rule that checks if the match is an alphabetic character: `alpha:?[A-Za-z]`. So when we call the `alpha` rule it will, in fact, check if the character is between 'A' and 'Z' or 'a' and 'z'. And this rule already exists, and there are many others that abstract a bunch of things.
+
+To call a rule you would need to put the rule name right after the '@' sign: `?[@alnum]` is the equivalent of `?[a-zA-Z0-9]`. And all of the negating and quantifying stuff still works: `*[@digit>3]` will awaits more than three digits. And all the other features that are available in regex engines are available in this regex engine through rules.
+
+It is mainly the case of the `or` rule, that simply matches at least one of the regexes: `*[ok?[@digit]|?[@alpha]@or]` shall match one or more times, the literal characters *ok* followed by a digit, or an alphabetic character. And this could be a rule: `strange_rule:*[ok?[@digit]|?[@alpha]@or]`, you should have seen that what separates the regexes is the '|' character so in this context it loses its literal meaning, and if we wanted to match this character we would do the same as for the metacharacters `?[|]`. And in this example we understand that rules receives in reality two input, the string to match and an optional argument which is specified before the '@' sign.
+
+The truth is that everything is a rule, and even when you try to match a character set: `?[abc]` you are in fact calling a rule named 'DEFAULT' so it is the same as typing `?[abc@DEFAULT]`. Which is good, because it means that a rule doesn't need to call other rules in order to work they can also call C functions ! We can conclude that rules are not limited to the power of other rules but of the C programming language !
