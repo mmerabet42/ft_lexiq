@@ -82,9 +82,15 @@ Here is a non-exhaustive list of available rules.
 | --- | --- | --- | --- | --- |
 | `@or` | Test multiple matches | C function | `reg?[ex\|ular expression@or]?[s@?]` | Might match 'regex' 'regular expression' 'regexs' or 'regular expressions' |
 | `@case` | Compare the strings ignoring case | C function | `?[hello@case] world` | Will match any possible form of the 'hello' string followed by ' world' |
-| `@^` | Beginning of string | C function | `?[@^]hello` | Match 'hello' at the beginning of the string |
-| `@$` | End of string | C function | `hello?[@$]` | Match 'hello' at the end of the string |
-| `@^n` | Beginning of string or line | C function | `?[@^n]hello` | Match all 'hello' at the beginning of a string or a line |
+| `@^` | Beginning of string | C function | `?[@^]hello` | Match 'hello' at the really beginning of a string |
+| `@$` | End of string | C function | `hello?[@$]` | Match 'hello' at the really end of a string |
+| `@^n` | Beginning of string or line | C function | `?[@^n]hello` | Match 'hello' at the beginning of a string or a line |
 | `@$n` | End of string or line | C function | `hello?[@$n]` | The string 'hello' shall occur at the end of a string or a line |
 | `@^w` | Beginning of string, line or word | C function | `?[@^w]hello` | Will match the string 'hello' if it is at the beginning of a string, line or if it is preceeded by any space character |
 | `@$w` | End of string, line or word | C function | `?[@^w]hello` | Will match the string 'hello' if it is at the end of a string, line or if it is followed by any space character |
+| `@upper` | Any uppercase letter | Inline regex | `*![@upper=3]` | Awaits three characters that are not uppercase letter |
+| `@lower` | Any lowercase letter | Inline regex | `?[@upper]*[@lower]` | An uppercase letter followed by any number of lowercase letter |
+| `@and` | All regexes shall match | C function | `*[?![@upper]&?![@lower]@and]` | Any number of character that are neither an uppercase letter nor a lowercase letter, equivalent of `*![@alpha]` |
+| `@word` | Any word character | Inline regex | `?[@^w]*[@word=3]?[@$w]` | Match words that are of exactly three characters long, without the word boundaries it would match three character words anywhere |
+| `@space` | Any space character | Inline regex | `?![@space]` | Not a space |
+| `@int` | Match a valid integer | Inline regex | `?[@int]` | An integer might start with zero or more space followed by minus or a plus sign followed by one or more digits |
