@@ -6,7 +6,7 @@ The regex engine i am going to present you works differently, and has a differen
 
 First of all, it is important to know that it has started as a school project, so it may not be perfect, and has definetely a tons of flaws.
 
-Secondly, this regex engine does not compile or precompile, it reads the regex string character by character without using dynamic allocation. It uses the concept of 'rules' which is where the main difference and power stands, we will get to it later.
+Secondly, this regex engine does not compile or precompile or whatever, it reads the regex expression character by character without using dynamic allocation. It uses the concept of 'rules' which is where the main difference and power stands, we will get to it later.
 
 So, before diving into the code, and learn how to use the `ft_regex` function, we will first look at the syntax.
 
