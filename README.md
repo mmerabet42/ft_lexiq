@@ -46,9 +46,10 @@ Now what if you want an '@' sign inside of a character set as there is no such a
 So with quantifying we could mimic the question mark behaviour with the wildcard `*[...@=1]`.
 Never forget that quantifying only works with the wildcard metacharacter and wont have any effect with the question mark metacharacter, it wont make any sense otherwise.
 
-There are two other operators that are used for quantifying matches, they are:
+There are three other operators that are used for quantifying matches, they are:
 - `[...@<n]`, the match shall occur less than n times.
 - `[...@>n]`, the match shall occur more than n times.
+- `[...@?]`, the match is optional, and will be ignored if the match is false.
 
 It is possible to give an empty character set to both of the metacharacters, for the wildcard it means match any single character between one and unlimited times, while the wildcard alone means match between zero and unlimited times For the question mark it doesn't change it's behaviour and will always match any single character once and only once.
 
@@ -74,3 +75,10 @@ It is mainly the case of the `or` rule, that simply matches at least one of the 
 The truth is that everything is a rule, and even when you try to match a character set: `?[abc]` you are in fact calling a rule named 'DEFAULT' so it is the same as typing `?[abc@DEFAULT]`. Which is good, because it means that a rule doesn't need to call other rules in order to work they can also call C functions ! We can conclude that rules are not limited to the power of other rules but of the C programming language !!
 
 It is commonly known that regexes are limited, and `ft_regex` is no exception, but with the concept of rules we break all limitations.
+
+Here is a non-exhaustive list of available rules.
+
+| Name | Description | Method | Example | Explanation |
+| --- | --- | --- | --- | --- |
+| or | Test multiple matches | C function | `reg?[ex\|ular expression@or]?[s@?]` | Might match 'regex' 'regular expression' 'regexs' or 'regular expressions' |
+| case | Compare the strings ignoring case | C function | `?[hello@case]` | Will match any possible form of the 'hello' string |
