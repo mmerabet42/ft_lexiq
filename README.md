@@ -73,4 +73,4 @@ It is mainly the case of the `or` rule, that simply matches at least one of the 
 
 The truth is that everything is a rule, and even when you try to match a character set: `?[abc]` you are in fact calling a rule named 'DEFAULT' so it is the same as typing `?[abc@DEFAULT]`. Which is good, because it means that a rule doesn't need to call other rules in order to work they can also call C functions ! We can conclude that rules are not limited to the power of other rules but of the C programming language !
 
-It is commonly known that regexes are limited, and `ft_regex` is no exception, but with the concept of rules we break all barrier.
+It is commonly known that regexes are limited, and `ft_regex` is no exception, but with the concept of rules we break all limitations.
