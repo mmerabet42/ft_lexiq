@@ -95,3 +95,6 @@ Here is a non-exhaustive list of available rules.
 | `@space` | Any space character | Inline regex | `?![@space]` | Not a space |
 | `@int` | Match a valid integer | Inline regex | `?[@int]` | An integer might start with zero or more space followed by minus or a plus sign or nothing followed by one or more digits |
 | `@X` | Nested regex | C function | `*[?[@int]:*;@X=3]` | Awaits three times an integer followed by ':' then zero or more  of any single character that ends with ';' |
+| `@R` | The regex is matched recursively | C function | `(*[?![()]\|?[@R]@or])` | Match nested parenthesis, this can also be done with a rule calling itself |
+| `@E` | Arithmetic expressions with variables | C function | `?[n=e+5@E]` | Add the value of *e* with five and put the result in variable *n* |
+| `@debug` | Print information about the current state of the regex | C function | `?[@debug]` | Print informations |
