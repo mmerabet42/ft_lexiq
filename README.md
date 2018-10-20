@@ -72,7 +72,7 @@ To call a rule you would need to put the rule name right after the '@' sign: `?[
 
 It is mainly the case of the `or` rule, that simply matches at least one of the regexes: `*[ok?[@digit]|?[@alpha]@or]` shall match one or more times, the literal characters *ok* followed by a digit, or an alphabetic character. And this could be a rule: `strange_rule:*[ok?[@digit]|?[@alpha]@or]`, you should have seen that what separates the regexes is the '|' character so in this context it loses its literal meaning, and if we wanted to match this character we would do the same as for the metacharacters `?[|]`. And in this example we understand that rules receives in reality two input, the string to match and an optional argument which is specified before the '@' sign.
 
-The truth is that everything is a rule, and even when you try to match a character set: `?[abc]` you are in fact calling a rule named 'DEFAULT' so it is the same as typing `?[abc@DEFAULT]`. Which is good, because it means that a rule doesn't need to call other rules in order to work they can also call C functions ! We can conclude that rules are not limited to the power of other rules but of the C programming language !!
+The truth is that everything is a rule, and even when you try to match a character set: `?[abc]` you are in fact calling a rule named 'DEFAULT' so it is the same as typing `?[abc@DEFAULT]`. Which is good, because it means that a rule doesn't need to call other rules in order to work, they can also call C functions ! We can conclude that rules are not limited to the power of other rules but of the C programming language !!
 
 It is commonly known that regexes are limited, and `ft_regex` is no exception, but with the concept of rules we break all limitations.
 
@@ -82,4 +82,9 @@ Here is a non-exhaustive list of available rules.
 | --- | --- | --- | --- | --- |
 | `@or` | Test multiple matches | C function | `reg?[ex\|ular expression@or]?[s@?]` | Might match 'regex' 'regular expression' 'regexs' or 'regular expressions' |
 | `@case` | Compare the strings ignoring case | C function | `?[hello@case] world` | Will match any possible form of the 'hello' string followed by ' world' |
-| 
+| `@^` | Beginning of string | C function | `?[@^]hello` | Match 'hello' at the beginning of the string |
+| `@$` | End of string | C function | `hello?[@$]` | Match 'hello' at the end of the string |
+| `@^n` | Beginning of string or line | C function | `?[@^n]hello` | Match all 'hello' at the beginning of a string or a line |
+| `@$n` | End of string or line | C function | `hello?[@$n]` | The string 'hello' shall occur at the end of a string or a line |
+| `@^w` | Beginning of string, line or word | C function | `?[@^w]hello` | Will match the string 'hello' if it is at the beginning of a string, line or if it is preceeded by any space character |
+| `@$w` | End of string, line or word | C function | `?[@^w]hello` | Will match the string 'hello' if it is at the end of a string, line or if it is followed by any space character |
