@@ -80,5 +80,6 @@ Here is a non-exhaustive list of available rules.
 
 | Name | Description | Method | Example | Explanation |
 | --- | --- | --- | --- | --- |
-| or | Test multiple matches | C function | `reg?[ex\|ular expression@or]?[s@?]` | Might match 'regex' 'regular expression' 'regexs' or 'regular expressions' |
-| case | Compare the strings ignoring case | C function | `?[hello@case] world` | Will match any possible form of the 'hello' string followed by ' world' |
+| `@or` | Test multiple matches | C function | `reg?[ex\|ular expression@or]?[s@?]` | Might match 'regex' 'regular expression' 'regexs' or 'regular expressions' |
+| `@case` | Compare the strings ignoring case | C function | `?[hello@case] world` | Will match any possible form of the 'hello' string followed by ' world' |
+| 
