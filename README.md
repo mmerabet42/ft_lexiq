@@ -94,4 +94,4 @@ Here is a non-exhaustive list of available rules.
 | `@word` | Any word character | Inline regex | `?[@^w]*[@word=3]?[@$w]` | Match words that are of exactly three characters long, without the word boundaries it would match three character words anywhere |
 | `@space` | Any space character | Inline regex | `?![@space]` | Not a space |
 | `@int` | Match a valid integer | Inline regex | `?[@int]` | An integer might start with zero or more space followed by minus or a plus sign or nothing followed by one or more digits |
-| `@X` | Nested regex | C function | `*[?[@int]:*;@X=3]` | Awaits three times an integer followed by ':' then zero or more any single character that ends with ';' |
+| `@X` | Nested regex | C function | `*[?[@int]:*;@X=3]` | Awaits three times an integer followed by ':' then zero or more  of any single character that ends with ';' |
