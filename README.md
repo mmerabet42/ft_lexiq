@@ -202,7 +202,7 @@ Here is a list of all the flags (they can be all combined):
 | RGX_GET | Returns a linked list of all the added rules | `t_list **rules` |
 | RGX_UGLOBAL | Stores in a linked list the non-matching part of the string, it 'splits' the string, to be distinguished from other matches, their id is equal to -1 | `t_list **matches` |
 | RGX_GLOBAL | Stores in a linked list the matching part of the string | `t_list **matches` |
-| RGX_FREE | Free the linked list previously returned by a call of `ft_regex` with the `RGX_GLOBAL` or `RGX_UGLOBAL` flag | |
+| RGX_FREE | Free the linked list previously returned by a call of `ft_regex` with the `RGX_GLOBAL` or `RGX_UGLOBAL` flag | `t_list **matches` |
 | RGX_CLEAN | Clean and free all the rules that were added manually with `ft_regex` and the `RGX_ADD` flag | |
 
 And here is the order of prototyping:
@@ -213,5 +213,5 @@ And here is the order of prototyping:
 | RGX_RGXN \| RGX_STRN \| RGX_GLOBAL \| RGX_UGLOBAL \| RGX_VAR | `int rgxn, int strn, t_list **matches, int vars[52]` |
 | RGX_ADD \| RGX_ID | `t_regex_funcptr *func, int id` |
 | RGX_GET | `t_list **rules` |
-| RGX_FREE | |
+| RGX_FREE | `t_list **matches` |
 | RGX_CLEAN | |
