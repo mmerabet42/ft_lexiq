@@ -141,7 +141,7 @@ int pos;
 int len = ft_regex(RGX_POS | RGX_END, "*[@digit>2]", "The number is 12 or 569 ?", &pos);
 ```
 
-Will match the first three or more following digits in the string which are *569*, `pos` is equal to 20 as it is the position of the matched pattern, and `len` is 3 as it is the number of matched characters.
+Will match the first three or more following digits in the string which is *569*, `pos` is equal to 20 as it is the position of the matched pattern, and `len` is the number of matched characters which is 3.
 
 There are other flags, but it is not really usefull to mention them as they are used by the most important one: `RGX_GLOBAL`. This flag wont stop after the first match and will store all matches in a linked list.
 ```C
@@ -182,9 +182,9 @@ What if we want to match five character words too ? Well we first add a rule:
 ```C
 ft_regex(RGX_ADD, NULL, "five_char_word:?[@^w]*[@word=5]?[@$w]", NULL)
 ```
-Then we call the regex function with this regex: `?[?[@three_char_word]|?[@five_char_word]@or]`. This way we will match three character words and five character words, so we get a fourth match which is 'Hello', but now with rules the 't_regex_match.id' attribute might point to different rules depending on what matched.
+Then we call the regex function with this regex: `?[?[@three_char_word]|?[@five_char_word]@or]`. This way we will match three character words and five character words, so we get a fourth match which is 'Hello', but now the 't_regex_match.id' attribute might point to different rules depending on what matched.
 
-You might have wondered what is the 'NULL' parameter at the end, well you have to know that a rule is either an inline regex, meaning that it is defined by another regex, or a function callback which means that if the rule is called it will in fact call a C function which is the last parameter. Here is its prototype:
+You might have wondered what is the 'NULL' parameter at the end, well you have to know that a rule is either an inline regex, meaning that it is defined by another regex, or a function callback which means that if the rule is called it will in fact call a C function specified by the last parameter. Here is its prototype:
 ```C
 int (*callback)(t_regex_info *, t_regex_rule *)
 ```
