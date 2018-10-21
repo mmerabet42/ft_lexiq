@@ -108,7 +108,7 @@ You can have the `@E` to work like an if by placing a zero instead of a variable
 
 # `ft_regex`
 
-Now that we have seen how this regex engine works (and why it might be powerfull ?) let's dive into the code and how we can use it.
+Now that we have seen how this regex engine works (and why it might be powerfull ?) let's dive into the code and let's see how we can use it.
 
 Everything is done through one and only one function:
 ```C
@@ -143,13 +143,18 @@ int pos;
 int len = ft_regex(RGX_POS | RGX_END, "*[@digit>2]", "The number is 12 or 569 ?", &pos);
 ```
 
-Will match the first three or more following digits in the string which are *569*, `pos` is equal to 20 as it the position of the matched pattern, and `len` is 3 as it is the number of matched characters.
+Will match the first three or more following digits in the string which are *569*, `pos` is equal to 20 as it is the position of the matched pattern, and `len` is 3 as it is the number of matched characters.
 
 There are other flags, but it is not really usefull to mention them as they are used by the most important one: `RGX_GLOBAL`. This flag wont stop after the first match and will store all matches in a linked list.
 ```C
 t_list *matches;
 int num_of_matches = ft_regex(RGX_GLOBAL, "*[@word]", "Hello word, how are you ?", &matches);
 ```
+You can use the `ft_print_matches` to hightlight all the matches.
+```C
+void ft_print_matches(const char *string, t_list *matches)
+```
+
 The returned linked list is constitued of `t_regex_match` structures:
 ```C
 struct t_regex_match
@@ -160,3 +165,23 @@ struct t_regex_match
   int         id; // An identifier to precise what matched
 };
 ```
+
+The fourth attribute is way to distinguish what matched, and it has something to do with rules, we will see it in the next part.
+
+## Adding rules
+
+As told earlier with the concept of rules, we can add rules by ourselves, and this is done with the RGX_ADD flag:
+```C
+ft_regex(RGX_ADD, NULL, "three_char_words:?[@^w]*[@word=3]?[@$w]", NULL)
+```
+Will add a rule named 'three_char_words', which by his definition will match only three character words. The function returns the id of the rule, that is used to dinstinguish it from other rules.
+So in this example:
+```C
+ft_regex(RGX_GLOBAL, "?[@three_char_word]", "Hello, budy how are you ?", &matches)
+```
+There are three matches 'how' 'are' and 'you', which are exactly three character words.
+What if we want to match five character words too ? Well first we add a rule:
+```C
+ft_regex(RGX_ADD, NULL, "five_char_word:?[@^w]*[@word=5]?[@$w]", NULL)
+```
+And we call the regex function with this regex: `?[?[@three_char_word]|?[@five_char_word]@or]`. This way we will match three character words and five character words, so we get a fourth match which is 'Hello', but now with rules the 't_regex_match.id' attribute might point to different rules depending on what matched.
