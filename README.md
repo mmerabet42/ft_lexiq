@@ -100,7 +100,7 @@ Here is a non-exhaustive list of available rules.
 
 ## Variables
 
-A rule that i didn't really talked about, is the arithmetic expression rule, which alows you to make operations like adding, subtracting, assigning, etc. The engine is limited to 52 variables, 26 lowercase letters and 26 uppercase letters. To use them you will need the `@E` rule and they can be used for quantifying `*[@digit=n]`. `?[N=3@E]` will assign the number 3 to the variable *N*, `?[n:*[ ]@E]` will assign to *n* the number of spaces. It is important to mention that this rule does not consume characters so the spaces wont be consumed, and they still need to be matched: `?[n:*[ ]@E]*[ ]`, to consume them you will need to use the ';' operator instead of the ':'. All the usual operators are available:
+A rule that i didn't really talked about, is the arithmetic expression rule, which alows you to make operations like adding, subtracting, assigning, etc. The engine is limited to 52 variables, 26 lowercase letters and 26 uppercase letters. To use them you will need the `@E` rule and they can be used for quantifying for example `*[@digit=n]`. `?[N=3@E]` will assign the number 3 to the variable *N*, `?[n:*[ ]@E]` will assign to *n* the number of spaces. It is important to mention that this rule does not consume characters so the spaces wont be consumed, and they still need to be matched: `?[n:*[ ]@E]*[ ]`, to consume them you will need to use the ';' operator instead of the ':'. All the usual operators are available:
 - `+` addition, `-` subtraction, `*` multiplication, `/` division and `%` modulus.
 - `>` greater than, `<` less than, `=` equals, `!` different.
 
