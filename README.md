@@ -96,5 +96,10 @@ Here is a non-exhaustive list of available rules.
 | `@int` | Match a valid integer | Inline regex | `?[@int]` | An integer might start with zero or more space followed by minus or a plus sign or nothing followed by one or more digits |
 | `@X` | Nested regex | C function | `*[?[@int]:*;@X=3]` | Awaits three times an integer followed by ':' then zero or more  of any single character that ends with ';' |
 | `@R` | The regex is matched recursively | C function | `(*[?![()]\|?[@R]@or])` | Match nested parenthesis, this can also be done with a rule calling itself |
-| `@E` | Arithmetic expressions with variables | C function | `?[n=e+5@E]` | Add the value of *e* with five and put the result in variable *n* |
-| `@debug` | Print information about the current state of the regex | C function | `?[@debug]` | Print informations |
+| `@debug` | Print information about the current state of the regex without consuming any characters | C function | `?[@debug]` | Print informations |
+
+## Variables
+
+A rule that i didn't really talked about, is the arithmetic expression rule, which alows you to make operations like adding, subtracting, assigning, etc. The engine is limited to 52 variables, 26 lowercase letters and 26 uppercase letters. To use them you will need the `@E` rule and they can be used for quantifying `*[@digit=n]`. `?[N=3@E]` will assign the number 3 to the variable *N*, `?[n:*[ ]@E]` will assign to *n* the number of space. It is important to mention that this rule does not consume characters so the spaces wont be consumed, and they still need to be matched: `?[n:*[ ]@E]*[ ]`, to consume them you will need to use the ';' operator instead of the ':'. By placing a zero instead of a variable will alows to check conditions: `?[0=n=3@E]`, you are checking if *n* is equal to three. All the usual operators are available:
+- `+` addition, `-` subtraction, `*` multiplication, `/` division and `%` modulus.
+- `>` greater than, `<` less than, `=` equals, `!` different.
