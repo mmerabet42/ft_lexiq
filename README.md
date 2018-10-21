@@ -189,7 +189,7 @@ You might have wondered what is the 'NULL' parameter at the end, well you have t
 int (*callback)(t_regex_info *, t_regex_rule *)
 ```
 
-Here is a list of all the flags (they can be all combined):
+Here is a table of all the flags:
 
 | Flag | Description | Prototype |
 | --- | --- | --- |
@@ -205,7 +205,7 @@ Here is a list of all the flags (they can be all combined):
 | RGX_FREE | Free the linked list previously returned by a call of `ft_regex` with the `RGX_GLOBAL` or `RGX_UGLOBAL` flag | `t_list **matches` |
 | RGX_CLEAN | Clean and free all the rules that were added manually with `ft_regex` and the `RGX_ADD` flag | |
 
-And here is the order of prototyping:
+And here is a table of all the possible combination with their order:
 
 | Flags | Prototyping order |
 | --- | --- |
