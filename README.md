@@ -206,6 +206,12 @@ Here is a list of all the flags (they can be all combined):
 | RGX_CLEAN | Clean and free all the rules that were added manually with `ft_regex` and the `RGX_ADD` flag | |
 
 And here is the order of prototyping:
+
 | Flags | Prototyping order |
 | --- | --- |
-| RGX_RGXN \| RGX_STRN \| RGX_POS \| RGX_END \| RGX_VAR \| RGX_ID | `int rgxn, int strn, int *pos, int *id, int vars[52] |
+| RGX_RGXN \| RGX_STRN \| RGX_POS \| RGX_END \| RGX_VAR \| RGX_ID | `int rgxn, int strn, int *pos, int *id, int vars[52]` |
+| RGX_RGXN \| RGX_STRN \| RGX_GLOBAL \| RGX_UGLOBAL \| RGX_VAR | `int rgxn, int strn, t_list **matches, int vars[52]` |
+| RGX_ADD \| RGX_ID | `t_regex_funcptr *func, int id` |
+| RGX_GET | `t_list **rules` |
+| RGX_FREE | |
+| RGX_CLEAN | |
