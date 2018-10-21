@@ -111,6 +111,6 @@ You can have the `@E` to work like an if by placing a zero instead of a variable
 Now that we have seen how this regex engine works (and why it might be powerfull ?) let's dive into the code and how you can use it.
 
 Everything is done through one and only one function:
-> `int  ft_regex(int flags, const char *regex, const char *string, ...)`
+> **`int  ft_regex(int flags, const char *regex, const char *string, ...)`**
 
 
