@@ -111,16 +111,28 @@ You can have the `@E` to work like an if by placing a zero instead of a variable
 Now that we have seen how this regex engine works (and why it might be powerfull ?) let's dive into the code and how we can use it.
 
 Everything is done through one and only one function:
-> **`int  ft_regex(int flags, const char *regex, const char *string, ...)`**
+```C
+int  ft_regex(int flags, const char *regex, const char *string, ...)
+```
 
 The way it behaves depends on the `flags` it receives, the `regex` is the search pattern which `string` will be the subject.
 
 By default, with no flags, the `string` argument shall entirely match the `regex` string.
-> `ft_regex(0, "?[@upper]*[@lower]", "Hello")`
+```C
+ft_regex(0, "?[@upper]*[@lower]", "Hello")
+```
 
 In this example the match is correct, and the function returns the number of matches which is 5.
 
 But
-> `ft_regex(0, "?[@upper]", "Hello")`
+```C
+ft_regex(0, "?[@upper]", "Hello")
+```
 
 Wont match because the search pattern only ask for an uppercase letter, so the function returns -1.
+The `RGX_END` flag will allow us to match string that at least starts with the given search pattern.
+```
+ft_regex(RGX_END, "?[@upper]", "Hello")
+```
+
+Matches only once, because it at least start with an uppercase letter, this call returns 1.
