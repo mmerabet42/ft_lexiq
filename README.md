@@ -164,7 +164,7 @@ struct t_regex_match
 };
 ```
 
-The fourth attribute is way to distinguish what matched, and it has something to do with rules, we will see it in the next part.
+The fourth attribute is a way to distinguish what matched, and it has something to do with rules, we will see it in the next part.
 
 ## Adding rules
 
@@ -172,19 +172,31 @@ As told earlier with the concept of rules, we can add rules by ourselves, and th
 ```C
 ft_regex(RGX_ADD, NULL, "three_char_words:?[@^w]*[@word=3]?[@$w]", NULL)
 ```
-Will add a rule named 'three_char_words', which by his definition will match only three character words. The function returns the id of the rule, that is used to dinstinguish it from other rules.
+Will add a rule named 'three_char_words' and defines any three character words. The function returns the id of the rule, that is used to dinstinguish it from other rules.
 So in this example:
 ```C
 ft_regex(RGX_GLOBAL, "?[@three_char_word]", "Hello, budy how are you ?", &matches)
 ```
 There are three matches 'how' 'are' and 'you', which are exactly three character words.
-What if we want to match five character words too ? Well we first add a rule:
+What if we wanted to match five character words too but still distinguish them from three character words ? Well we first add a rule that matches words with five characters:
 ```C
 ft_regex(RGX_ADD, NULL, "five_char_word:?[@^w]*[@word=5]?[@$w]", NULL)
 ```
-Then we call the regex function with this regex: `?[?[@three_char_word]|?[@five_char_word]@or]`. This way we will match three character words and five character words, so we get a fourth match which is 'Hello', but now the 't_regex_match.id' attribute might point to different rules depending on what matched.
+Then we call the regex function with this regex: `?[?[@three_char_word]|?[@five_char_word]@or]`. Here the regex says, 'i want three character words OR five character words. So we get a fourth match from the initial ones which is 'Hello', but now the 't_regex_match.id' attribute might point to different rules depending on what matched.
 
 You might have wondered what is the 'NULL' parameter at the end, well you have to know that a rule is either an inline regex, meaning that it is defined by another regex, or a function callback which means that if the rule is called it will in fact call a C function specified by the last parameter. Here is its prototype:
 ```C
 int (*callback)(t_regex_info *, t_regex_rule *)
 ```
+
+Here is a list of the flags that were not mentioned (they can be all combined):
+| Flag | Description |
+| --- | --- |
+| RGX_RGXN | The first n characters of the search pattern shall match |
+| RGX_STRN | The first n characters of the string shall match |
+| RGX_VAR | Alows you to receive existing variables in parameter instead of starting with fresh ones |
+| RGX_ID | Returns the id of the last called rule in an int pointer |
+| RGX_GET | Returns a linked list of all the added rules |
+| RGX_FREE | Free the linked list previously returned by a call of `ft_regex` with the `RGX_GLOBAL` flag |
+| RGX_CLEAN | Clean and free all the rules that were added manually with `ft_regex` and the `RGX_ADD` flag |
+| RGX_UGLOBAL | Stores in a linked list the non-matching part of the string, it 'splits' the string |
