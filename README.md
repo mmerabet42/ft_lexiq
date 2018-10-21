@@ -106,3 +106,11 @@ A rule that i didn't really talked about, is the arithmetic expression rule, whi
 
 You can have the `@E` to work like an if by placing a zero instead of a variable name at the beginning: `?[0=n<e@E]` will be true only of *n* is less than *e*.
 
+# `ft_regex`
+
+Now that we have seen how this regex engine works (and why it might be powerfull ?) let's dive into the code and how you can use it.
+
+Everything is done through one and only one function:
+> `int  ft_regex(int flags, const char *regex, const char *string, ...)`
+
+
