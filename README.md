@@ -189,15 +189,18 @@ You might have wondered what is the 'NULL' parameter at the end, well you have t
 int (*callback)(t_regex_info *, t_regex_rule *)
 ```
 
-Here is a list of the flags that were not mentioned (they can be all combined):
+Here is a list of all the flags (they can be all combined):
 
-| Flag | Description |
-| --- | --- |
-| RGX_RGXN | The first n characters of the search pattern shall match |
-| RGX_STRN | The first n characters of the string shall match |
-| RGX_VAR | Alows you to receive existing variables in parameter instead of starting with fresh ones |
-| RGX_ID | Returns the id of the last called rule in an int pointer |
-| RGX_GET | Returns a linked list of all the added rules |
-| RGX_FREE | Free the linked list previously returned by a call of `ft_regex` with the `RGX_GLOBAL` flag |
-| RGX_CLEAN | Clean and free all the rules that were added manually with `ft_regex` and the `RGX_ADD` flag |
-| RGX_UGLOBAL | Stores in a linked list the non-matching part of the string, it 'splits' the string |
+| Flag | Description | Prototype |
+| --- | --- | --- |
+| RGX_RGXN | The first n characters of the search pattern shall match | `int rgxn` |
+| RGX_STRN | The first n characters of the string shall match | `int strn` |
+| RGX_POS | Stores the starting position of the matched pattern | `int *pos` |
+| RGX_END | The rest of the string is ignored, and should at least start with the given search pattern | |
+| RGX_VAR | Alows you to receive existing variables in parameter instead of starting with fresh ones | `int vars[52]` |
+| RGX_ID | Returns the id of the last called rule in an int pointer | `int *id` |
+| RGX_GET | Returns a linked list of all the added rules | `t_list **rules` |
+| RGX_UGLOBAL | Stores in a linked list the non-matching part of the string, it 'splits' the string, to be distinguished from other matches, their id is equal to -1 | `t_list **matches` |
+| RGX_GLOBAL | Stores in a linked list the matching part of the string | `t_list **matches` |
+| RGX_FREE | Free the linked list previously returned by a call of `ft_regex` with the `RGX_GLOBAL` or `RGX_UGLOBAL` flag | |
+| RGX_CLEAN | Clean and free all the rules that were added manually with `ft_regex` and the `RGX_ADD` flag | |
