@@ -131,8 +131,32 @@ ft_regex(0, "?[@upper]", "Hello")
 
 Wont match because the search pattern only ask for an uppercase letter, so the function returns -1.
 The `RGX_END` flag will allow us to match string that at least starts with the given search pattern.
-```
+```C
 ft_regex(RGX_END, "?[@upper]", "Hello")
 ```
 
 Matches only once, because it at least start with an uppercase letter, this call returns 1.
+
+The `RGX_POS` makes `ft_regex` to return an extra information which is the position of the matched string, and doesn't need to start with the search pattern, the extra information is stored in an int whose address is sent in parameter to the function.
+```C
+int pos;
+int len = ft_regex(RGX_POS | RGX_END, "*[@digit>2]", "The number is 12 or 569 ?", &pos);
+```
+
+Will match the first three or more following digits in the string which are *569*, `pos` is equal to 20 as it the position of the matched pattern, and `len` is 3 as it is the number of matched characters.
+
+There are other flags, but it is not really usefull to mention them as they are used by the most important one: `RGX_GLOBAL`. This flag wont stop after the first match and will store all matches in a linked list.
+```C
+t_list *matches;
+int num_of_matches = ft_regex(RGX_GLOBAL, "*[@word]", "Hello word, how are you ?", &matches);
+```
+The returned linked list is constitued of `t_regex_match` structures:
+```C
+struct t_regex_match
+{
+  const char  *str; // A pointer to the start of the match
+  int         pos; // The position of the matched pattern
+  int         len; // The length of the matched pattern
+  int         id; // An identifier to precise what matched
+};
+```
