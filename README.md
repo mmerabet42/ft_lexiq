@@ -113,4 +113,4 @@ Now that we have seen how this regex engine works (and why it might be powerfull
 Everything is done through one and only one function:
 > **`int  ft_regex(int flags, const char *regex, const char *string, ...)`**
 
-
+The way it behaves depends on the `flags` it receives, the `regex` is the search pattern which `string` will be the subject.
