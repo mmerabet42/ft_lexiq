@@ -180,8 +180,13 @@ So in this example:
 ft_regex(RGX_GLOBAL, "?[@three_char_word]", "Hello, budy how are you ?", &matches)
 ```
 There are three matches 'how' 'are' and 'you', which are exactly three character words.
-What if we want to match five character words too ? Well first we add a rule:
+What if we want to match five character words too ? Well we first add a rule:
 ```C
 ft_regex(RGX_ADD, NULL, "five_char_word:?[@^w]*[@word=5]?[@$w]", NULL)
 ```
-And we call the regex function with this regex: `?[?[@three_char_word]|?[@five_char_word]@or]`. This way we will match three character words and five character words, so we get a fourth match which is 'Hello', but now with rules the 't_regex_match.id' attribute might point to different rules depending on what matched.
+Then we call the regex function with this regex: `?[?[@three_char_word]|?[@five_char_word]@or]`. This way we will match three character words and five character words, so we get a fourth match which is 'Hello', but now with rules the 't_regex_match.id' attribute might point to different rules depending on what matched.
+
+You might have wondered what is the 'NULL' parameter at the end, well you have to know that a rule is either an inline regex, meaning that it is defined by another regex, or a function callback which means that if the rule is called it will in fact call a C function which is the last parameter. Here is its prototype:
+```C
+int (*callback)(t_regex_info *, t_regex_rule *)
+```
