@@ -190,6 +190,7 @@ int (*callback)(t_regex_info *, t_regex_rule *)
 ```
 
 Here is a list of the flags that were not mentioned (they can be all combined):
+
 | Flag | Description |
 | --- | --- |
 | RGX_RGXN | The first n characters of the search pattern shall match |
