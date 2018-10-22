@@ -189,6 +189,8 @@ You might have wondered what is the 'NULL' parameter at the end, well you have t
 int (*callback)(t_regex_info *, t_regex_rule *)
 ```
 
+I will let you imagine all the possibilities with this.
+
 ## Flags
 
 | Flag | Description | Prototype |
