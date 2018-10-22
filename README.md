@@ -198,7 +198,7 @@ int (*callback)(t_regex_info *, t_regex_rule *)
 | RGX_POS | Stores the starting position of the matched pattern | `int *pos` |
 | RGX_END | The rest of the string is ignored, and should at least start with the given search pattern | |
 | RGX_VAR | Alows you to receive existing variables in parameter instead of starting with fresh ones | `int vars[52]` |
-| RGX_ID | Returns the id of the last called rule in an int pointer. With the RGX_ADD flag it lets specify the id of the rule | `int *id` or `int id` |
+| RGX_ID | Returns the id of the last called rule in an int pointer. With the RGX_ADD flag it lets you specify the id of the rule | `int *id` or `int id` |
 | RGX_GET | Returns a linked list of all the added rules | `t_list **rules` |
 | RGX_UGLOBAL | Stores in a linked list the non-matching part of the string, it 'splits' the string, to be distinguished from other matches, their id is equal to -1 | `t_list **matches` |
 | RGX_GLOBAL | Stores in a linked list the matching part of the string | `t_list **matches` |
