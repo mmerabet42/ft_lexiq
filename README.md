@@ -189,7 +189,28 @@ You might have wondered what is the 'NULL' parameter at the end, well you have t
 int (*callback)(t_regex_info *, t_regex_rule *)
 ```
 
-I will let you imagine all the possibilities with this.
+The function receives two structure, `t_regex_info` gives informations about the regex in general, and `t_regex_rule` gives information about the rule:
+```C
+struct t_regex_info
+{
+  const char  *str_begin; // Pointer to the beginning of the string subject
+  const char  *rgx_begin; // Pointer to the beginning of the regular expression
+  const char  *str; // Current position in the string
+  const char  *regex; // Current position the regular expression
+  int         len; // The number of matched characters
+  int         *vars; // All the 52 variables
+  int         flags; // Currently enabled flags
+};
+
+struct t_regex_rule
+{
+  const char  *rule; // The rule name
+  const char  *arg; // The argument received before the '@' sign, it is not a copy of the argument
+                    // but just a pointer to the beginning of the argument in the 'rgx_begin' string
+  int         len_rule; // The length of the rule name
+  int         len_arg; // The length of the received argument
+};
+```
 
 ## Flags
 
