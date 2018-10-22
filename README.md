@@ -201,7 +201,9 @@ struct t_regex_info
   int         *vars; // All the 52 variables
   int         flags; // Currently enabled flags
 };
+```
 
+```C
 struct t_regex_rule
 {
   const char  *rule; // The rule name
