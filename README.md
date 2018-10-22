@@ -189,14 +189,14 @@ You might have wondered what is the 'NULL' parameter at the end, well you have t
 int (*callback)(t_regex_info *, t_regex_rule *)
 ```
 
-The function receives two structure, `t_regex_info` gives informations about the regex in general, and `t_regex_rule` gives information about the rule:
+The function receives two structures, `t_regex_info` gives informations about the regex in general, and `t_regex_rule` gives information about the rule:
 ```C
 struct t_regex_info
 {
   const char  *str_begin; // Pointer to the beginning of the string subject
   const char  *rgx_begin; // Pointer to the beginning of the regular expression
   const char  *str; // Current position in the string
-  const char  *regex; // Current position the regular expression
+  const char  *regex; // Current position in the regular expression
   int         len; // The number of matched characters
   int         *vars; // All the 52 variables
   int         flags; // Currently enabled flags
@@ -211,6 +211,8 @@ struct t_regex_rule
   int         len_arg; // The length of the received argument
 };
 ```
+
+There are two ways of consuming characters with this method, the first one is to simply return the number of matched characters and the second one is to increment directly the `t_regex_info.str` pointer, the difference is that with the last method the matched characters wont be added to the return of the `ft_regex` function.
 
 ## Flags
 
