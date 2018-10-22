@@ -214,7 +214,7 @@ struct t_regex_rule
 };
 ```
 
-There are two ways of consuming characters with this method, the first one is to simply return the number of matched characters and the second one is to increment directly the `t_regex_info.str` pointer, the difference is that with the last method the matched characters wont be added to the final return of the `ft_regex` function.
+There are two ways of consuming characters with this method, the first one is to simply return the number of matched characters and the second one is to increment directly the `t_regex_info.str` pointer, the difference is that with the last method the matched characters wont be added to the final return of the `ft_regex` function, this is what does the boundary rules (`@$n` and `@$w`).
 
 ## Flags
 
