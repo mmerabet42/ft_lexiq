@@ -1,3 +1,18 @@
+
+### Table of content
+
+* [What is a regular expression ?](https://github.com/mmerabet42/ft_regex#what-is-a-regular-expression-)
+* [How a regular expression works ?](https://github.com/mmerabet42/ft_regex#how-a-regular-expression-works-)
+ * [Two metacharacters are enough](https://github.com/mmerabet42/ft_regex#two-metacharacters-are-enough)
+ * [Negating and quandtifying](https://github.com/mmerabet42/ft_regex#negating-and-quantifying)
+ * [Backslash limitation](https://github.com/mmerabet42/ft_regex#backslash-limitation)
+ * [The concept of rules](https://github.com/mmerabet42/ft_regex#the-concept-of-rules)
+ * [Variables](https://github.com/mmerabet42/ft_regex#variables)
+* [`ft_regex`](https://github.com/mmerabet42/ft_regex#ft_regex-1)
+ * [Adding rules](https://github.com/mmerabet42/ft_regex#adding-rules)
+ * [Flags](https://github.com/mmerabet42/ft_regex#adding-rules)
+
+
 # What is a regular expression ?
 A regular expression (or regex) is a way to define a search pattern, wich is usually used for 'find' operations. 
 There are many regex engines out there in almost all programming languages, and they all follow the same syntax, there could be some differences but in general they do not vary that much.
