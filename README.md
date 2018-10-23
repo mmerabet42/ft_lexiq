@@ -33,7 +33,7 @@ For example the regex `abc.` *abc* are literal characters, which matches just *a
 
 Well i wont give a hole tutorial on how regular expression works as it is defenitely not the goal of this. But you could check [this website](https://www.regular-expressions.info/tutorial.html) to learn more.
 
-## Two metacharacter are enough
+## Two metacharacters are enough
 
 I talked about this regex having only two metacharacter and it should be enough to match any possible string, this is the first reason of it being limited to two, the second one is to keep it simple and generic.
 
