@@ -127,9 +127,9 @@ Now that we have seen how this regex engine works (and why it might be powerfull
 
 Everything is done through one and only one function:
 ```C
-# include "libft/inlcudes/ft_str.h"
+# include "libft/includes/ft_str.h"
 // OR
-#include "libft/includes/ft_regex.h"
+# include "libft/includes/ft_regex.h"
 
 
 
