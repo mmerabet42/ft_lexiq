@@ -201,6 +201,7 @@ struct t_regex_info
   int         len; // The number of matched characters
   int         *vars; // All the 52 variables
   int         flags; // Currently enabled flags
+  void        *data; // The data received in parameter of ft_regex if the RGX_DATA flag was enabled
 };
 ```
 
@@ -227,9 +228,11 @@ There are two ways of consuming characters with this method, the first one is to
 | RGX_END | The rest of the string is ignored, and should at least start with the given search pattern | |
 | RGX_VAR | Alows you to receive existing variables in parameter instead of starting with fresh ones | `int vars[52]` |
 | RGX_ID | Returns the id of the last called rule in an int pointer. With the RGX_ADD flag it lets you specify the id of the rule | `int *id` or `int id` |
-| RGX_GET | Returns a linked list of all the added rules | `t_list **rules` |
-| RGX_UGLOBAL | Stores in a linked list the non-matching part of the string, it 'splits' the string, to be distinguished from other matches, their id is equal to -1 | `t_list **matches` |
 | RGX_GLOBAL | Stores in a linked list the matching part of the string | `t_list **matches` |
+| RGX_UGLOBAL | Stores in a linked list the non-matching part of the string, it 'splits' the string, to be distinguished from other matches, their id is equal to -1 | `t_list **matches` |
+| RGX_DATA | Allows to send a data to the regex functions | `void *data` |
+| RGX_ADD | Add a rule to the regex engine | `t_regex_funcptr *func` |
+| RGX_GET | Returns a linked list of all the added rules | `t_list **rules` |
 | RGX_FREE | Free the linked list previously returned by a call of `ft_regex` with the `RGX_GLOBAL` or `RGX_UGLOBAL` flag | `t_list **matches` |
 | RGX_CLEAN | Clean and free all the rules that were added manually with `ft_regex` and the `RGX_ADD` flag | |
 
@@ -237,8 +240,8 @@ And here is a table of all the possible combination with their order:
 
 | Flags | Prototyping order |
 | --- | --- |
-| RGX_RGXN \| RGX_STRN \| RGX_POS \| RGX_END \| RGX_VAR \| RGX_ID | `int rgxn, int strn, int *pos, int *id, int vars[52]` |
-| RGX_RGXN \| RGX_STRN \| RGX_GLOBAL \| RGX_UGLOBAL \| RGX_VAR | `int rgxn, int strn, t_list **matches, int vars[52]` |
+| RGX_RGXN \| RGX_STRN \| RGX_POS \| RGX_END \| RGX_VAR \| RGX_ID \| RGX_DATA | `int rgxn, int strn, int *pos, int *id, int vars[52]` |
+| RGX_RGXN \| RGX_STRN \| RGX_GLOBAL \| RGX_UGLOBAL \| RGX_VAR \| RGX_DATA | `int rgxn, int strn, t_list **matches, int vars[52]` |
 | RGX_ADD \| RGX_ID | `t_regex_funcptr *func, int id` |
 | RGX_GET | `t_list **rules` |
 | RGX_FREE | `t_list **matches` |
