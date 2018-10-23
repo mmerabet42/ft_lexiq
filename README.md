@@ -9,6 +9,7 @@
   * [The concept of rules](#the-concept-of-rules)
   * [Variables](#variables)
 * [`ft_regex`](#ft_regex-1)
+  * [Try it](#the-latest-version-of-the-ft_regex-function-is-available-in-the-libft-library)
   * [Adding rules](#adding-rules)
   * [Flags](#adding-rules)
 
