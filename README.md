@@ -122,7 +122,7 @@ You can have the `@E` to work like an if by placing a zero instead of a variable
 
 # `ft_regex`
 
-###### The latest version of the `ft_regex` function is available in the [libft](https://github.com/mmerabet42/libft) library.
+#### The latest version of the `ft_regex` function is available in the [libft](https://github.com/mmerabet42/libft) library.
 
 Now that we have seen how this regex engine works (and why it might be powerfull ?) let's dive into the code and let's see how we can use it.
 
