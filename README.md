@@ -1,16 +1,16 @@
 
 ### Table of content
 
-* [What is a regular expression ?](https://github.com/mmerabet42/ft_regex#what-is-a-regular-expression-)
-* [How a regular expression works ?](https://github.com/mmerabet42/ft_regex#how-a-regular-expression-works-)
-  * [Two metacharacters are enough](https://github.com/mmerabet42/ft_regex#two-metacharacters-are-enough)
-  * [Negating and quandtifying](https://github.com/mmerabet42/ft_regex#negating-and-quantifying)
-  * [Backslash limitation](https://github.com/mmerabet42/ft_regex#backslash-limitation)
-  * [The concept of rules](https://github.com/mmerabet42/ft_regex#the-concept-of-rules)
-  * [Variables](https://github.com/mmerabet42/ft_regex#variables)
-* [`ft_regex`](https://github.com/mmerabet42/ft_regex#ft_regex-1)
-  * [Adding rules](https://github.com/mmerabet42/ft_regex#adding-rules)
-  * [Flags](https://github.com/mmerabet42/ft_regex#adding-rules)
+* [What is a regular expression ?](#what-is-a-regular-expression-)
+* [How a regular expression works ?](#how-a-regular-expression-works-)
+  * [Two metacharacters are enough](#two-metacharacters-are-enough)
+  * [Negating and quandtifying](#negating-and-quantifying)
+  * [Backslash limitation](#backslash-limitation)
+  * [The concept of rules](#the-concept-of-rules)
+  * [Variables](#variables)
+* [`ft_regex`](#ft_regex-1)
+  * [Adding rules](#adding-rules)
+  * [Flags](#adding-rules)
 
 
 # What is a regular expression ?
