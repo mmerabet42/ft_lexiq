@@ -250,7 +250,7 @@ There are two ways of consuming characters with this method, the first one is to
 | RGX_ID | Returns the id of the last called rule in an int pointer. With the RGX_ADD flag it lets you specify the id of the rule | `int *id` or `int id` |
 | RGX_GLOBAL | Stores in a linked list the matching part of the string | `t_list **matches` |
 | RGX_UGLOBAL | Stores in a linked list the non-matching part of the string, it 'splits' the string, to be distinguished from other matches, their id is equal to -1 | `t_list **matches` |
-| RGX_DATA | Allows to send a data to the regex functions | `void *data` |
+| RGX_DATA | Sends an extra data to the regex functions | `void *data` |
 | RGX_READABLE | All space characters outside of metacharacters are ignored. With the RGX_ADD flag, the space characters in the regex definition are ignored | | 
 | RGX_ADD | Add a rule to the regex engine | `t_regex_funcptr *func` |
 | RGX_GET | Returns a linked list of all the added rules | `t_list **rules` |
