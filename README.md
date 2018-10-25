@@ -11,7 +11,7 @@
 * [`ft_regex`](#ft_regex-1)
   * [libft](#the-latest-version-of-the-ft_regex-function-is-available-in-the-libft-library)
   * [Adding rules](#adding-rules)
-  * [Flags](#adding-rules)
+  * [Flags](#flags)
 
 
 # What is a regular expression ?
