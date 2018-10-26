@@ -116,9 +116,7 @@ Here is a non-exhaustive list of available rules.
 
 ## Variables
 
-A rule that i didn't really talked about, is the arithmetic expression rule, which alows you to make operations like adding, subtracting, assigning, etc. The engine is limited to 52 variables, 26 lowercase letters and 26 uppercase letters. To use them you will need the `@E` rule and they can be used for quantifying for example `*[@digit=n]`. `?[N=3@E]` will assign the number 3 to the variable *N*, `?[n:*[ ]@E]` will assign to *n* the number of spaces. It is important to mention that this rule does not consume characters so the spaces wont be consumed, and they still need to be matched: `?[n:*[ ]@E]*[ ]`, to consume them you will need to use the ';' operator instead of the ':'. The available operators are: `+`, `-`, `*`, `/`, `%`, `<`, `>`, `=` or `!`.
-
-You can have the `@E` to work like an if by placing a zero instead of a variable name at the beginning: `?[0=n<e@E]` will be true only of *n* is less than *e*.
+Another interestring feature available with this engine is the possibility of using variables throughout the regular expression. Thanks to the `@E` rule you have access to 52 variables (26 lowercase letter and 26 uppercase letter). They can be instaciated `?[@E]`
 
 # `ft_regex`
 
