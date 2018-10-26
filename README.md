@@ -125,7 +125,7 @@ The engine gives you these operators to work with: `+`, `-`, `*`, `/`, `=`, `!`,
 
 You also have the possibility to store the return of a regular expression inside of a variable by using a '*:*' or a '*;*' instead of an *=* as a second character. `?[n:*[@space]@E]` will store in the variable *n* the number of space characters that were met or -1 if the regular expression failed, here we used the *:* operator so the space characters that were met wont be consumed, to consume them you will need to match them right after the call of the `@E` rule (`?[n:*[@space]@E]*[@space]`), this is the difference with the *;* operator which will consume the matched characters at the same time.
 
-The point of variables is to use them for quantifying instead of using literal values you can also use variable. `*[@digit=n]` awaits *n* digits.
+The point of variables is to use them for quantifying instead of using literal values. `*[@digit=n]` awaits *n* digits.
 
 # `ft_regex`
 
