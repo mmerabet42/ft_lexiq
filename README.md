@@ -116,7 +116,7 @@ Here is a non-exhaustive list of available rules.
 
 ## Variables
 
-Another interestring feature available with this engine is the possibility of using variables throughout the regular expression. Thanks to the `@E` rule you have access to 52 variables (26 lowercase letter and 26 uppercase letter). They can be instaciated `?[@E]`
+Another interestring feature available with this engine is the possibility of using variables throughout the regular expression. Thanks to the `@E` rule you have access to 52 variables (26 lowercase letter and 26 uppercase letter). They can be instaciated `?[n=3@E]` to a literal value or `?[x=C@E]` another variable, the first example puts the value *3* to the variable *n* and the second one puts the value of *C* to *x*.
 
 # `ft_regex`
 
