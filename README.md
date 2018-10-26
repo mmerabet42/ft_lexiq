@@ -121,6 +121,8 @@ Another interestring feature available with this engine is the possibility of us
 It is important to mention that a call of this rule wont consume any character and will never fail, it will just change the current state of variables, but it is possible to check if a certain a condition is true or make the rule fails it the condition is false.
 `?[0=n=3@E]` will check if *n* is equal to *3*, the `0=` means that we want to return true if the resut of the expression is different than zero or false if it is equal to zero.
 
+There is not that much operators but they should be enough: `+`, `-`, `*`, `/`, `=`, `!`, `<`, `>`.
+
 # `ft_regex`
 
 #### The latest version of the `ft_regex` function is available in the [libft](https://github.com/mmerabet42/libft) library.
