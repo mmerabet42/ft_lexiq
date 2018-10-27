@@ -196,23 +196,28 @@ The fourth attribute is a way to distinguish what matched, and it has something 
 
 ## Adding rules
 
-As told earlier with the concept of rules, we can add rules by ourselves, and this is done with the RGX_ADD flag:
+As told earlier with the concept of rules, we can add rules by ourselves, and this is done with the RGX_ADD flag
 ```C
-ft_regex(RGX_ADD, NULL, "three_char_words:?[@^w]*[@word=3]?[@$w]", NULL)
+ft_regex(RGX_ADD, NULL, "three_char_word", "?[@^w]*[@word=3]?[@$w]", NULL)
 ```
-Will add a rule named 'three_char_words' and defines any three character words. The function returns the id of the rule, that is used to dinstinguish it from other rules.
-So in this example:
+This call will add a rule named '*three_char_word*' that defines words of excactly three characters long. The function returns the id that has been assigned to the rule which can be used to differenciate it from other rules.
+The '*three_char_word*' rule can now be called like any other rule:
 ```C
-ft_regex(RGX_GLOBAL, "?[@three_char_word]", "Hello, budy how are you ?", &matches)
+ft_regex(RGX_GLOBAL, "?[@three_char_word]", "Hello budy, how are you ?", &matches)
 ```
-There are three matches 'how' 'are' and 'you', which are exactly three character words.
-What if we wanted to match five character words too but still distinguish them from three character words ? Well we first add a rule that matches words with five characters:
-```C
-ft_regex(RGX_ADD, NULL, "five_char_word:?[@^w]*[@word=5]?[@$w]", NULL)
-```
-Then we call the regex function with this regex: `?[?[@three_char_word]|?[@five_char_word]@or]`. Here the regex says, 'i want three character words OR five character words. So we get a fourth match from the initial ones which is 'Hello', but now the 't_regex_match.id' attribute might point to different rules depending on what matched.
+This call will match three times ('how' 'are' and 'you'), without the word boundaries (`?[@^w]` and `?[@$w]`) we would have also matched the three first three characters of 'Hello' and 'budy'.
 
-You might have wondered what is the 'NULL' parameter at the end, well you have to know that a rule is either an inline regex, meaning that it is defined by another regex, or a function callback which means that if the rule is called it will in fact call a C function specified by the last parameter. Here is its prototype:
+Now lets imagine a scenario were we would need to match three character words and five character words too, but still be able to distinguish these two possible match. For this case we would need to keep the '*three_char_word*' rule and add another one that matches five character words:
+```C
+ft_regex(RGX_ADD, NULL, "five_char_word", "?[@^w]*[@word=5]?[@$w]", NULL)
+```
+Then we will ask the engine to match '*three_char_word*' or '*five_char_word*'.
+```C
+ft_regex(RGX_GLOBAL, "?[?[@three_char_word]|?[@five_char_word]@or]", "Hello budy, how are you ?", &matches)
+```
+The linked list returned will, now, have a fourth match from the initial ones which is 'Hello', but this time the `t_regex_match.id` attribute will point to different rules depending on what matches.
+
+You might have noticed the 'NULL' parameter at the end, well you have to know that a rule is either an inline regex, meaning that it is defined by another regex, or a function callback which means that if the rule is called it will in fact call a C function specified by the last parameter. But it cant be both. The callback function must follow this prototype:
 ```C
 int (*callback)(t_regex_info *, t_regex_rule *)
 ```
