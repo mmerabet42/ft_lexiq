@@ -203,7 +203,7 @@ ft_regex(RGX_ADD, NULL, "three_char_word", "?[@^w]*[@word=3]?[@$w]", NULL)
 This call will add a rule named '*three_char_word*' that defines words of excactly three characters long. The function returns the id that has been assigned to the rule which can be used to differenciate it from other rules.
 The '*three_char_word*' rule can now be called like any other rule:
 ```C
-ft_regex(RGX_GLOBAL, "?[@three_char_word]", "Hello budy, how are you ?", &matches)
+ft_regex(RGX_GLOBAL, NULL, "?[@three_char_word]", "Hello budy, how are you ?", &matches)
 ```
 This call will match three times ('how' 'are' and 'you'), without the word boundaries (`?[@^w]` and `?[@$w]`) we would have also matched the three first three characters of 'Hello' and 'budy'.
 
