@@ -198,18 +198,18 @@ The fourth attribute is a way to distinguish what matched, and it has something 
 
 As told earlier with the concept of rules, we can add rules by ourselves, and this is done with the RGX_ADD flag
 ```C
-ft_regex(RGX_ADD, NULL, "three_char_word", "?[@^w]*[@word=3]?[@$w]", NULL)
+ft_regex(RGX_ADD, "three_char_word", "?[@^w]*[@word=3]?[@$w]", NULL)
 ```
 This call will add a rule named '*three_char_word*' that defines words of excactly three characters long. The function returns the id that has been assigned to the rule which can be used to differenciate it from other rules.
 The '*three_char_word*' rule can now be called like any other rule:
 ```C
-ft_regex(RGX_GLOBAL, NULL, "?[@three_char_word]", "Hello budy, how are you ?", &matches)
+ft_regex(RGX_GLOBAL, "?[@three_char_word]", "Hello budy, how are you ?", &matches)
 ```
 This call will match three times ('how' 'are' and 'you'), without the word boundaries (`?[@^w]` and `?[@$w]`) we would have also matched the three first three characters of 'Hello' and 'budy'.
 
 Now lets imagine a scenario were we would need to match three character words and five character words too, but still be able to distinguish these two possible match. For this case we would need to keep the '*three_char_word*' rule and add another one that matches five character words:
 ```C
-ft_regex(RGX_ADD, NULL, "five_char_word", "?[@^w]*[@word=5]?[@$w]", NULL)
+ft_regex(RGX_ADD, "five_char_word", "?[@^w]*[@word=5]?[@$w]", NULL)
 ```
 Then we will ask the engine to match '*three_char_word*' or '*five_char_word*'.
 ```C
