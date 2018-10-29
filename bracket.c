@@ -26,7 +26,7 @@ int main(int argc, char **argv)
   
   // We use the ft_print_matches function to print elegantly all the matches.
   ft_print_matches(argv[2], matches);
-  ft_printf("%d matches\n");
+  ft_printf("%d matches\n", ret);
   
   // We clean everything.
   ft_regex(RGX_FREE, NULL, NULL, &matches);
