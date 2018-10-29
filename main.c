@@ -1,6 +1,7 @@
 #include "ft_regex.h"
 #include "ft_printf.h"
 #include "ft_list.h"
+#include <fcntl.h>
 
 int main(int argc, char **argv)
 {
@@ -20,11 +21,14 @@ int main(int argc, char **argv)
   // This rule test for opening curly bracket and closing curly bracket with possibly other nested brackets insde.
   ft_regex(RGX_ADD, "BRACKET3", "{*[?[@BRACKET]|?![{(){}[]}]@or?]}", NULL);
   
-  ret = ft_regex(RGX_GLOBAL, argv[1], argv[2], &matches);
+  // This call will match every bracket of the first argument. To have the content of a file : ./exe "`cat file`"
+  ret = ft_regex(RGX_GLOBAL, "?[@BRACKET]", argv[1], &matches);
   
+  // We use the ft_print_matches function to print elegantly all the matches.
   ft_print_matches(argv[2], matches);
   ft_printf("%d matches\n");
   
+  // We clean everything.
   ft_regex(RGX_FREE, NULL, NULL, &matches);
   ft_regex(RGX_CLEAN, NULL, NULL);
   
