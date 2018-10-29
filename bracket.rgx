@@ -1,0 +1,4 @@
+BRACKET:"?[?[@BRACKET1]|?[@BRACKET2]|?[@BRACKET3]@or]"
+BRACKET1:"(*[?[@BRACKET]|?![{(){}[]}]@or?])"
+BRACKET2:"[*[?[@BRACKET]|?![{(){}[]}]@or?]]"
+BRACKET3:"{*[?[@BRACKET]|?![{(){}[]}]@or?]}"
