@@ -205,6 +205,11 @@ struct t_regex_match
 
 The fourth attribute is a way to distinguish what matched, and it has something to do with rules, we will see it in the next part.
 
+After using the returned list you can free it properly with the following call
+```C
+ft_regex(RGX_FREE, NULL, NULL, &matches)
+```
+
 ## Adding rules
 
 As told earlier with the concept of rules, we can add rules by ourselves, and this is done with the RGX_ADD flag
