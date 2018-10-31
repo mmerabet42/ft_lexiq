@@ -2,12 +2,14 @@
 ### Table of content
 
 * [What is a regular expression ?](#what-is-a-regular-expression-)
+
 * [How a regular expression works ?](#how-a-regular-expression-works-)
   * [Two metacharacters are enough](#two-metacharacters-are-enough)
   * [Negating and quandtifying](#negating-and-quantifying)
   * [Backslash limitation](#backslash-limitation)
   * [The concept of rules](#the-concept-of-rules)
   * [Variables](#variables)
+  
 * [`ft_regex`](#ft_regex-1)
   * [libft](#the-latest-version-of-the-ft_regex-function-is-available-in-the-libft-library)
   * [Adding rules](#adding-rules)
