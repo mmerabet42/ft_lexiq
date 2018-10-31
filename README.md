@@ -119,6 +119,7 @@ Here is a non-exhaustive list of available rules.
 Another interestring feature available with this engine is the possibility of using variables throughout the regular expression. Thanks to the `@E` rule you have access to 52 variables (26 lowercase letter and 26 uppercase letter). They can be instanciated to a literal value `?[n=3@E]`, or another variable `?[x=C@E]`, the first example puts the value *3* to the variable *n* and the second one sets the value of *x* to the value of *C*. You also have the possibility of using arithmetic expressions with variables, `?[n=3+P@E]` will add *3* to the current value of *P* and will put the result to the variable *n*.
 
 These are the available arithmetic operators
+
 | Operator | Descrption |
 | --- | --- |
 | `+` | Returns the addition of the two variables |
