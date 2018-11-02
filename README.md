@@ -150,7 +150,7 @@ To capture a group you need to use the `@G` rule, this rule takes in argument a 
 
 The regex `?[*[@alpha]@G]:?[0@B]` will first store the alphabetical characters in a group, then will match a colon, then will backreference to the first captured group. For exmaple the string `hello:hello` will match but `hello:no` wont.
 
-A more usefull and explicit example would be to find a regular expression that matches opening tags and closing tags for the HTML syntax: `<?[*[@word]@G]*>*</?[0@B]>`.
+A more usefull and explicit example would be to define a regular expression that matches opening tags and closing tags for the HTML syntax: `<?[*[@word]@G]*>*</?[0@B]>`.
 
 # `ft_regex`
 
