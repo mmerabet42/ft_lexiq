@@ -13,6 +13,7 @@
   
 * [`ft_regex`](#ft_regex-1)
   * [libft](#the-latest-version-of-the-ft_regex-function-is-available-in-the-libft-library)
+  * [The global flag](#the-global-flag)
   * [Adding rules](#adding-rules)
   * [Flags](#flags)
 
@@ -202,7 +203,7 @@ There are other flags, but it is not really usefull to mention them as they are 
 t_list *matches;
 int num_of_matches = ft_regex(RGX_GLOBAL, "*[@word]", "Hello word, how are you ?", &matches);
 ```
-You can use the `ft_print_matches` to hightlight all the matches in a colored manner
+You can use the `ft_print_matches` function to hightlight all the matches in a colored manner
   * ![ft_print_matches output](/screenshots/ft_print_matches.png)
 ```C
 void ft_print_matches(const char *string, t_list *matches)
