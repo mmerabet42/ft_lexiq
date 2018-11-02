@@ -205,6 +205,7 @@ int num_of_matches = ft_regex(RGX_GLOBAL, "*[@word]", "Regular expressions are a
 ```
 You can use the `ft_print_matches` function to hightlight all the matches in a colored manner
   * ![ft_print_matches output](/screenshots/ft_print_matches.png)
+  
 ```C
 void ft_print_matches(const char *string, t_list *matches)
 ```
