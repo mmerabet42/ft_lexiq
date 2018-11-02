@@ -9,6 +9,7 @@
   * [Backslash limitation](#backslash-limitation)
   * [The concept of rules](#the-concept-of-rules)
   * [Variables](#variables)
+  * [Capturing group and backreference](#capturing-groups-and-backreferencing)
   
 * [`ft_regex`](#ft_regex-1)
   * [libft](#the-latest-version-of-the-ft_regex-function-is-available-in-the-libft-library)
@@ -147,6 +148,8 @@ Another important and powerfull concept about regular expressions that this engi
 To capture a group you need to use the `@G` rule, this rule takes in argument a regular expression which will store the matched part of the string. The captured groups can be reused via a backreference with the `@B` rule that takes the index of which group to reuse, in arguemnt.
 
 The regex `?[*[@alpha]@G]:?[0@B]` will first store the alphabetical characters in a group, then will match a colon, then will backreference to the first captured group. For exmaple the string `hello:hello` will match but `hello:no` wont.
+
+A more usefull and explicit example would be to find a regular expression that matches opening tags and closing tags for the HTML syntax: `<?[*[@word]@G]*>*</?[0@B]>`.
 
 # `ft_regex`
 
