@@ -136,9 +136,17 @@ These are the available arithmetic operators
 It is important to mention that a call of this rule wont consume characters and will never fail, it will just change the current state of variables. But it is possible to check if a certain a condition is true or make the rule fails if a condition isn't respected, by using a *0* instead of a variable name as a first character.
 `?[0=n=3@E]` will check if *n* is equal to *3*, the `0=` means that we want to return true if the resut of the expression is different than zero or false if it is equal to zero.
 
-You also have the possibility to store the return of a regular expression inside of a variable by using a '*:*' or a '*;*' instead of an *=* as a second character. `?[n:*[@space]@E]` will store in the variable *n* the number of space characters that were met or -1 if the regular expression failed, here we used the *:* operator so the space characters that were met wont be consumed, to consume them you will need to match them right after the call of the `@E` rule (`?[n:*[@space]@E]*[@space]`), this is the difference with the *;* operator which will consume the matched characters at the same time.
+You also have the possibility to store the return of a regular expression inside of a variable by using a colon (':') or a semicolon (';') instead of an equals sign ('=') as a second character. `?[n:*[@space]@E]` will store in the variable *n* the number of space characters that were met or -1 if the regular expression failed, here we used the colon operator so the space characters that were met wont be consumed, to consume them you will need to match them right after the call of the `@E` rule (`?[n:*[@space]@E]*[@space]`), this is the difference with the semicolon operator which will consume the matched characters at the same time.
 
 The point of variables is to use them for quantifying instead of using literal values. `*[@digit=n]` awaits *n* digits.
+
+## Capturing groups and backreferencing
+
+Another important and powerfull concept about regular expressions that this engine implements is the possibility of capturing chuncks of strings and reusing them later in the regular expression via backreference.
+
+To capture a group you need to use the `@G` rule, this rule takes in argument a regular expression which will store the matched part of the string. The captured groups can be reused via a backreference with the `@B` rule that takes the index of which group to reuse, in arguemnt.
+
+The regex `?[*[@alpha]@G]:?[0@B]` will first store the alphabetical characters in a group, then will match a colon, then will backreference to the first captured group. For exmaple the string `hello:hello` will match but `hello:no` wont.
 
 # `ft_regex`
 
@@ -202,10 +210,11 @@ struct t_regex_match
   int         pos; // The position of the matched pattern
   int         len; // The length of the matched pattern
   int         id; // An identifier to precise what matched
+  t_list      *groups; // The captured groups
 };
 ```
 
-The fourth attribute is a way to distinguish what matched, and it has something to do with rules, we will see it in the next part.
+The fourth attribute is a way to distinguish what matched, and it is related to rules, we will see it in the next part.
 
 After using the returned list you can free it properly with the following call
 ```C
@@ -280,6 +289,7 @@ There are two ways of consuming characters with this method, the first one is to
 | RGX_ID | Returns the id of the last called rule in an int pointer. With the RGX_ADD flag it lets you specify the id of the rule | `int *id` or `int id` |
 | RGX_GLOBAL | Stores in a linked list the matching part of the string | `t_list **matches` |
 | RGX_UGLOBAL | Stores in a linked list the non-matching part of the string, it 'splits' the string, to be distinguished from other matches, their id is equal to -1 | `t_list **matches` |
+| RGX_GROUP | Enables capturing and backreferencing for the regular expression and also returns the captured groups in a lineked list | `t_list **groups` |
 | RGX_DATA | Sends an extra data to the regex functions | `void *data` |
 | RGX_READABLE | All space characters outside of metacharacters are ignored. With the RGX_ADD flag, the space characters in the regex definition are ignored | | 
 | RGX_ADD | Add a rule to the regex engine | `t_regex_funcptr *func` |
