@@ -201,7 +201,7 @@ Will match the first three or more following digits in the string which is *569*
 There are other flags, but it is not really usefull to mention them as they are used by the most important one: `RGX_GLOBAL`. This flag will store all the matching pattern in a linked list of `t_regex_match` structures.
 ```C
 t_list *matches;
-int num_of_matches = ft_regex(RGX_GLOBAL, "*[@word]", "Hello word, how are you ?", &matches);
+int num_of_matches = ft_regex(RGX_GLOBAL, "*[@word]", "Regular expressions are amazing !", &matches);
 ```
 You can use the `ft_print_matches` function to hightlight all the matches in a colored manner
   * ![ft_print_matches output](/screenshots/ft_print_matches.png)
