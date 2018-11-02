@@ -195,12 +195,15 @@ int len = ft_regex(RGX_POS | RGX_END, "*[@digit>2]", "The number is 12 or 569 ?"
 
 Will match the first three or more following digits in the string which is *569*, `pos` is equal to 20 as it is the position of the matched pattern, and `len` is the number of matched characters which is 3.
 
+## The global flag
+
 There are other flags, but it is not really usefull to mention them as they are used by the most important one: `RGX_GLOBAL`. This flag will store all the matching pattern in a linked list of `t_regex_match` structures.
 ```C
 t_list *matches;
 int num_of_matches = ft_regex(RGX_GLOBAL, "*[@word]", "Hello word, how are you ?", &matches);
 ```
-You can use the `ft_print_matches` to hightlight all the matches.
+You can use the `ft_print_matches` to hightlight all the matches in a colored manner
+  * ![ft_print_matches output](/screenshots/ft_print_matches.png)
 ```C
 void ft_print_matches(const char *string, t_list *matches)
 ```
