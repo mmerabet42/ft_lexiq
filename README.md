@@ -76,7 +76,7 @@ It is possible to give an empty character set to both of the metacharacters, for
 ## Backslash limitation
 
 There is a question that has not been raised yet which concerns how the square brackets works and how to have any possible character in a character set, because as we know we can't backslash a closing square bracket and with the concept of 'rules' things could have get really messy, so we had to counter the problem by letting the user control what starts a character set and what closes it.
-> An opening square bracket followed by n opening curly bracket shall be closed by n closing bracket followed by a closing square bracket.
+> An opening square bracket followed by *n* opening curly bracket shall be closed by *n* closing curly bracket followed by a closing square bracket.
 
 We would get something of this shape `?[{{...}}]`, and here we reached the limitation of not using backslashes, because with this solution how would you have a character set that starts with an opening curly bracket ? You may think that this question does not make any sense as the order of a character set shall not change it's behaviour, well it is true for this context but not for the context of rules, that are going to be seen in the next part (finally). To counter this other problem, backslashing is coming back but stays only for the very first character, and it just cancels the meaning of the backslash and the opening curly bracket characters. So the solution of the problem is `?[{\{...}]` or `?[{{{{\\....}}}}]` or `?[{...]...}]`. The '@' sign should always appair before whatever closing has been used: `?[{{...@=3}}]`.
 
