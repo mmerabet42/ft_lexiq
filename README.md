@@ -90,7 +90,7 @@ A rule is no more than the equivalent of a function in programming languages. It
 
 To call a rule you would need to put the rule name right after the '@' sign: `?[@alnum]` is the equivalent of `?[a-zA-Z0-9]`. And all of the negating and quantifying stuff still works: `*![@digit>3]` will awaits more than three characters that are not digits. And all the other features that are available in other regex engines are available in this regex engine through rules.
 
-It is mainly the case of the `or` rule, that should simply matches one of the regexes: `*[ok?[@digit]|?[@alpha]@or]` shall match one or more times; the literal characters *ok* followed by a digit; or an alphabetic character. And this could be a rule: `strange_rule:*[ok?[@digit]|?[@alpha]@or]`, you should have seen that what separates the regexes is the `|` character so in this context it loses its literal meaning, and if we wanted to match this character we would do the same as for the metacharacters `?[|]`. And in this example we understand that rules receives in reality two input, the string to match and an optional argument which is specified before the '@' sign.
+It is mainly the case of the `or` rule, that should simply match one of the alternatives: `*[ok?[@digit]|?[@alpha]@or]` shall match one or more times; the literal characters *ok* followed by a digit; or an alphabetic character. And this could be a rule: `strange_rule:*[ok?[@digit]|?[@alpha]@or]`, you should have seen that what separates the regexes is the `|` character so in this context it loses its literal meaning, and if we wanted to match this character we would do the same as for the metacharacters `?[|]`. And in this example we understand that rules receives in reality two input, the string to match and an optional argument which is specified before the '@' sign.
 
 The truth is that everything is a rule, and even when you try to match a character set: `?[abc]` you are in fact calling a rule named 'DEFAULT' so it is the same as typing `?[abc@DEFAULT]`. So at this point the `DEFAULT` rule cannot call other rules, as it is the lowest rule. Which is good, because it means that a rule doesn't need to call other rules in order to work, they can also call C functions ! We can conclude that rules are not limited to the power of other rules but of the C programming language !!
 
@@ -135,7 +135,7 @@ These are the available arithmetic operators
 | `>` | Returns 1 if the first variable is greater than the second one or 0 otherwise |
 | `<` | Returns 1 if the first variable is less than the second one or 0 otherwise |
 
-It is important to mention that a call of this rule wont consume characters and will never fail, it will just change the current state of variables. But it is possible to check if a certain a condition is true or make the rule fails if a condition isn't respected, by using a *0* instead of a variable name as a first character.
+It is important to mention that this rule is a zero-length match meaning that it wont consume any characters, it will just change the current state of variables. But it is possible to use it for checking conditions, by using a *0* instead of a variable name as a first character.
 `?[0=n=3@E]` will check if *n* is equal to *3*, the `0=` means that we want to return true if the resut of the expression is different than zero or false if it is equal to zero.
 
 You also have the possibility to store the return of a regular expression inside of a variable by using a colon (':') or a semicolon (';') instead of an equals sign ('=') as a second character. `?[n:*[@space]@E]` will store in the variable *n* the number of space characters that were met or -1 if the regular expression failed, here we used the colon operator so the space characters that were met wont be consumed, to consume them you will need to match them right after the call of the `@E` rule (`?[n:*[@space]@E]*[@space]`), this is the difference with the semicolon operator which will consume the matched characters at the same time.
@@ -150,7 +150,7 @@ To capture a group you need to use the `@G` rule, this rule takes in argument a 
 
 The regex `?[*[@alpha]@G]:?[0@B]` will first store the alphabetical characters in a group, then will match a colon, then will backreference to the first captured group. For exmaple the string `hello:hello` will match but `hello:no` wont.
 
-A more usefull and explicit example would be to find a regular expression that matches opening tags and closing tags for the HTML syntax: `<?[*[@word]@G]*>*</?[0@B]>`.
+A more usefull and explicit example would be to define a regular expression that matches opening tags and closing tags for the HTML syntax: `<?[*[@word]@G]*>*</?[0@B]>`.
 
 # `ft_regex`
 
@@ -250,7 +250,7 @@ Then we will ask the engine to match '*three_char_word*' or '*five_char_word*'.
 ```C
 ft_regex(RGX_GLOBAL, "?[?[@three_char_word]|?[@five_char_word]@or]", "Hello budy, how are you ?", &matches)
 ```
-The linked list returned will, now, have a fourth match from the initial ones which is 'Hello', but this time the `t_regex_match.id` attribute will point to different rules depending on what matches.
+The linked list returned will, now, have a fourth match from the initial ones which is 'Hello', but this time the `t_regex_match.id` attribute will point to different rules depending on what matched.
 
 You might have noticed the 'NULL' parameter at the end, well you have to know that a rule is either an inline regex, meaning that it is defined by another regex, or a function callback which means that if the rule is called it will in fact call a C function specified by the last parameter. But it cant be both. The callback function must follow this prototype:
 ```C
