@@ -1,5 +1,5 @@
 
-![lol](/screenshots/goood.png)
+
 
 ### Table of content
 
@@ -317,3 +317,5 @@ And here is a table of all the possible combination with their order:
 | RGX_GET | `t_list **rules` |
 | RGX_FREE | `t_list **matches` |
 | RGX_CLEAN | |
+
+![lol](/screenshots/goood.png)
