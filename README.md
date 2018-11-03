@@ -318,4 +318,4 @@ And here is a table of all the possible combination with their order:
 | RGX_FREE | `t_list **matches` |
 | RGX_CLEAN | |
 
-![lol](/screenshots/lol.png)
+![lol](/screenshots/lol.jpg)
