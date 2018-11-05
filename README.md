@@ -71,7 +71,7 @@ Never forget that quantifying only works with the wildcard metacharacter and won
 There are three other operators that are used for quantifying matches, they are:
 - `[...@<n]`, the match shall occur less than n times.
 - `[...@>n]`, the match shall occur more than n times.
-- `[...@?]`, the match is optional, and will be ignored if the match is false.
+- `[...@?]`, the match is optional, and will result in a zero-length match if the match failed. This quantifier works with the question mark too.
 
 It is possible to give an empty character set to both of the metacharacters, for the wildcard it means match any single character between one and unlimited times, while the wildcard alone means match between zero and unlimited times. For the question mark it doesn't change it's behaviour and will always match any single character once and only once.
 
