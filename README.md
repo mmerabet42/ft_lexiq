@@ -146,7 +146,7 @@ The point of variables is to use them for quantifying instead of using literal v
 
 ## Capturing groups and backreferencing
 
-Another important and powerfull concept about regular expressions that this engine implements is the possibility of memorizing chuncks of strings and are remembered for later use.
+Another important and powerfull concept about regular expressions that this engine implements is the possibility of memorizing chuncks of strings.
 
 To capture a group you need to use the `@G` rule, this rule takes in argument a regular expression which will store the matched part of the string. The captured groups can be reused via a backreference with the `@B` rule that takes the index of which group to reuse, in arguemnt.
 
