@@ -299,7 +299,7 @@ There are two ways of consuming characters with this method, the first one is to
 | RGX_ID | Returns the id of the last called rule in an int pointer. With the RGX_ADD flag it lets you specify the id of the rule | `int *id` or `int id` |
 | RGX_GLOBAL | Stores in a linked list the matching part of the string | `t_list **matches` |
 | RGX_UGLOBAL | Stores in a linked list the non-matching part of the string, it 'splits' the string, to be distinguished from other matches, their id is equal to -1 | `t_list **matches` |
-| RGX_GROUP | Enables capturing and backreferencing for the regular expression and also returns the captured groups in a lineked list | `t_list **groups` |
+| RGX_GROUP | At the end of an `ft_regex` call, the capturing groups, if any, are destroyed, by default, this flag will instead return the capturing in a linked list. | `t_list **groups` |
 | RGX_DATA | Sends an extra data to the regex functions | `void *data` |
 | RGX_READABLE | All space characters outside of metacharacters are ignored. With the RGX_ADD flag, the space characters in the regex definition are ignored | |
 | RGX_LOAD | The engine will load the rules from a files formatted as `rule_name "regular expression"`, each rules are added with the RGX_READABLE flag | |
