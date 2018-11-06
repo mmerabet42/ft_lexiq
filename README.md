@@ -302,7 +302,7 @@ There are two ways of consuming characters with this method, the first one is to
 | RGX_GROUP | Enables capturing and backreferencing for the regular expression and also returns the captured groups in a lineked list | `t_list **groups` |
 | RGX_DATA | Sends an extra data to the regex functions | `void *data` |
 | RGX_READABLE | All space characters outside of metacharacters are ignored. With the RGX_ADD flag, the space characters in the regex definition are ignored | |
-| RGX_LOAD | The engine will load the rules from a files formatted as `rule_name "regular expression"` | |
+| RGX_LOAD | The engine will load the rules from a files formatted as `rule_name "regular expression"`, each rules are added with the RGX_READABLE flag | |
 | RGX_ADD | Add a rule to the regex engine | `t_regex_funcptr *func` |
 | RGX_GET | Returns a linked list of all the added rules | `t_list **rules` |
 | RGX_FREE | Free the linked list previously returned by a call of `ft_regex` with the `RGX_GLOBAL` or `RGX_UGLOBAL` flag | `t_list **matches` |
