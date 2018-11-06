@@ -7,8 +7,11 @@ int main(int argc, char **argv)
 {
   t_list  *matches = NULL;
   int     ret;
-  
-  // A bracket is either '(...)', '[...]' or '{...}' each one of them is tested by a respective rule.
+
+  // Will load rules from the 'rules.rgx' file
+  ft_regex(RGX_LOAD, "rules.rgx", NULL);
+
+  // A bracket is either '(...)', '[...]' or '{...}' each one of them can nested inside one and another.
   // And this rule test the 3 of them.
   ft_regex(RGX_ADD | RGX_ID, "BRACKET", "?[?[@BRACKET1]|?[@BRACKET2]|?[@BRACKET3]@or]", NULL, -2);
   
