@@ -327,4 +327,4 @@ And here is a table of all the possible combination with their order:
 | RGX_FREEGRP | `t_list **groups` |
 | RGX_CLEAN | |
 
-![lol](/screenshots/lol.jpg)
+![lol](/screenshots/picture.jpg)
