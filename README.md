@@ -216,7 +216,7 @@ void ft_print_matches(const char *string, t_list *matches)
 
   * ![ft_print_matches output](/screenshots/vowels.png)
 
-Here, we've asked to match only words, but also to capture the vowels of these words, this is the reason why they are colored differently. The ![0 at the end](/screenshots/end_match.png) at the end indicate the id of the last called rule of the matched pattern.
+Here, we've asked to match only words, but also to capture the vowels of these words, this is the reason why they are colored differently. The ![0 at the end](/screenshots/end_match.png) at the end indicates the id of the last called rule of the matched pattern.
 
 The  `t_regex_match` structure is defined as follow:
 ```C
