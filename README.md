@@ -208,12 +208,15 @@ There are other flags, but it is not really usefull to mention them as they are 
 t_list *matches;
 int num_of_matches = ft_regex(RGX_GLOBAL, "*[@word]", "Regular expressions are amazing !", &matches);
 ```
-You can use the `ft_print_matches` function to hightlight all the matches in a human readable way
-  * ![ft_print_matches output](/screenshots/vowels.png)
 
+You can use the `ft_print_matches` function to hightlight all the matches in a human readable way
 ```C
 void ft_print_matches(const char *string, t_list *matches)
 ```
+
+  * ![ft_print_matches output](/screenshots/vowels.png)
+
+Here, we've asked to match only words, but also to capture the vowels of these words, this is the reason why they are colored differently. The ![0 at the end](/screenshots/end_match.png) at the end indicate the id of the last called rule of the matched pattern.
 
 The  `t_regex_match` structure is defined as follow:
 ```C
