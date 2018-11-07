@@ -294,16 +294,16 @@ There are two ways of consuming characters with this method, the first one is to
 | RGX_RGXN | The first n characters of the search pattern shall match (not yet implemented). | `int rgxn` |
 | RGX_STRN | The first n characters of the string shall match (not yet implemented). | `int strn` |
 | RGX_POS | Returns the starting position of the matched pattern. | `int *pos` |
-| RGX_END | The string subject must at least start with the given search pattern, wiith the RGX_POS flag it must contain the search pattern should match at least somewhere in the string. | |
-| RGX_VAR | By default the `ft_regex` function creates and uses its own 52 variables, but it is possible to send them in paremeter so the `ft_regex` function will use them, all modifications made are kept unchanged. | `int vars[52]` |
+| RGX_END | The string subject must at least start with the given search pattern, wiith the RGX_POS flag it must contain at least once the search pattern somewhere in the string. | |
+| RGX_VAR | By default the `ft_regex` function creates and uses its own 52 variables, but it is possible to send them in paremeter so the `ft_regex` function will use them, so all modifications made are left unchanged. | `int vars[52]` |
 | RGX_ID | Returns the id of the last called rule in an int pointer. With the RGX_ADD flag it lets you specify the id of the rule | `int *id` or `int id` |
 | RGX_GLOBAL | Stores in a linked list the matching part of the string | `t_list **matches` |
 | RGX_UGLOBAL | Stores in a linked list the non-matching part of the string, it 'splits' the string, to be distinguished from other matches, their id is equal to -1 | `t_list **matches` |
 | RGX_GROUP | At the end of an `ft_regex` call, the capturing groups, if any, are destroyed by default. This flag will instead return the captured group in a linked list of `t_regex_group` structure. | `t_list **groups` |
 | RGX_DATA | Sends an extra data to the regex functions | `void *data` |
-| RGX_READABLE | Ignores all space characters in the regular expression and all other rules that allows regular expressions in argument. this flag is disabled when calling a rule that is an inline regex, for an inline regex rule to be readable, it needs to have the RGX_READABLE flag with the RGX_ADD flag. | |
+| RGX_READABLE | Ignores all space characters in the regular expression and all other rules that allows regular expressions in argument. this flag is disabled when calling a rule that is an inline regex. For an inline regex rule to be readable, it needs to have the RGX_READABLE flag enabled with the RGX_ADD flag. | |
 | RGX_ADD | Add a rule to the regex engine | `t_regex_funcptr *func` |
-| RGX_LOAD | The engine will load the rules from a files formatted as `rule_name "regular expression"`, each rules are added with the RGX_READABLE flag automatically | |
+| RGX_LOAD | The engine will load the rules from a file formatted as `rule_name "regular expression"`, each rules are added with the RGX_READABLE flag automatically | |
 | RGX_GET | Returns a linked list of all the added rules | `t_list **rules` |
 | RGX_FREE | Free the linked list previously returned by a call of `ft_regex` with the `RGX_GLOBAL` or `RGX_UGLOBAL` flag | `t_list **matches` |
 | RGX_FREEGRP | Free the linked list previously returned by a call of `ft_regex` with the `RGX_GROUP` flag | |
