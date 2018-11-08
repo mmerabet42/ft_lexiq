@@ -1,32 +1,45 @@
+-BRACKET		"?[?[@BRACKET1]|?[@BRACKET2]|?[@BRACKET3]@or]"
 
--BRACKET "?[?[@BRACKET1]|?[@BRACKET2]|?[@BRACKET3]@or]"
+BRACKET1		"(*[?[@BRACKET]|?![{(){}[]}]@or?])"
 
-BRACKET1 "(*[?[@BRACKET]|?![{(){}[]}]@or?])"
-BRACKET2 "[*[?[@BRACKET]|?![{(){}[]}]@or?]]"
-BRACKET3 "{*[?[@BRACKET]|?![{(){}[]}]@or?]}"
+BRACKET2		"[*[?[@BRACKET]|?![{(){}[]}]@or?]]"
 
+BRACKET3		"{*[?[@BRACKET]|?![{(){}[]}]@or?]}"
 
-ONECOMMENT "// * ?[@$n]"
-MULTICOMMENT "/?[*] * ?[*]/"
+DQUOTE			"\"*[?[\\\"@G]|?![\"]@or?]\""
 
-COMMENT "?[ ?[@ONECOMMENT] | ?[@MULTICOMMENT] @or]"
+ONECOMMENT		"//*?[@$n]"
+MULTICOMMENT	"/?[*] * ?[*]/"
 
-DQUOTE "\"*[\\\"|?![\"]@or]\""
+COMMENT			"?[?[@ONECOMMENT]|?[@MULTICOMMENT]@or]"
 
--STRUCTURE "?[?[@TSTRUCT]|?[@STRUCT]@or]"
+-STRUCTURE		"?[?[@STRUCT]|?[@TSTRUCT]@or]"
 
-STRUCT
-"
+WORD			"?[a-zA-Z0-9_*]"
+
+STRUCT			"
 struct *[@space] ?[*[@word]@G] *[@space?]
 {
-	*![}]
+	*[@space]
+	*[?[?[@WORD]*?[@space]*?[@WORD]*;@G]*[@space?]@X]
 } *[@space?] ;
 "
 
-TSTRUCT
-"
+TSTRUCT			"
 typedef *[@space] struct *[@space] ?[*[@word]@G] *[@space?]
 {
-	*![}]
+	*[@space]
+	*[?[?[@WORD]*?[@space]*?[@WORD]*;@G]*[@space?]@X]
 } *[@space?] ?[*[@word]@G] *[@space?] ;
+"
+
+JSON_FORMAT		"
+?[\\{
+	*[@space?]
+	*[
+		?[?[*[@word]@G]*[@space?]:*[@space?]?[?[?[@DQUOTE]@G]|null|?[@JSON_FORMAT]@or]*[@space?],*[@space?]@X]
+	|
+		?[?[*[@word]@G]*[@space?]:*[@space?]?[?[?[@DQUOTE]@G]|null|?[@JSON_FORMAT]@or]*[@space?]@X]
+	@or?]
+?[}@G]@G]
 "
