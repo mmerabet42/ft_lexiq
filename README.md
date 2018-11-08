@@ -323,6 +323,8 @@ And here is a table of all the possible combination with their order:
 | RGX_RGXN \| RGX_STRN \| RGX_POS \| RGX_END \| RGX_VAR \| RGX_ID \| RGX_DATA \| RGX_READABLE \| RGX_GROUP | `int rgxn, int strn, int *pos, int *id, t_list **groups, void *data, int vars[52]` |
 | RGX_RGXN \| RGX_STRN \| RGX_GLOBAL \| RGX_UGLOBAL \| RGX_VAR \| RGX_DATA \| RGX_READABLE | `int rgxn, int strn, t_list **matches, void *data, int vars[52]` |
 | RGX_ADD \| RGX_ID \| RGX_READABLE | `t_regex_funcptr *func, int id` |
+| RGX_ADD_MULTI | `t_regex_funcs *funcs, size_t len` |
+| RGX_LOAD | `const char *regex <` |
 | RGX_GET | `t_list **rules` |
 | RGX_FREE | `t_list **matches` |
 | RGX_FREEGRP | `t_list **groups` |
