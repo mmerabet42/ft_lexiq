@@ -309,6 +309,7 @@ There are two ways of consuming characters with this method, the first one is to
 | RGX_DATA | Sends an extra data to the regex functions | `void *data` |
 | RGX_READABLE | Ignores all space characters in the regular expression and all other rules that allows regular expressions in argument. this flag is disabled when calling a rule that is an inline regex. For an inline regex rule to be readable, it needs to have the RGX_READABLE flag enabled with the RGX_ADD flag. | |
 | RGX_ADD | Add a rule to the regex engine | `t_regex_funcptr *func` |
+| RGX_ADD_MULTI | Add rules from an array of `t_regex_func` structures | `t_regex_func *funcs, size_t len` |
 | RGX_LOAD | The engine will load the rules from a file formatted as `rule_name "regular expression"`, each rules are added with the RGX_READABLE flag automatically | |
 | RGX_GET | Returns a linked list of all the added rules | `t_list **rules` |
 | RGX_FREE | Free the linked list previously returned by a call of `ft_regex` with the `RGX_GLOBAL` or `RGX_UGLOBAL` flag | `t_list **matches` |
