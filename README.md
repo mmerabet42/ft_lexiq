@@ -23,6 +23,7 @@
 # What is a regular expression ?
 A regular expression (or regex) is a way to define a search pattern, wich is usually used for 'find' operations on documents and any type of text. 
 There are many regex engines out there in almost all programming languages, and they all follow the same syntax, there could be some differences but in general they do not vary that much.
+
 ### ft_regex
 The regex engine i am going to present you works differently, and has a different syntax. But still follows the same 'idea', meaning that each character in a regular expression is still either a metacharacter, which are in number of two, or a literal character. This will be explained later, we will first talk about how it differs from most regex engines and why it could be powerfull.
 
@@ -30,7 +31,7 @@ First of all, it is important to know that it has started as a school project, s
 
 Secondly, this regex engine does not compile or precompile or whatever, it reads the regex expression character by character without using dynamic allocation. It uses the concept of 'rules' which is where the main difference and power stands, we will get to it later.
 
-So, before diving into the code, and learn how to use the `ft_regex` function, we will first look at the syntax.
+So, before diving into the code, and learn how to use the `ft_regex` function, let's first look at the syntax.
 
 # How a regular expression works ?
 
