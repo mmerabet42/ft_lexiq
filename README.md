@@ -31,7 +31,7 @@ First of all, it is important to know that it has started as a school project, s
 
 Secondly, this regex engine does not compile or precompile or whatever, it reads the regex expression character by character without using dynamic allocation. It uses the concept of 'rules' which is where the main difference and power stands, we will get to it later.
 
-So, before diving into the code, and learn how to use the `ft_regex` function, let's first look at the syntax.
+So, before diving into the code, and learn how to use the `ft_regex` function, let's first have a look at the syntax.
 
 # How a regular expression works ?
 
