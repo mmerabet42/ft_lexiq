@@ -1,45 +1,49 @@
--BRACKET		"?[?[@BRACKET1]|?[@BRACKET2]|?[@BRACKET3]@or]"
+DQUOTE			"\"*[\\\"|?![\"]@or?]\""
 
-BRACKET1		"(*[?[@BRACKET]|?![{(){}[]}]@or?])"
-
-BRACKET2		"[*[?[@BRACKET]|?![{(){}[]}]@or?]]"
-
-BRACKET3		"{*[?[@BRACKET]|?![{(){}[]}]@or?]}"
-
-DQUOTE			"\"*[?[\\\"@G]|?![\"]@or?]\""
-
-ONECOMMENT		"//*?[@$n]"
-MULTICOMMENT	"/?[*] * ?[*]/"
-
-COMMENT			"?[?[@ONECOMMENT]|?[@MULTICOMMENT]@or]"
-
--STRUCTURE		"?[?[@STRUCT]|?[@TSTRUCT]@or]"
-
-WORD			"?[a-zA-Z0-9_*]"
-
-STRUCT			"
-struct *[@space] ?[*[@word]@G] *[@space?]
-{
-	*[@space]
-	*[?[?[@WORD]*?[@space]*?[@WORD]*;@G]*[@space?]@X]
-} *[@space?] ;
-"
-
-TSTRUCT			"
-typedef *[@space] struct *[@space] ?[*[@word]@G] *[@space?]
-{
-	*[@space]
-	*[?[?[@WORD]*?[@space]*?[@WORD]*;@G]*[@space?]@X]
-} *[@space?] ?[*[@word]@G] *[@space?] ;
-"
+JSON_NAME		"*[@word]"
+JSON_NULL		"null"
+JSON_STRING		"?[@DQUOTE]"
 
 JSON_FORMAT		"
-?[\\{
+{
 	*[@space?]
 	*[
-		?[?[*[@word]@G]*[@space?]:*[@space?]?[?[?[@DQUOTE]@G]|null|?[@JSON_FORMAT]@or]*[@space?],*[@space?]@X]
+		?[*[@word]@G] *[@space?] : *[@space?]
+		?[?[
+			?[@JSON_NULL]
+		|
+			?[@JSON_STRING]
+		|
+			?[@JSON_FORMAT]
+		@or]@G]
+		*[@space?] ?[ , *[@space?] | ?[}@,] @or]
+	@X?]
+}
+"
+
+JSON_FORMAT_OLD	"
+{
+	*[@space?]
+	*[
+		?[*[@word]@G] *[@space?] : *[@space?]
+		?[?[
+			?[@JSON_NULL]
+		|
+			?[@JSON_STRING]
+		|
+			?[@JSON_FORMAT]
+		@or]@G]
+		*[@space?] , *[@space?]
 	|
-		?[?[*[@word]@G]*[@space?]:*[@space?]?[?[?[@DQUOTE]@G]|null|?[@JSON_FORMAT]@or]*[@space?]@X]
+		?[*[@word]@G] *[@space?] : *[@space?]
+		?[?[
+			?[@JSON_NULL]
+		|
+			?[@JSON_STRING]
+		|
+			?[@JSON_FORMAT]
+		@or]@G]
+		*[@space?] ?[}@,]
 	@or?]
-?[}@G]@G]
+}
 "

@@ -1,0 +1,22 @@
+
+{
+	hello : "Hello",
+	ok : {
+		2:{
+		
+		},
+		3: {
+			rest : null,
+			lol : null
+		},
+		HAHAHAA: "ok"
+	},
+	lol:"haha"
+}
+
+
+
+{
+	mdr : "ok"
+}
+
