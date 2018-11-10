@@ -16,7 +16,7 @@ JSON_FORMAT		"
 		|
 			?[@JSON_FORMAT]
 		@or]@G]
-		*[@space?] ?[ , *[@space?] | ?[}@,] @or]
+		*[@space?] ?[ , *[@space?] | ?[}@;] @or]
 	@X?]
 }
 "
@@ -43,7 +43,7 @@ JSON_FORMAT_OLD	"
 		|
 			?[@JSON_FORMAT]
 		@or]@G]
-		*[@space?] ?[}@,]
+		*[@space?] ?[}@;]
 	@or?]
 }
 
