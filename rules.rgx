@@ -46,4 +46,5 @@ JSON_FORMAT_OLD	"
 		*[@space?] ?[}@,]
 	@or?]
 }
+
 "
