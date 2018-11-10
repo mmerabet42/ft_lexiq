@@ -103,7 +103,7 @@ Here is a non-exhaustive list of available rules.
 
 | Name | Description | Method | Example | Explanation |
 | --- | --- | --- | --- | --- |
-| `@or` | One of the alternatives given in the argument shall match | C function | `reg?[ex\|ular expression@or]?[s@?]` | Might match 'regex' 'regular expression' 'regexs' or 'regular expressions' |
+| `@or` | One of the alternatives given in argument shall match | C function | `reg?[ex\|ular expression@or]?[s@?]` | Might match 'regex' 'regular expression' 'regexs' or 'regular expressions' |
 | `@case` | Compare the strings ignoring case | C function | `?[hello@case] world` | Will match any possible form of the 'hello' string followed by exactly ' world' |
 | `@^` | Beginning of string | C function | `?[@^]hello` | The string '*hello*' matches only if it is at the beginning of a string |
 | `@$` | End of string | C function | `hello?[@$]` | The string '*hello*' matches only if it is at the end of a string |
@@ -113,7 +113,7 @@ Here is a non-exhaustive list of available rules.
 | `@$w` | End of string, line or word | C function | `hello?[@$w]` | The string '*hello*' matches only if it is at the end of a string, line or word |
 | `@upper` | Any uppercase letter | Inline regex | `*![@upper=3]` | Matches three characters that are not uppercase letters |
 | `@lower` | Any lowercase letter | Inline regex | `?[@upper]*[@lower]` | An uppercase letter followed by any number of lowercase letters |
-| `@and` | All of the alternatives given in the argument shall match  | C function | `*[?![@upper]&?![@lower]@and]` | Any number of characters that are neither an uppercase letter nor a lowercase letter, equivalent of `*![@alpha]` |
+| `@and` | All of the alternatives given in argument shall match  | C function | `*[?![@upper]&?![@lower]@and]` | Any number of characters that are neither an uppercase letter nor a lowercase letter, equivalent of `*![@alpha]` |
 | `@word` | Any word character that is either an alphabetic character, a digit or an underscore. | Inline regex | `?[@^w]*[@word=3]?[@$w]` | Three word characters between word boundaries |
 | `@space` | Any space character | Inline regex | `?![@space]` | Match any character that is not a space. |
 | `@int` | A valid integer | Inline regex | `?[@int]` | An integer might start with zero or more space followed by; a minus or a plus sign or nothing; followed by one or more digits. |
