@@ -1,22 +1,33 @@
 
 {
-	hello : "Hello",
-	ok : {
-		2:{
-		
+	"hello" : "Hello",
+	"toto":   null,
+	"ok" : {
+		"2":{
+			"lol":[3, "md\"\"\"r", 5, {"a":1,"b":2}]
 		},
-		3: {
-			rest : null,
-			lol : null
+		"3": {
+			"rest" : null,
+			"lol" : null
 		},
-		HAHAHAA: "ok"
+		"mdr": "loool",
+		"HAHAHAA": [
+			"avakevbhaadf", "ebhjvb fv",
+			456, "eigverbviuhev\"\"ehv",
+			-7854, {
+				"fly":"whubvaev",
+				"owhuiv":null
+			}
+		]
 	},
-	lol:"haha"
+	"lol":"haha",
+	"ok":				"loool",
+	"aebhv":"avwebhjd\"aerbhv"
 }
 
 
 
 {
-	mdr : "ok"
+	"mdr" : "ok"
 }
 

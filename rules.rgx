@@ -1,50 +1,46 @@
-DQUOTE			"\"*[\\\"|?![\"]@or?]\""
-
-JSON_NAME		"*[@word]"
-JSON_NULL		"null"
+DQUOTE			"\"*[?[\\\"@G]|?![\"]@or?]\""
+JSON_NAME		"?[@DQUOTE]"
+JSON_KEYWORD	"?[null|true|false@or]"
 JSON_STRING		"?[@DQUOTE]"
+JSON_INTEGER	"?[@nint]"
 
 JSON_FORMAT		"
 {
 	*[@space?]
 	*[
-		?[*[@word]@G] *[@space?] : *[@space?]
+		?[?[@JSON_NAME]@G] *[@space?] : *[@space?]
 		?[?[
-			?[@JSON_NULL]
+			?[@JSON_KEYWORD]
+		|
+			?[@JSON_INTEGER]
 		|
 			?[@JSON_STRING]
 		|
 			?[@JSON_FORMAT]
+		|
+			?[@JSON_ARRAY]
 		@or]@G]
 		*[@space?] ?[ , *[@space?] | ?[}@;] @or]
 	@X?]
 }
 "
 
-JSON_FORMAT_OLD	"
-{
+JSON_ARRAY		"
+[
 	*[@space?]
 	*[
-		?[*[@word]@G] *[@space?] : *[@space?]
 		?[?[
-			?[@JSON_NULL]
+			?[@JSON_KEYWORD]
+		|
+			?[@JSON_INTEGER]
 		|
 			?[@JSON_STRING]
 		|
 			?[@JSON_FORMAT]
-		@or]@G]
-		*[@space?] , *[@space?]
-	|
-		?[*[@word]@G] *[@space?] : *[@space?]
-		?[?[
-			?[@JSON_NULL]
 		|
-			?[@JSON_STRING]
-		|
-			?[@JSON_FORMAT]
+			?[@JSON_ARRAY]
 		@or]@G]
-		*[@space?] ?[}@;]
-	@or?]
-}
-
+		*[@space?] ?[ , *[@space?] | ?[{ ] @;}] @or]
+	@X?]
+]
 "
