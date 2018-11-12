@@ -1,8 +1,9 @@
 DQUOTE			"\"*[?[\\\"@G]|?![\"]@or?]\""
-JSON_NAME		"?[@DQUOTE]"
+JSON_NAME		"*[@word]"
 JSON_KEYWORD	"?[null|true|false@or]"
 JSON_STRING		"?[@DQUOTE]"
 JSON_INTEGER	"?[@nint]"
+
 
 JSON_FORMAT		"
 {

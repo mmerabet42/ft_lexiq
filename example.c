@@ -14,17 +14,17 @@ void print_matches(t_list *matches);
 int main(int argc, char **argv)
 {
 /*
-** For readability purpose i have put the rules in the 'rules.rgx' file.
-** So we will load them with the RGX_LOAD flag.
+** For readability purpose i have put the rules in the 'json.rgx' file.
+** So we will load them with the RGX_LOAD flag first.
 ** If the call failed for any reason, we exit.
 */
-	if (ft_regex(RGX_LOAD, "rules.rgx", NULL) == -1)
+	if (ft_regex(RGX_LOAD, "json.rgx", NULL) == -1)
 		return (0);
 /*
 ** Now we have the @JSON_FORMAT rule loaded. We can test it on the argument we received.
 ** We will use the RGX_GLOBAL flag to allow multiple JSON structure.
 ** By the way it is important to mention that argv[1] should be the content of the string to test.
-** So if you are willing to test a file you should write:
+** So if you are willing to test the content of a file you should write:
 **             ./a.out "`cat file`"
 */
 	int		n;
@@ -60,4 +60,3 @@ void print_matches(t_list *matches)
 		matches = matches->next;
 	}
 }
-
