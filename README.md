@@ -247,7 +247,7 @@ ft_regex(RGX_FREE, NULL, NULL, &matches)
 
 ## Adding rules
 
-As told earlier with the concept of rules, we can add rules by ourselves. This can be done with by various methods.
+As told earlier with the concept of rules, we can add rules by ourselves. This can be done with various methods.
 
 #### RGX_ADD a rule
 
