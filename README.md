@@ -19,6 +19,7 @@
   * [Adding rules](#adding-rules)
     * [RGX_ADD a rule](#rgx_add-a-rule)
     * [RGX_LOAD rules from a file](#rgx_load-rules-from-a-file)
+    
   * [Global and local rules](#global-and-local-rules)
     * [RGX_TO a local list](#rgx_to-a-local-list)
   * [Flags](#flags)
