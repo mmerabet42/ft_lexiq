@@ -240,11 +240,11 @@ ft_regex(RGX_FREE, NULL, NULL, &matches)
 
 ## Adding rules
 
-As told earlier with the concept of rules, we can add rules by ourselves, and this can be done with various ways.
+As told earlier with the concept of rules, we can add rules by ourselves. This can be done with by various methods.
 
 #### RGX_ADD
 
-The RGX_ADD flag adds one rule, by taking `regex` parameter as the rule name and the `string` parameter as the regex definition.
+The RGX_ADD flag adds one rule, by taking the `regex` parameter as the rule name and the `string` parameter as the regex definition.
 
 ```C
 ft_regex(RGX_ADD, "three_char_word", "?[@^w]*[@word=3]?[@$w]", NULL)
@@ -312,11 +312,11 @@ And can be loaded with an `ft_regex` call with the RGX_LOAD flag.
 ft_regex(RGX_LOAD, "rules.rgx", NULL)
 ```
 
-The functions returns the number of added rule. When adding rules witht the RGX_LOAD flag the RGX_READABLE flag is also enabled which will ignore any space character.
+The function returns the number of added rule. When adding rules with the RGX_LOAD flag, the RGX_READABLE flag is also enabled which means that it will ignore any space character in the regex definition.
 
 ## Global and local rules
 
-It is also possible to add rules to a specific 'channel', by default the added rules are pushed into a list which can be requested with the RGX_GET flag.
+It is also possible to add rules to a specific 'channel', by default the added rules are pushed into a global list which can be requested with the RGX_GET flag.
 ```C
 t_list *list;
 ft_regex(RGX_GET, NULL, NULL, &list)
@@ -327,7 +327,7 @@ The `list` variable now points to the global rules. The reason of that is that y
 ft_regex(RGX_SET, NULL, NULL, &list)
 ```
 
-After this call, all the added rules are pushed into the local list `list`. As the RGX_SET flag overwrite the current global list, it should be stored somewhere with the RGX_GET flag before overwriting it, so it can be set back to the global list.
+After this call, all the added rules are pushed into the local list `list`. As the RGX_SET flag overwrite the current global list, it should be stored somewhere with the RGX_GET flag before overwriting it, so it can be set back.
 
 #### RGX_TO
 
