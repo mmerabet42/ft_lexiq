@@ -17,6 +17,10 @@
   * [libft](#the-latest-version-of-the-ft_regex-function-is-available-in-the-libft-library)
   * [The global flag](#the-global-flag)
   * [Adding rules](#adding-rules)
+    * [RGX_ADD a rule](#rgx_add-a-rule)
+    * [RGX_LOAD rules from a file](#rgx_load-rules-from-a-file)
+  * [Global and local rules](#global-and-local-rules)
+    * [RGX_TO a local list](#rgx_to-a-local-list)
   * [Flags](#flags)
 
 
@@ -242,7 +246,7 @@ ft_regex(RGX_FREE, NULL, NULL, &matches)
 
 As told earlier with the concept of rules, we can add rules by ourselves. This can be done with by various methods.
 
-#### RGX_ADD
+#### RGX_ADD a rule
 
 The RGX_ADD flag adds one rule, by taking the `regex` parameter as the rule name and the `string` parameter as the regex definition.
 
@@ -299,7 +303,7 @@ struct t_regex_rule
 
 There are two ways of consuming characters with this method, the first one is to simply return the number of matched characters and the second one is to increment directly the `t_regex_info.str` pointer, the difference is that with the last method the matched characters wont be added to the final return of the `ft_regex` function, (the boundary rules uses this last method `@$n` and `@$w`). If you want the match to fail the function must return -1.
 
-#### RGX_LOAD
+#### RGX_LOAD rules from a file
 
 You can also load rules from a file. For example the 'rules.rgx' file is formatted as
 ```
@@ -307,7 +311,7 @@ rule0  "regular expression ..."
 rule1 "regular expression ..."
 ```
 
-And can be loaded with an `ft_regex` call with the RGX_LOAD flag.
+And can be loaded by calling `ft_regex` with the RGX_LOAD flag.
 ```C
 ft_regex(RGX_LOAD, "rules.rgx", NULL)
 ```
@@ -329,7 +333,7 @@ ft_regex(RGX_SET, NULL, NULL, &list)
 
 After this call, all the added rules are pushed into the local list `list`. As the RGX_SET flag overwrite the current global list, it should be stored somewhere with the RGX_GET flag before overwriting it, so it can be set back.
 
-#### RGX_TO
+#### RGX_TO a local list
 
 Instead of playing with the RGX_GET and RGX_SET flag, for adding rules to a local list, you can use the RGX_TO flag, combined with the RGX_ADD or RGX_LOAD flag, to specify in which list to add the rules.
 ```C
