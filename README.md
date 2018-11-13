@@ -365,7 +365,7 @@ The 'rules.rgx' file will be loaded to the local list `list`. This is usefull to
 | RGX_LOAD | The engine will load the rules from a file formatted as `rule_name "regular expression"`, each rules are added with the RGX_READABLE flag automatically | |
 | RGX_GET | Returns a linked list of all the added rules | `t_list **rules` |
 | RGX_SET | Set the default global list | `t_list **rules` |
-| RGX_TO | Must go with RGX_ADD or RGX_LOAD. It pushes the rule(s) into a specified local list. With RGX_CLEAN it free it properly. | `t_list **rules` |
+| RGX_TO | Must go with RGX_ADD or RGX_LOAD. It pushes the rule(s) into a specified local list. With RGX_CLEAN it cleans it. | `t_list **rules` |
 | RGX_FREE | Free the linked list previously returned by a call of `ft_regex` with the `RGX_GLOBAL` or `RGX_UGLOBAL` flag | `t_list **matches` |
 | RGX_FREEGRP | Free the linked list previously returned by a call of `ft_regex` with the `RGX_GROUP` flag | |
 | RGX_CLEAN | Clean and free all the rules that were added manually by the `ft_regex` function with the `RGX_ADD` flag | |
