@@ -24,6 +24,7 @@
   * [Global and local rules](#global-and-local-rules)
     * [RGX_TO a local list](#rgx_to-a-local-list)
   * [Flags](#flags)
+* [A powerfull and generic parser, the true power of `ft_regex`](#a-powerfull-and-generic-parser-the-true-power-of-ft_regex)
 
 
 # What is a regular expression ?
