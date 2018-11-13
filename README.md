@@ -6,6 +6,7 @@
 * [What is a regular expression ?](#what-is-a-regular-expression-)
 
 * [How a regular expression works ?](#how-a-regular-expression-works-)
+
   * [Two metacharacters are enough](#two-metacharacters-are-enough)
   * [Negating and quandtifying](#negating-and-quantifying)
   * [Backslash limitation](#backslash-limitation)
@@ -14,12 +15,12 @@
   * [Capturing group and backreference](#capturing-groups-and-backreferencing)
   
 * [`ft_regex`](#ft_regex-1)
+
   * [libft](#the-latest-version-of-the-ft_regex-function-is-available-in-the-libft-library)
   * [The global flag](#the-global-flag)
   * [Adding rules](#adding-rules)
     * [RGX_ADD a rule](#rgx_add-a-rule)
     * [RGX_LOAD rules from a file](#rgx_load-rules-from-a-file)
-    
   * [Global and local rules](#global-and-local-rules)
     * [RGX_TO a local list](#rgx_to-a-local-list)
   * [Flags](#flags)
