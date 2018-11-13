@@ -240,7 +240,9 @@ ft_regex(RGX_FREE, NULL, NULL, &matches)
 
 ## Adding rules
 
-As told earlier with the concept of rules, we can add rules by ourselves, and this is done with the RGX_ADD flag
+As told earlier with the concept of rules, we can add rules by ourselves, and this can be done with various ways.
+
+#### RGX_ADD
 ```C
 ft_regex(RGX_ADD, "three_char_word", "?[@^w]*[@word=3]?[@$w]", NULL)
 ```
