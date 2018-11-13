@@ -243,6 +243,9 @@ ft_regex(RGX_FREE, NULL, NULL, &matches)
 As told earlier with the concept of rules, we can add rules by ourselves, and this can be done with various ways.
 
 #### RGX_ADD
+
+The RGX_ADD flag adds one rule, by taking `regex` parameter as the rule name and the `string` parameter as the regex definition.
+
 ```C
 ft_regex(RGX_ADD, "three_char_word", "?[@^w]*[@word=3]?[@$w]", NULL)
 ```
@@ -295,6 +298,46 @@ struct t_regex_rule
 ```
 
 There are two ways of consuming characters with this method, the first one is to simply return the number of matched characters and the second one is to increment directly the `t_regex_info.str` pointer, the difference is that with the last method the matched characters wont be added to the final return of the `ft_regex` function, (the boundary rules uses this last method `@$n` and `@$w`). If you want the match to fail the function must return -1.
+
+#### RGX_LOAD
+
+You can also load rules from a file. For example the 'rules.rgx' file is formatted as
+```
+rule0  "regular expression ..."
+rule1 "regular expression ..."
+```
+
+And can be loaded with an `ft_regex` call with the RGX_LOAD flag.
+```C
+ft_regex(RGX_LOAD, "rules.rgx", NULL)
+```
+
+The functions returns the number of added rule. When adding rules witht the RGX_LOAD flag the RGX_READABLE flag is also enabled which will ignore any space character.
+
+## Global and local rules
+
+It is also possible to add rules to a specific 'channel', by default the added rules are pushed into a list which can be requested with the RGX_GET flag.
+```C
+t_list *list;
+ft_regex(RGX_GET, NULL, NULL, &list)
+```
+
+The `list` variable now points to the global rules. The reason of that is that you can also set the global rules list with the RGX_SET flag.
+```C
+ft_regex(RGX_SET, NULL, NULL, &list)
+```
+
+After this call, all the added rules are pushed into the local list `list`. As the RGX_SET flag overwrite the current global list, it should be stored somewhere with the RGX_GET flag before overwriting it, so it can be set back to the global list.
+
+#### RGX_TO
+
+Instead of playing with the RGX_GET and RGX_SET flag, for adding rules to a local list, you can use the RGX_TO flag, combined with the RGX_ADD or RGX_LOAD flag, to specify in which list to add the rules.
+```C
+t_list *list = NULL;
+ft_regex(RGX_LOAD | RGX_TO, "rules.rgx", NULL, &list);
+```
+
+The 'rules.rgx' file will be loaded to the local list `list`. This is usefull to avoid conflicts if the `ft_regex` function is called in different places of a project.
 
 ## Flags
 
