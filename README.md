@@ -337,7 +337,7 @@ t_list *list = NULL;
 ft_regex(RGX_LOAD | RGX_TO, "rules.rgx", NULL, &list);
 ```
 
-The 'rules.rgx' file will be loaded to the local list `list`. This is usefull to avoid conflicts if the `ft_regex` function is called in different places of a project.
+The 'rules.rgx' file will be loaded to the local list `list`. This is usefull to avoid conflicts and duplications.
 
 ## Flags
 
@@ -358,6 +358,8 @@ The 'rules.rgx' file will be loaded to the local list `list`. This is usefull to
 | RGX_ADD_MULTI | Add rules from an array of `t_regex_func` structures | `t_regex_func *funcs, size_t len` |
 | RGX_LOAD | The engine will load the rules from a file formatted as `rule_name "regular expression"`, each rules are added with the RGX_READABLE flag automatically | |
 | RGX_GET | Returns a linked list of all the added rules | `t_list **rules` |
+| RGX_SET | Set the default global list | `t_list **rules` |
+| RGX_TO | Must go with RGX_ADD or RGX_LOAD. It pushes the rule(s) into a specified local list. With RGX_CLEAN it free it properly. | `t_list **rules` |
 | RGX_FREE | Free the linked list previously returned by a call of `ft_regex` with the `RGX_GLOBAL` or `RGX_UGLOBAL` flag | `t_list **matches` |
 | RGX_FREEGRP | Free the linked list previously returned by a call of `ft_regex` with the `RGX_GROUP` flag | |
 | RGX_CLEAN | Clean and free all the rules that were added manually by the `ft_regex` function with the `RGX_ADD` flag | |
@@ -368,12 +370,12 @@ And here is a table of all the possible combination with their order:
 | --- | --- |
 | RGX_RGXN \| RGX_STRN \| RGX_POS \| RGX_END \| RGX_VAR \| RGX_ID \| RGX_DATA \| RGX_READABLE \| RGX_GROUP | `int rgxn, int strn, int *pos, int *id, t_list **groups, void *data, int vars[52]` |
 | RGX_RGXN \| RGX_STRN \| RGX_GLOBAL \| RGX_UGLOBAL \| RGX_VAR \| RGX_DATA \| RGX_READABLE | `int rgxn, int strn, t_list **matches, void *data, int vars[52]` |
-| RGX_ADD \| RGX_ID \| RGX_READABLE | `t_regex_funcptr *func, int id` |
-| RGX_ADD_MULTI | `t_regex_funcs *funcs, size_t len` |
-| RGX_LOAD | `const char *regex <` |
+| RGX_ADD \| RGX_ID \| RGX_READABLE \| RGX_TO | `t_list **rules, t_regex_funcptr *func, int id` |
+| RGX_ADD_MULTI | `t_list **rules, t_regex_funcs *funcs, size_t len` |
+| RGX_LOAD \| RGX_TO | `const char *regex <, t_list **rules` |
 | RGX_GET | `t_list **rules` |
 | RGX_FREE | `t_list **matches` |
 | RGX_FREEGRP | `t_list **groups` |
-| RGX_CLEAN | |
+| RGX_CLEAN \| RGX_TO | `t_list **rules` |
 
 ![lol](/screenshots/picture.jpg)
