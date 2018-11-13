@@ -385,4 +385,6 @@ And here is a table of all the possible combination with their order:
 | RGX_FREEGRP | `t_list **groups` |
 | RGX_CLEAN \| RGX_TO | `t_list **rules` |
 
+# A powerfull and generic parser, the true power of `ft_regex`
+
 ![lol](/screenshots/picture.jpg)
