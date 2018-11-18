@@ -19,10 +19,10 @@
   * [libft](#the-latest-version-of-the-ft_regex-function-is-available-in-the-libft-library)
   * [The global flag](#the-global-flag)
   * [Adding rules](#adding-rules)
-    * [RGX_ADD a rule](#rgx_add-a-rule)
-    * [RGX_LOAD rules from a file](#rgx_load-rules-from-a-file)
+    * [Only one rule](#only-one-rule)
+    * [Importing multiple rules from  a file](#importing-multiple-rules-from-a-file)
   * [Global and local rules](#global-and-local-rules)
-    * [RGX_TO a local list](#rgx_to-a-local-list)
+    * [Adding to a specific list directly](#adding-to-a-specific-list-directly)
   * [Flags](#flags)
 * [A powerfull and generic parser, the true power of `ft_regex`](#a-powerfull-and-generic-parser-the-true-power-of-ft_regex)
 
@@ -247,9 +247,9 @@ ft_regex(RGX_FREE, NULL, NULL, &matches)
 
 ## Adding rules
 
-As told earlier with the concept of rules, we can add rules by ourselves. This can be done with various methods.
+As told earlier with the concept of rules, we can add rules by ourselves.
 
-#### RGX_ADD a rule
+#### Only one rule
 
 The RGX_ADD flag adds one rule, by taking the `regex` parameter as the rule name and the `string` parameter as the regex definition.
 
@@ -306,45 +306,49 @@ struct t_regex_rule
 
 There are two ways of consuming characters with this method, the first one is to simply return the number of matched characters and the second one is to increment directly the `t_regex_info.str` pointer, the difference is that with the last method the matched characters wont be added to the final return of the `ft_regex` function, (the boundary rules uses this last method `@$n` and `@$w`). If you want the match to fail the function must return -1.
 
-#### RGX_LOAD rules from a file
+#### Importing multiple rules from a file
 
-You can also load rules from a file. For example the 'rules.rgx' file is formatted as
+You can also import one or more rules from a file. For instance the 'rules.rgx' file is formatted as
 ```
-rule0  "regular expression ..."
-rule1 "regular expression ..."
+#import "other.rgx"
+rule0  "definition ..."
+rule1 "definition ..."
 ```
 
-And can be loaded by calling `ft_regex` with the RGX_LOAD flag.
+And can be imported by calling `ft_regex` with the RGX_IMPORT flag.
 ```C
-ft_regex(RGX_LOAD, "rules.rgx", NULL)
+ft_regex(RGX_IMPORT, "rules.rgx", NULL)
 ```
 
-The function returns the number of added rule. When adding rules with the RGX_LOAD flag, the RGX_READABLE flag is also enabled which means that it will ignore any space character in the regex definition.
+The file asks first to import the 'other.rgx' so all the rules declared in this file are imported too. Then we declare two rules 'rule0' and 'rule1' their regex definition is specified inside the double quotes.
+
+The amount of added rules is then returned by the function. Something else to know is that the rules are added with the RGX_READABLE flag allowing the definition to be humanly readable, it means that the engine will simple ignore any space characters (spaces, tabulations and new lines) that are not inside a regular expression.
 
 ## Global and local rules
 
-It is also possible to add rules to a specific 'channel', by default the added rules are pushed into a global list which can be requested with the RGX_GET flag.
+When adding rules, you are in fact pushing them into a default global linked list that can be requested with the RGX_GET flag.
 ```C
-t_list *list;
-ft_regex(RGX_GET, NULL, NULL, &list)
+t_list *rules;
+ft_regex(RGX_GET, NULL, NULL, &rules)
 ```
 
-The `list` variable now points to the global rules. The reason of that is that you can also set the global rules list with the RGX_SET flag.
+The `rules` variable now points to that global list. The reason of this is that you can push them into a custom list instead.
 ```C
-ft_regex(RGX_SET, NULL, NULL, &list)
+t_list *custom = NULL;
+ft_regex(RGX_SET, NULL, NULL, &custom);
 ```
 
-After this call, all the added rules are pushed into the local list `list`. As the RGX_SET flag overwrite the current global list, it should be stored somewhere with the RGX_GET flag before overwriting it, so it can be set back.
+After this call, all the added rules are pushed into the local list `custom`. As the RGX_SET flag overwrite the current set list, so overwriting it means losing it, that is why you should request the current set list with the RGX_GET flag to reset it back.
 
-#### RGX_TO a local list
+#### Adding to a specific list directly
 
-Instead of playing with the RGX_GET and RGX_SET flag, for adding rules to a local list, you can use the RGX_TO flag, combined with the RGX_ADD or RGX_LOAD flag, to specify in which list to add the rules.
+Instead of playing with the RGX_GET and RGX_SET flag for adding rules to a local list, you can use the RGX_TO flag in combination of the RGX_ADD and RGX_IMPORT flags to specify directly in which list to add them.
 ```C
 t_list *list = NULL;
-ft_regex(RGX_LOAD | RGX_TO, "rules.rgx", NULL, &list);
+ft_regex(RGX_IMPORT | RGX_TO, "rules.rgx", NULL, &list);
 ```
 
-The 'rules.rgx' file will be loaded to the local list `list`. This is usefull to avoid conflicts and duplications.
+The 'rules.rgx' file will be imported into the local list `list`. This is usefull to avoid conflicts and duplications.
 
 ## Flags
 
@@ -363,7 +367,7 @@ The 'rules.rgx' file will be loaded to the local list `list`. This is usefull to
 | RGX_READABLE | Ignores all space characters in the regular expression and all other rules that allows regular expressions in argument. this flag is disabled when calling a rule that is an inline regex. For an inline regex rule to be readable, it needs to have the RGX_READABLE flag enabled with the RGX_ADD flag. | |
 | RGX_ADD | Add a rule to the regex engine | `t_regex_funcptr *func` |
 | RGX_ADD_MULTI | Add rules from an array of `t_regex_func` structures | `t_regex_func *funcs, size_t len` |
-| RGX_LOAD | The engine will load the rules from a file formatted as `rule_name "regular expression"`, each rules are added with the RGX_READABLE flag automatically | |
+| RGX_IMPORT | The engine will import the rules from a file formatted as `rule_name "regular expression"`, each rules are added with the RGX_READABLE flag automatically | |
 | RGX_GET | Returns a linked list of all the added rules | `t_list **rules` |
 | RGX_SET | Set the default global list | `t_list **rules` |
 | RGX_TO | Must go with RGX_ADD or RGX_LOAD. It pushes the rule(s) into a specified local list. With RGX_CLEAN it cleans it. | `t_list **rules` |
@@ -379,7 +383,7 @@ And here is a table of all the possible combination with their order:
 | RGX_RGXN \| RGX_STRN \| RGX_GLOBAL \| RGX_UGLOBAL \| RGX_VAR \| RGX_DATA \| RGX_READABLE | `int rgxn, int strn, t_list **matches, void *data, int vars[52]` |
 | RGX_ADD \| RGX_ID \| RGX_READABLE \| RGX_TO | `t_list **rules, t_regex_funcptr *func, int id` |
 | RGX_ADD_MULTI | `t_list **rules, t_regex_funcs *funcs, size_t len` |
-| RGX_LOAD \| RGX_TO | `const char *regex <, t_list **rules` |
+| RGX_IMPORT \| RGX_TO | `const char *regex <, t_list **rules` |
 | RGX_GET | `t_list **rules` |
 | RGX_FREE | `t_list **matches` |
 | RGX_FREEGRP | `t_list **groups` |
@@ -389,4 +393,26 @@ And here is a table of all the possible combination with their order:
 
 # A powerfull and generic parser, the true power of `ft_regex`
 
+In this part i will explain how you can use the `ft_regex` function to literally parse anything, by combining two major concepts; Nested capturing groups and recursive rules.
 
+Our goal will be to parse any json file. And by parsing i literally mean parsing, understand the extraction of each part of the json file in a structured way, with only one `ft_regex` call.
+
+#### Capturing groups
+
+Before getting into the real stuff, let us see first how capturing groups works behind the scenes.
+
+When the engine sees a capturing group `?[blabla@G]` it pushes it into a list of `t_regex_group` structures defined as
+```C
+struct t_regex_group
+{
+  const char  *str; // A pointer to the start of the captured string
+  int         pos; // The position of the captured string
+  int         len; // The length of the captured string
+  int         id; // The id of the last called rule in the regex expression that captured the string
+  t_list      *groups; // The captured groups inside if this captured groups
+};
+```
+
+You might notice the similarity with the `t_regex_match` structure, the truth is that `t_regex_group` is just an alias of `t_regex_match`, they are literally the same structure.
+
+With the last attribute `groups` you might have figured how nested capturing groups empowers the `ft_regex` engine, if not, let me explain.
