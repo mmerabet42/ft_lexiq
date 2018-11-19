@@ -396,7 +396,7 @@ And here is a table of all the possible combination with their order:
 
 In this part i will explain how the `ft_regex` function can be used to literally parse anything, by combining two major concepts; Nested capturing groups and recursive rules.
 
-Our goal will be to create rules that parses any json file. And by parsing i literally mean parsing, understand the extraction of each part of the json file in a structured way, with only one `ft_regex` call.
+Our goal will be to create a rule that can parse any json file. And by parsing i literally mean parsing, understand the extraction of each part of the json file in a structured way, with only one `ft_regex` call.
 
 #### Capturing groups
 
