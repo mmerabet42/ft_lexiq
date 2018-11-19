@@ -414,6 +414,6 @@ struct t_regex_group
 };
 ```
 
-You might have noticed the similarity with the `t_regex_match` structure, the truth is that `t_regex_group` is just an alias of `t_regex_match`, they are literally the same structure.
+You might have noticed the similarity with the `t_regex_match` structure, the truth is that `t_regex_group` is just an alias of `t_regex_match`, they are literally the same structure. Theoretically a group is different than a match but practically it doesn't need to be.
 
 With the last attribute `groups` you might have figured how capturing groups empowers the `ft_regex` engine, if not, let me explain.
