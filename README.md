@@ -320,29 +320,29 @@ And can be imported by calling `ft_regex` with the RGX_IMPORT flag.
 ft_regex(RGX_IMPORT, "rules.rgx", NULL)
 ```
 
-The file asks first to import the 'other.rgx' so all the rules declared in this file are imported too. Then we declare two rules 'rule0' and 'rule1' their regex definition is specified inside the double quotes.
+The file asks first to import the 'other.rgx' file so all the rules declared in this file are imported too. Then we declare two rules 'rule0' and 'rule1' their regex definition is specified inside the double quotes.
 
-The amount of added rules is then returned by the function. Something else to know is that the rules are added with the RGX_READABLE flag allowing the definition to be humanly readable, it means that the engine will simple ignore any space characters (spaces, tabulations and new lines) that are not inside a regular expression.
+The amount of added rules is then returned by the function. Something else to know is that the rules are added with the RGX_READABLE flag allowing the definition to be humanly readable, it means that the engine will ignore any space characters (spaces, tabulations and new lines) that are not inside of a regular expression.
 
 ## Global and local rules
 
-When adding rules, you are in fact pushing them into a default global linked list that can be requested with the RGX_GET flag.
+When adding rules, you are in fact pushing them into a default global list that can be requested with the RGX_GET flag.
 ```C
 t_list *rules;
 ft_regex(RGX_GET, NULL, NULL, &rules)
 ```
 
-The `rules` variable now points to that global list. The reason of this is that you can push them into a custom list instead.
+The `rules` variable now points to that global list. The reason of this is that you can push rules into a custom list instead.
 ```C
 t_list *custom = NULL;
 ft_regex(RGX_SET, NULL, NULL, &custom);
 ```
 
-After this call, all the added rules are pushed into the local list `custom`. As the RGX_SET flag overwrite the current set list, so overwriting it means losing it, that is why you should request the current set list with the RGX_GET flag to reset it back.
+After this call, all the added rules are pushed into the local list `custom`. The RGX_SET flag overwrites the current set list. S overwriting it means losing it, that is why you should request the current set list with the RGX_GET flag to reset it back.
 
 #### Adding to a specific list directly
 
-Instead of playing with the RGX_GET and RGX_SET flag for adding rules to a local list, you can use the RGX_TO flag in combination of the RGX_ADD and RGX_IMPORT flags to specify directly in which list to add them.
+Instead of playing with the RGX_GET and RGX_SET flag for adding rules to a local list, you can use the RGX_TO flag in combination of the RGX_ADD and RGX_IMPORT flags to specify directly in which list to add the rules.
 ```C
 t_list *list = NULL;
 ft_regex(RGX_IMPORT | RGX_TO, "rules.rgx", NULL, &list);
@@ -368,12 +368,12 @@ The 'rules.rgx' file will be imported into the local list `list`. This is useful
 | RGX_ADD | Add a rule to the regex engine | `t_regex_funcptr *func` |
 | RGX_ADD_MULTI | Add rules from an array of `t_regex_func` structures | `t_regex_func *funcs, size_t len` |
 | RGX_IMPORT | The engine will import the rules from a file formatted as `rule_name "regular expression"`, each rules are added with the RGX_READABLE flag automatically | |
-| RGX_GET | Returns a linked list of all the added rules | `t_list **rules` |
-| RGX_SET | Set the default global list | `t_list **rules` |
-| RGX_TO | Must go with RGX_ADD or RGX_LOAD. It pushes the rule(s) into a specified local list. With RGX_CLEAN it cleans it. | `t_list **rules` |
+| RGX_GET | Returns the current global list | `t_list **rules` |
+| RGX_SET | Sets the current global list with the specified local list | `t_list **rules` |
+| RGX_TO | Must go with RGX_ADD or RGX_IMPORT. It pushes the rule(s) into a specified local list. With RGX_CLEAN it cleans the specified rule lists. | `t_list **rules` |
 | RGX_FREE | Free the linked list previously returned by a call of `ft_regex` with the `RGX_GLOBAL` or `RGX_UGLOBAL` flag | `t_list **matches` |
 | RGX_FREEGRP | Free the linked list previously returned by a call of `ft_regex` with the `RGX_GROUP` flag | |
-| RGX_CLEAN | Clean and free all the rules that were added manually by the `ft_regex` function with the `RGX_ADD` flag | |
+| RGX_CLEAN | Clean and free all the rules that were added manually by the `ft_regex` function with the RGX_ADD or RGX_IMPORT flag | |
 
 And here is a table of all the possible combination with their order:
 
@@ -385,6 +385,7 @@ And here is a table of all the possible combination with their order:
 | RGX_ADD_MULTI | `t_list **rules, t_regex_funcs *funcs, size_t len` |
 | RGX_IMPORT \| RGX_TO | `const char *regex <, t_list **rules` |
 | RGX_GET | `t_list **rules` |
+| RGX_SET | `t_list **rules` |
 | RGX_FREE | `t_list **matches` |
 | RGX_FREEGRP | `t_list **groups` |
 | RGX_CLEAN \| RGX_TO | `t_list **rules` |
@@ -395,7 +396,7 @@ And here is a table of all the possible combination with their order:
 
 In this part i will explain how you can use the `ft_regex` function to literally parse anything, by combining two major concepts; Nested capturing groups and recursive rules.
 
-Our goal will be to parse any json file. And by parsing i literally mean parsing, understand the extraction of each part of the json file in a structured way, with only one `ft_regex` call.
+Our goal will be to create rules that parses any json file. And by parsing i literally mean parsing, understand the extraction of each part of the json file in a structured way, with only one `ft_regex` call.
 
 #### Capturing groups
 
@@ -413,6 +414,6 @@ struct t_regex_group
 };
 ```
 
-You might notice the similarity with the `t_regex_match` structure, the truth is that `t_regex_group` is just an alias of `t_regex_match`, they are literally the same structure.
+You might have noticed the similarity with the `t_regex_match` structure, the truth is that `t_regex_group` is just an alias of `t_regex_match`, they are literally the same structure.
 
 With the last attribute `groups` you might have figured how nested capturing groups empowers the `ft_regex` engine, if not, let me explain.
