@@ -394,7 +394,7 @@ And here is a table of all the possible combination with their order:
 
 # A powerfull and generic parser, the true power of `ft_regex`
 
-In this part i will explain how you can use the `ft_regex` function to literally parse anything, by combining two major concepts; Nested capturing groups and recursive rules.
+In this part i will explain how the `ft_regex` function can be used to literally parse anything, by combining two major concepts; Nested capturing groups and recursive rules.
 
 Our goal will be to create rules that parses any json file. And by parsing i literally mean parsing, understand the extraction of each part of the json file in a structured way, with only one `ft_regex` call.
 
@@ -410,10 +410,10 @@ struct t_regex_group
   int         pos; // The position of the captured string
   int         len; // The length of the captured string
   int         id; // The id of the last called rule in the regex expression that captured the string
-  t_list      *groups; // The captured groups inside if this captured groups
+  t_list      *groups; // The captured groups inside of this captured groups
 };
 ```
 
 You might have noticed the similarity with the `t_regex_match` structure, the truth is that `t_regex_group` is just an alias of `t_regex_match`, they are literally the same structure.
 
-With the last attribute `groups` you might have figured how nested capturing groups empowers the `ft_regex` engine, if not, let me explain.
+With the last attribute `groups` you might have figured how capturing groups empowers the `ft_regex` engine, if not, let me explain.
