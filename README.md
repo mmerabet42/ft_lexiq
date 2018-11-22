@@ -401,7 +401,7 @@ Our goal will be to create a rule that can parse any json file. And by parsing i
 
 #### Capturing groups
 
-You might have already figured out how capturing groups empowers the `ft_regex` engine, but there is a completely different use that can be made of this concept.
+You might already have an idea of how capturing groups empowers the `ft_regex` engine, but this is already available in all regex engines. What i am about to show you, is really unique.
 
 When the engine sees a capturing group `?[blabla@G]` it pushes it into a list of `t_regex_group` structures defined as
 ```C
