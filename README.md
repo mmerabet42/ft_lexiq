@@ -322,7 +322,7 @@ ft_regex(RGX_IMPORT, "rules.rgx", NULL)
 
 The file asks first to import the 'other.rgx' file so all the rules declared in this file are imported too. Then we declare two rules 'rule0' and 'rule1' their regex definition is specified inside the double quotes.
 
-The amount of added rules is then returned by the function. Something else to know is that the rules are added with the RGX_READABLE flag allowing the definition to be humanly readable, it means that the engine will ignore any space characters (spaces, tabulations and new lines) that are not inside of a regular expression.
+The amount of added rules is then returned by the function. Something else to know is that the rules are added with the RGX_READABLE flag allowing the definition to be humanly readable, it means that the engine will ignore any space characters (spaces, tabulations and new lines) that are inside of a regular expression (Raw expressions or any rule that allows subexpressions in their argument like `@or`, `@X`, `@G` etc.).
 
 ## Default and temporary rules
 
