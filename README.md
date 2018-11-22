@@ -429,4 +429,14 @@ For the subject string 'hello:world', the resulting tree would be
 'hello'              'world'
 ```
 
-'hello' and 'world' are the captured groups of 'hello:world'.
+'hello' and 'world' are the captured groups of 'hello:world', they were pushed into the `t_regex_group.groups` list of 'hello:world'. The `t_regex_group.id` attribute shows its use when the matching string complexifies, because when iterating through the tree you will need to know what matched exactly at this place without retesting the regex (saving time), for the example above we will add two rules 'KEY' and 'VALUE' for differentiating these two part of the match
+```
+ft_regex(RGX_ADD ...
+  KEY "*[@word]"
+  VALUE "*[@word"
+);
+
+ft_regex(... "?[?[?[@KEY]@G]*[@space?]:*[@space?]?[?[@VALUE]@G]@G]", ...);
+```
+
+Here i've added the possibility of having space characters between the colon character `:`. Now, when reaching captured group 'hello', we will know that the 'KEY' rule matched.
