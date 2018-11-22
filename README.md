@@ -433,10 +433,10 @@ For the subject string 'hello:world', the resulting tree would be
 ```
 ft_regex(RGX_ADD ...
   KEY "*[@word]"
-  VALUE "*[@word"
+  VALUE "*[@word]"
 );
 
 ft_regex(... "?[?[?[@KEY]@G]*[@space?]:*[@space?]?[?[@VALUE]@G]@G]", ...);
 ```
 
-Here i've added the possibility of having space characters between the colon character `:`. Now, when reaching captured group 'hello', we will know that the 'KEY' rule matched.
+Here i've added the possibility of having space characters between the colon character `:`. Now, when reaching the captured group 'hello', we will know that the 'KEY' rule matched. This is not really usefull for this example, but it would be for the 'VALUE' rule as a value can be different things (integers, strings, arrays, etc.), so it would be usefull to know the type of the value directly at parsing time.
