@@ -401,7 +401,7 @@ Our goal will be to create a rule that can parse any json file. And by parsing i
 
 #### Capturing groups
 
-You might have already figured out how capturing groups empowers the `ft_regex` engine, but there is a complete different use that can be made of this concept.
+You might have already figured out how capturing groups empowers the `ft_regex` engine, but there is a completely different use that can be made of this concept.
 
 When the engine sees a capturing group `?[blabla@G]` it pushes it into a list of `t_regex_group` structures defined as
 ```C
@@ -438,3 +438,22 @@ ft_regex(... "?[?[?[@KEY]@G]*[@space?]:*[@space?]?[?[@VALUE]@G]@G]", ...);
 ```
 
 Now, when reaching the captured group 'hello', we will know that the 'KEY' rule matched because `t_regex_group.id` will be equal to whatever id has been given to 'KEY'. This is not really usefull for this example, but it would be for the 'VALUE' rule as a value can be different things (integers, strings, arrays, etc.), so it would be usefull to know the type of the value directly at parsing time by creating a rule for each type.
+
+#### Recursive rules
+
+To understand and master the recursive rules concept, the bracket example turns out to be perfect, so let's go for it.
+
+The bracket example is about matching nested bracket of any type (square, round and curly bracket) with any possible characters inside them.
+
+We will go step by step. From now on, we will add rules as if we were adding them from a file with the RGX_IMPORT flag.
+
+Let's start simple by making a rule that matches only nested round brackets.
+* Round brackets might start with an opening round bracket, followed by zero or more characters, followed by a closing round bracket.
+```C
+ROUND_BRACKET "(*)"
+```
+* That was the simplest form. It will directly stop once a closing round bracket is met, meaning that if another round bracket were to be opened, its closing would be taken as for the end of the regular expression. For example the subject string '(blabla(bla)bla)' would have matched until the first closing round bracket and not the second which is not correct because it has been opened previously. We need a way to 'jump' the **nested** parenthesis. The only solution is to use recursivity.
+```C
+ROUND_BRACKET "( *[ ?![()] | ?[@ROUND_BRACKET] @or?] )"
+```
+* Here we've asked the engine to match an opening round bracket, followed by one or more times a character that is neither an opening nor a closing round bracket otherwise, if it is, retry the 'ROUND_BRACKET' rule. Notice the question mark after the `@or`, it stands for the case of an empty parenthesis (`()`).
