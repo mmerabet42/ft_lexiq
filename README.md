@@ -21,8 +21,8 @@
   * [Adding rules](#adding-rules)
     * [Only one rule](#only-one-rule)
     * [Importing multiple rules from  a file](#importing-multiple-rules-from-a-file)
-  * [Global and local rules](#global-and-local-rules)
-    * [Adding to a specific list directly](#adding-to-a-specific-list-directly)
+  * [Default and temporary rules](#default-and-temporary-rules)
+    * [Temporary rules](#temporary-rules)
   * [Flags](#flags)
 * [A powerfull and generic parser, the true power of `ft_regex`](#a-powerfull-and-generic-parser-the-true-power-of-ft_regex)
 
@@ -324,31 +324,32 @@ The file asks first to import the 'other.rgx' file so all the rules declared in 
 
 The amount of added rules is then returned by the function. Something else to know is that the rules are added with the RGX_READABLE flag allowing the definition to be humanly readable, it means that the engine will ignore any space characters (spaces, tabulations and new lines) that are not inside of a regular expression.
 
-## Global and local rules
+## Default and temporary rules
 
-When adding rules, you are in fact pushing them into a default global list that can be requested with the RGX_GET flag.
+When adding rules, you are in fact pushing them into a default list that can be requested with the RGX_GET flag.
 ```C
 t_list *rules;
 ft_regex(RGX_GET, NULL, NULL, &rules)
 ```
 
-The `rules` variable now points to that global list. The reason of this is that you can push rules into a custom list instead.
+The `rules` variable now points to the current default list that the engine uses. The reason of this is that you can push rules into some other lists instead.
 ```C
 t_list *custom = NULL;
 ft_regex(RGX_SET, NULL, NULL, &custom);
 ```
 
-After this call, all the added rules are pushed into the local list `custom`. The RGX_SET flag overwrites the current set list. S overwriting it means losing it, that is why you should request the current set list with the RGX_GET flag to reset it back.
+After this call, all the added rules will be pushed into the list `custom`. The RGX_SET flag overwrites the current default list, so it may be a good idea to request it first with an RGX_GET call.
 
-#### Adding to a specific list directly
+#### Temporary rules
 
-Instead of playing with the RGX_GET and RGX_SET flag for adding rules to a local list, you can use the RGX_TO flag in combination of the RGX_ADD and RGX_IMPORT flags to specify directly in which list to add the rules.
+We've seen how to set the current default list, but what about adding rules to a custom list without changing the current default list, this is possible with the RGX_TO flag, that allows you to change temporarly the current default list.
+
 ```C
 t_list *list = NULL;
 ft_regex(RGX_IMPORT | RGX_TO, "rules.rgx", NULL, &list);
 ```
 
-The 'rules.rgx' file will be imported into the local list `list`. This is usefull to avoid conflicts and duplications.
+The 'rules.rgx' file will be imported into the local list `list`. The current default list will remain unchanged.
 
 ## Flags
 
@@ -368,8 +369,8 @@ The 'rules.rgx' file will be imported into the local list `list`. This is useful
 | RGX_ADD | Add a rule to the regex engine | `t_regex_funcptr *func` |
 | RGX_ADD_MULTI | Add rules from an array of `t_regex_func` structures | `t_regex_func *funcs, size_t len` |
 | RGX_IMPORT | The engine will import the rules from a file formatted as `rule_name "regular expression"`, each rules are added with the RGX_READABLE flag automatically | |
-| RGX_GET | Returns the current global list | `t_list **rules` |
-| RGX_SET | Sets the current global list with the specified local list | `t_list **rules` |
+| RGX_GET | Returns the current default list | `t_list **rules` |
+| RGX_SET | Sets the current default list with the specified local list | `t_list **rules` |
 | RGX_TO | Must go with RGX_ADD or RGX_IMPORT. It pushes the rule(s) into a specified local list. With RGX_CLEAN it cleans the specified rule lists. | `t_list **rules` |
 | RGX_FREE | Free the linked list previously returned by a call of `ft_regex` with the `RGX_GLOBAL` or `RGX_UGLOBAL` flag | `t_list **matches` |
 | RGX_FREEGRP | Free the linked list previously returned by a call of `ft_regex` with the `RGX_GROUP` flag | |
@@ -396,11 +397,11 @@ And here is a table of all the possible combination with their order:
 
 In this part i will explain how the `ft_regex` function can be used to literally parse anything, by combining two major concepts; Nested capturing groups and recursive rules.
 
-Our goal will be to create a rule that can parse any json file. And by parsing i literally mean parsing, understand the extraction of each part of the json file in a structured way, with only one `ft_regex` call.
+Our goal will be to create a rule that can parse any json file. And by parsing i literally mean parsing. Understand the extraction of each part of the json file in a structured way, with only one `ft_regex` call.
 
 #### Capturing groups
 
-Before getting into the real stuff, let us see first how capturing groups works behind the scenes.
+Before getting into the real stuff, let's see first how capturing groups works behind the scenes.
 
 When the engine sees a capturing group `?[blabla@G]` it pushes it into a list of `t_regex_group` structures defined as
 ```C
@@ -414,6 +415,18 @@ struct t_regex_group
 };
 ```
 
-You might have noticed the similarity with the `t_regex_match` structure, the truth is that `t_regex_group` is just an alias of `t_regex_match`, they are literally the same structure. Theoretically a group is different than a match but practically it doesn't need to be.
+You might have noticed the similarity with the `t_regex_match` structure. The truth is that `t_regex_group` is just an alias of `t_regex_match`, they are literally the same structure. Theoretically a group is different than a match but practically it doesn't need to be.
 
 With the last attribute `groups` you might have figured how capturing groups empowers the `ft_regex` engine, if not, let me explain.
+
+Imagine a scenario where you need to capture key value pairs: `?[?[*[@word]@G]:?[*[@word]@G]@G]`.
+Here we have 3 capturing groups, one for all the match, and the two others for the key and the value respectively. The generated list will in fact have the form of a tree, the root being the capturing group surrounding all the match and its two sons (`?[*[@word]@G]`) being the key and the value.
+
+For the subject string 'hello:world', the resulting tree would be
+```
+        'hello:word'
+       /            \
+'hello'              'world'
+```
+
+'hello' and 'world' are the captured groups of 'hello:world'.
