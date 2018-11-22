@@ -342,7 +342,7 @@ After this call, all the added rules will be pushed into the list `custom`. The 
 
 #### Temporary rules
 
-We've seen how to set the current default list, but what about adding rules to a custom list without changing the current default list, this is possible with the RGX_TO flag, that allows you to change temporarly the current default list.
+We've seen that we can change the current default list, but what about adding rules to a custom list without changing the current default list, this is possible with the RGX_TO flag, that allows you to change temporarly the current default list.
 
 ```C
 t_list *list = NULL;
