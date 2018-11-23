@@ -26,6 +26,9 @@
   * [Flags](#flags)
 * [A powerfull and generic parser, the true power of `ft_regex`](#a-powerfull-and-generic-parser-the-true-power-of-ft_regex)
 
+ * [Nested capturing groups](#nested-capturing-groups)
+ * [Recursive rules](#recursive-rules)
+
 
 # What is a regular expression ?
 A regular expression (or regex) is a way to define a search pattern, wich is usually used for 'find' operations on documents and any type of text. 
@@ -399,7 +402,7 @@ In this part i will explain how the `ft_regex` function can be used to literally
 
 Our goal will be to create a rule that can parse any json file. And by parsing i literally mean parsing. Understand the extraction of each part of the json file in a structured way, with only one `ft_regex` call.
 
-#### Capturing groups
+#### Nested capturing groups
 
 You might already have an idea of how capturing groups empowers the `ft_regex` engine, but this is already available in all regex engines. What i am about to show you, is really unique.
 
