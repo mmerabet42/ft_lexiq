@@ -460,3 +460,10 @@ ROUND_BRACKET "(*)"
 ROUND_BRACKET "( *[ ?![()] | ?[@ROUND_BRACKET] @or?] )"
 ```
 * Here we've asked the engine to match an opening round bracket, followed by one or more times a character that is neither an opening nor a closing round bracket otherwise, if it is, retry the 'ROUND_BRACKET' rule. Notice the question mark after the `@or`, it stands for the case of an empty parenthesis (`()`).
+* At this point it must be easy to think about a rule for nested curly and square brackets.
+```C
+ROUND_BRACKET "( *[ ?![()] | ?[@ROUND_BRACKET] @or?] )"
+SQUARE_BRACKET "[ *[ ?![{[]}] | ?[@SQUARE_BRACKET] @or?] ]"
+CURLY_BRACKET "{ *[ ?![\\{}] | ?[@CURLY_BRACKET] @or?] }"
+```
+* Notice the special character escaping used for the square and curly brackets, i redirect you to the [backslashing problem](#backslash-limitation) section for a full explanation of why it is needed.
