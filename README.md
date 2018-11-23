@@ -26,8 +26,8 @@
   * [Flags](#flags)
 * [A powerfull and generic parser, the true power of `ft_regex`](#a-powerfull-and-generic-parser-the-true-power-of-ft_regex)
 
- * [Nested capturing groups](#nested-capturing-groups)
- * [Recursive rules](#recursive-rules)
+  * [Nested capturing groups](#nested-capturing-groups)
+  * [Recursive rules](#recursive-rules)
 
 
 # What is a regular expression ?
