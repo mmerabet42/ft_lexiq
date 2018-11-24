@@ -446,24 +446,33 @@ Now, when reaching the captured group 'hello', we will know that the 'KEY' rule 
 
 To understand and master the recursive rules concept, the bracket example turns out to be perfect, so let's go for it.
 
-The bracket example is about matching nested bracket of any type (square, round and curly bracket) with any possible characters inside them.
+The bracket example is about matching nested brackets of any kind (square `[]`, round `()` or curly `{}`) with possibly characters inside them.
 
-We will go step by step. From now on, we will add rules as if we were adding them from a file with the RGX_IMPORT flag.
+From now on, we will add rules as if we were adding them from a file with the RGX_IMPORT flag.
 
 Let's start simple by making a rule that matches only nested round brackets.
 * Round brackets might start with an opening round bracket, followed by zero or more characters, followed by a closing round bracket.
 ```C
 ROUND_BRACKET "(*)"
 ```
-* That was the simplest form. It will directly stop once a closing round bracket is met, meaning that if another round bracket were to be opened, its closing would be taken as for the end of the regular expression. For example the subject string '(blabla(bla)bla)' would have matched until the first closing round bracket and not the second which is not correct because it has been opened previously. We need a way to 'jump' the **nested** parenthesis. The only solution is to use recursivity.
+* That was the simplest form. It will directly stop once a closing round bracket is met, meaning that if another round bracket were to be opened, its closing would be taken as for the end of the regular expression. For example the subject string '(blabla(bla)bla)' would have matched until the first closing round bracket and not the second one which is not correct because it has been opened previously, it must continue to the next closing round bracket. We need a way to 'jump' the **nested** parenthesis. The best solution would be to use recursivity.
 ```C
 ROUND_BRACKET "( *[ ?![()] | ?[@ROUND_BRACKET] @or?] )"
 ```
-* Here we've asked the engine to match an opening round bracket, followed by one or more times a character that is neither an opening nor a closing round bracket otherwise, if it is, retry the 'ROUND_BRACKET' rule. Notice the question mark after the `@or`, it stands for the case of an empty parenthesis (`()`).
-* At this point it must be easy to think about a rule for nested curly and square brackets.
+* Here we've asked the engine to match an opening round bracket, followed by zero or more times a character that is neither an opening nor a closing round bracket otherwise, if it is an opening one, retry the 'ROUND_BRACKET', or else if it is a closing one, stop the loop, then finally match a closing round bracket. Notice the question mark after the `@or`, it stands for the case of an empty parenthesis (`()`), allowing the `@or` rule to loop zero times.
+* At this point, making a rule for the square and curly brackets, must be easy.
 ```C
 ROUND_BRACKET "( *[ ?![()] | ?[@ROUND_BRACKET] @or?] )"
 SQUARE_BRACKET "[ *[ ?![{[]}] | ?[@SQUARE_BRACKET] @or?] ]"
 CURLY_BRACKET "{ *[ ?![\\{}] | ?[@CURLY_BRACKET] @or?] }"
 ```
 * Notice the special character escaping used for the square and curly brackets, i redirect you to the [backslashing problem](#backslash-limitation) section for a full explanation of why it is needed.
+* You may think that it is done, but there is one last one thing to do to accomplish our goal. Indeed, we still need a rule for matching these three possible brackets. And this is done by simply adding a rule that or's these three rules.
+```C
+BRACKET "?[ ?[@ROUND_BRACKET] | ?[@SQUARE_BRACKET] | ?[@CURLY_BRACKET] @or]"
+
+ROUND_BRACKET "( *[ ?![{(){}[]}] | ?[@BRACKET] @or?] )"
+SQUARE_BRACKET "[ *[ ?![{(){}[]}] | ?[@BRACKET] @or?] ]"
+CURLY_BRACKET "{ *[ ?![{(){}[]}] | ?[@BRACKET] @or?] }"
+```
+* We've, now, accomplished our goal, which is to have a rule that matches nested brackets of any types (by calling `?[@BRACKET]`). I want you to notice and understand by yourself the changes inside the brackets rules.
