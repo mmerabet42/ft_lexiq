@@ -424,23 +424,35 @@ Imagine a scenario where we would need to capture key value pairs seperated by a
 Here we have 3 capturing groups, one for all the match, and the two others for the key and the value respectively. The generated list will in fact have the form of a tree, the root being the capturing group surrounding all the match and its two sons (`?[*[@word]@G]`) being the key and the value.
 
 For the subject string 'hello:world', the resulting tree would be
-```
+```C
         'hello:word'
        /            \
 'hello'              'world'
 ```
 
 'hello' and 'world' are the captured groups of 'hello:world', they were pushed into the `t_regex_group.groups` list of 'hello:world'. The `t_regex_group.id` attribute shows its use when the matching string complexifies, because when iterating through the tree we would need to know what matched exactly at this place without having to rematch the regex (saving time), for the example above we need to add two rules 'KEY' and 'VALUE' for differentiating these two part of the match
-```
-ft_regex(RGX_ADD ...
-  KEY "*[@word]"
-  VALUE "*[@word]"
-);
+```C
+/* imported file: rule.rgx */
+
+  WORD_VOWEL "*[ ?[ *[aeiou] @G] | ?[@word] @or]"
+  KEY "?[@WORD_VOWEL]"
+  VALUE "?[@WORD_VOWEL]"
+  
+/* end of file: rule.rgx */
 
 ft_regex(... "?[?[?[@KEY]@G]*[@space?]:*[@space?]?[?[@VALUE]@G]@G]", ...);
 ```
 
-Now, when reaching the captured group 'hello', we will know that the 'KEY' rule matched because `t_regex_group.id` will be equal to whatever id has been given to 'KEY'. This is not really usefull for this example, but it would be for the 'VALUE' rule as a value can be different things (integers, strings, arrays, etc.), so it would be usefull to know the type of the value directly at parsing time by creating a rule for each type.
+Now, when reaching the captured group 'hello', we will know that the 'KEY' rule matched because `t_regex_group.id` will be equal to whatever id has been assigned to 'KEY'. This is not really usefull for this example, but it would be for the 'VALUE' rule as a value can be different things (integers, strings, arrays, etc.), so it would be usefull to know the type of the value directly at parsing time by creating a rule for each type.
+I've added the `@WORD_VOWEL` rule for fun, it matches any word characters and captures the vowels. For the subject string 'hallelujah:yailahi', the generated tree would be
+```C
+             'hallelujah:yailahi'
+            /                   \
+  'hallelujah'                 'yailahi'
+  /  |    |  \                /  |  |  \
+'a' 'e'  'u' 'a'             'a' | 'a' 'i'
+                                'i'
+```
 
 #### Recursive rules
 
