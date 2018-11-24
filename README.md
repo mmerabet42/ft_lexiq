@@ -475,4 +475,4 @@ ROUND_BRACKET "( *[ ?![{(){}[]}] | ?[@BRACKET] @or?] )"
 SQUARE_BRACKET "[ *[ ?![{(){}[]}] | ?[@BRACKET] @or?] ]"
 CURLY_BRACKET "{ *[ ?![{(){}[]}] | ?[@BRACKET] @or?] }"
 ```
-* We've, now, accomplished our goal, which is to have a rule that matches nested brackets of any types (by calling `?[@BRACKET]`). I want you to notice and understand by yourself the changes inside the brackets rules.
+* We've, now, accomplished our goal, which is to have a rule that matches nested brackets of any types (by calling `?[@BRACKET]`). I want you to notice and understand by yourself why the changes inside the brackets rules were necessary (`?![{(){}[]}]` and why calling `?[@BRACKET]` ?).
