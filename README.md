@@ -460,7 +460,7 @@ I've added the `@WORD_VOWEL` rule for fun, it matches any word characters and ca
 
 To understand and master the recursive rules concept, the bracket example turns out to be perfect, so let's go for it.
 
-The bracket example is about matching nested brackets of any kind (square `[]`, round `()` or curly `{}`) with possibly characters inside them.
+The bracket example is about matching nested brackets of any kind (square `[]`, round `()` and curly `{}`) with possibly characters inside of them.
 
 From now on, we will add rules as if we were adding them from a file with the RGX_IMPORT flag.
 
@@ -469,7 +469,7 @@ Let's start simple by making a rule that matches only nested round brackets.
 ```C
 ROUND_BRACKET "(*)"
 ```
-* That was the simplest form. It will directly stop once a closing round bracket is met, meaning that if another round bracket were to be opened, its closing would be taken as for the end of the regular expression. For example the subject string '(blabla(bla)bla)' would have matched until the first closing round bracket and not the second one which is not correct because it has been opened previously, it must continue to the next closing round bracket. We need a way to 'jump' the **nested** parenthesis. The best solution would be to use recursivity.
+* That was the simplest form. It will directly stop once a closing round bracket is met, meaning that if another round bracket were to be opened, its closing would be taken as for the end of the regular expression. For example the subject string '(blabla(bla)bla)' would have matched until the first closing round bracket and not the second one which is not correct because it has been opened previously, it must continue to the next closing round bracket. We need a way to 'jump' the **nested** parenthesis. The best solution is to use recursivity.
 ```C
 ROUND_BRACKET "( *[ ?![()] | ?[@ROUND_BRACKET] @or?] )"
 ```
@@ -481,7 +481,7 @@ SQUARE_BRACKET "[ *[ ?![{[]}] | ?[@SQUARE_BRACKET] @or?] ]"
 CURLY_BRACKET "{ *[ ?![\\{}] | ?[@CURLY_BRACKET] @or?] }"
 ```
 * Notice the special character escaping used for the square and curly brackets, i redirect you to the [backslashing problem](#backslash-limitation) section for a full explanation of why it is needed.
-* You may think that it is done, but there is one last one thing to do to accomplish our goal. Indeed, we still need a rule for matching these three possible brackets. And this is done by simply adding a rule that or's these three rules.
+* You may think that it is done, but there is one last thing to do to accomplish our goal. Indeed, we still need a rule for matching these three possible brackets. And this is done by simply adding a rule that or's these three rules.
 ```C
 BRACKET "?[ ?[@ROUND_BRACKET] | ?[@SQUARE_BRACKET] | ?[@CURLY_BRACKET] @or]"
 
