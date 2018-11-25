@@ -507,4 +507,4 @@ CURLY_BRACKET "{ *[ ?![{(){}[]}] | ?[@BRACKET] @or?] }"
 Pretty simple, we've just surrounded the `@or` with a capturing group, so everytime the `BRACKET` rule is called, the entire bracket from its opening to its corresponding closing is captured. Besides that, we can also know the type of the bracket thanks to `t_regex_group.id` which will point to `ROUND_BRACKET`, `SQUARE_BRACKET` or `CURLY_BRACKET` depending on what has been captured.
 
 Let's have a nice output with the `ft_print_matches` function
- * ![ft_print_matches output](/screenshots/brackert_matches.png)
+ * ![ft_print_matches output](/screenshots/bracket_matches.png)
