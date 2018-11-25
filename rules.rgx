@@ -1,2 +1,4 @@
 #import "json.rgx"
 #import "bracket.rgx"
+
+MAIN "*"
