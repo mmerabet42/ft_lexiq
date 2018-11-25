@@ -6,11 +6,6 @@
 ** As a first example we will parse a JSON file
 */
 
-/*
-** This function will print the matched patterns properly.
-*/
-void print_matches(t_list *matches);
-
 int main(int argc, char **argv)
 {
 /*
@@ -18,7 +13,7 @@ int main(int argc, char **argv)
 ** So we will load them with the RGX_LOAD flag first.
 ** If the call failed for any reason, we exit.
 */
-	if (ft_regex(RGX_LOAD, "json.rgx", NULL) == -1)
+	if (ft_regex(RGX_IMPORT, "json.rgx", NULL) == -1)
 		return (0);
 /*
 ** Now we have the @JSON_FORMAT rule loaded. We can test it on the argument we received.
@@ -37,26 +32,4 @@ int main(int argc, char **argv)
 	ft_printf("%d matches\n", n);
 
 	return (0);
-}
-
-void print_groups(t_list *groups, int tab)
-{
-	while (groups)
-	{
-		t_regex_group	*grp = (t_regex_group *)groups->content;
-		ft_printf("%?*\tgroup: %d %d %d '%.*s'\n", tab, grp->pos, grp->len, grp->id, grp->len, grp->str);
-		print_groups(grp->groups, tab + 1);
-		groups = groups->next;
-	}
-}
-
-void print_matches(t_list *matches)
-{
-	while (matches)
-	{
-		t_regex_match	*mch = (t_regex_match *)matches->content;
-		ft_printf("match: %d %d %d '%.*s'\n", mch->pos, mch->len, mch->id, mch->len, mch->str);
-		print_groups(mch->groups, 1);
-		matches = matches->next;
-	}
 }
