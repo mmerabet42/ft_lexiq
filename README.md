@@ -183,7 +183,7 @@ Everything is done through one and only one function:
 int  ft_regex(int flags, const char *regex, const char *string, ...)
 ```
 
-The way it behaves depends on the `flags` it receives, the `regex` is the search pattern which will be tested on the `string` subject.
+The way it behaves depends on the `flags` it receives, the `regex` is the search pattern which `string` will be the subject of.
 
 By default, with no flags, the `string` argument shall entirely match the `regex` string.
 ```C
