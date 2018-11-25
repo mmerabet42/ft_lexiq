@@ -28,6 +28,7 @@
 
   * [Nested capturing groups](#nested-capturing-groups)
   * [Recursive rules](#recursive-rules)
+  * [Combining the two](#combining-the-two)
 
 
 # What is a regular expression ?
@@ -480,7 +481,7 @@ ROUND_BRACKET "( *[ ?![()] | ?[@ROUND_BRACKET] @or?] )"
 SQUARE_BRACKET "[ *[ ?![{[]}] | ?[@SQUARE_BRACKET] @or?] ]"
 CURLY_BRACKET "{ *[ ?![\\{}] | ?[@CURLY_BRACKET] @or?] }"
 ```
-* Notice the special character escaping used for the square and curly brackets, i redirect you to the [backslashing problem](#backslash-limitation) section for a full explanation of why it is needed.
+* Notice the special character escaping used for the square and curly brackets (`[{[]}]` and `[\\{}]`), i redirect you to the [backslashing problem](#backslash-limitation) section for a full explanation of why it is needed.
 * You may think that this is done, but there is one last thing to do to accomplish our goal. Indeed, we still need a rule for matching these three possible brackets. And this is done by simply adding a rule that or's these three rules.
 ```C
 BRACKET "?[ ?[@ROUND_BRACKET] | ?[@SQUARE_BRACKET] | ?[@CURLY_BRACKET] @or]"
@@ -490,3 +491,19 @@ SQUARE_BRACKET "[ *[ ?![{(){}[]}] | ?[@BRACKET] @or?] ]"
 CURLY_BRACKET "{ *[ ?![{(){}[]}] | ?[@BRACKET] @or?] }"
 ```
 * We've finally reached our objective, which is to have a rule that matches nested brackets of any types (by calling `?[@BRACKET]`). I want you to notice and understand by yourself why the changes inside the brackets rules were necessary (`?![{(){}[]}]` and why calling `?[@BRACKET]` ?).
+
+#### Combining the two
+
+Before getting into our main exercise (making a json parser), we need to do one last thing; Combining capturing groups and recursive rules.
+
+We will reuse our last example with a slight change: capturing every nested brackets
+```C
+BRACKET "?[ ?[ ?[@ROUND_BRACKET] | ?[@SQUARE_BRACKET] | ?[@CURLY_BRACKET] @or] @G]"
+
+ROUND_BRACKET "( *[ ?![{(){}[]}] | ?[@BRACKET] @or?] )"
+SQUARE_BRACKET "[ *[ ?![{(){}[]}] | ?[@BRACKET] @or?] ]"
+CURLY_BRACKET "{ *[ ?![{(){}[]}] | ?[@BRACKET] @or?] }"
+```
+Pretty simple, we've just surrounded the `@or` with a capturing group, so everytime the `BRACKET` rule is called, the entire bracket from its opening to its corresponding closing is captured. Besides that, we can also know the type of the bracket thanks to `t_regex_group.id` which will point to `ROUND_BRACKET`, `SQUARE_BRACKET` or `CURLY_BRACKET` depending on what has been captured.
+
+
