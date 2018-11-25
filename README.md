@@ -420,7 +420,7 @@ struct t_regex_group
 
 You might have noticed the similarity with the `t_regex_match` structure. The truth is that `t_regex_group` is just an alias of `t_regex_match`, they are literally the same structure. Theoretically a capturing group is different than a match but practically it doesn't need to be.
 
-Imagine a scenario where we would need to capture key value pairs seperated by a colon with possibly spaces between it, we would use this regex: `?[ ?[ *[@word] @G] *[@spaces?] : *[@spaces] ?[ *[@word] @G] @G]` (the spaces are for the readability).
+Imagine a scenario where we would need to capture key value pairs seperated by a colon with possibly spaces between it, we would use this regex: `?[ ?[ *[@word] @G] *[@spaces?] : *[@spaces?] ?[ *[@word] @G] @G]` (the spaces are for the readability).
 Here we have 3 capturing groups, one for all the match, and the two others for the key and the value respectively. The generated list will in fact have the form of a tree, the root being the capturing group surrounding all the match and its two sons (`?[*[@word]@G]`) being the key and the value.
 
 For the subject string 'hello:world', the resulting tree would be
@@ -430,7 +430,9 @@ For the subject string 'hello:world', the resulting tree would be
 'hello'              'world'
 ```
 
-'hello' and 'world' are the captured groups of 'hello:world', they were pushed into the `t_regex_group.groups` list of 'hello:world'. The `t_regex_group.id` attribute shows its use when the matching string complexifies, because when iterating through the tree we would need to know what matched exactly at this place without having to rematch the regex (saving time), for the example above we need to add two rules 'KEY' and 'VALUE' for differentiating these two part of the match
+'hello' and 'world' are the captured groups of 'hello:world', they were pushed into the `t_regex_group.groups` list of 'hello:world'.
+
+The `t_regex_group.id` attribute shows its use when the matching string complexifies, because when iterating through the tree it would be usefull to know what matched exactly at this place without having to rematch the regex (saving time), for the example above we need to add two rules 'KEY' and 'VALUE' for differentiating these two part of the match
 ```C
 /* imported file: rule.rgx */
 
@@ -440,10 +442,10 @@ For the subject string 'hello:world', the resulting tree would be
   
 /* end of file: rule.rgx */
 
-ft_regex(... "?[?[?[@KEY]@G]*[@space?]:*[@space?]?[?[@VALUE]@G]@G]", ...);
+ft_regex(... "?[ ?[ ?[@KEY] @G] *[@space?] : *[@space?] ?[ ?[@VALUE] @G] @G]", ...);
 ```
 
-Now, when reaching the captured group 'hello', we will know that the 'KEY' rule matched because `t_regex_group.id` will be equal to whatever id has been assigned to 'KEY'. This is not really usefull for this example, but it would be for the 'VALUE' rule as a value can be different things (integers, strings, arrays, etc.), so it would be usefull to know the type of the value directly at parsing time by creating a rule for each type.
+Now, when reaching the captured group 'hello', we will know that the 'KEY' rule matched because its `t_regex_group.id` will be equal to whatever id has been assigned to 'KEY'. This is not really usefull for this example, but it would be for the 'VALUE' rule as a value can be different things (integers, strings, arrays, etc.), so it would be usefull to know the type of the value directly at parsing time by creating a rule for each type.
 I've added the `@WORD_VOWEL` rule for fun, it matches any word characters and captures the vowels. For the subject string 'hallelujah:yailahi', the generated tree would be
 ```C
              'hallelujah:yailahi'
