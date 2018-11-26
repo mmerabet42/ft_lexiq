@@ -13,3 +13,6 @@ re:
 clean:
 	@make fclean -C libft
 	@rm -rf $(NAME)
+
+fclean:
+	@make clean
