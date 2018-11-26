@@ -5,7 +5,7 @@ JSON_STRING		"?[@DQUOTE]"
 JSON_INTEGER	"?[@nint]"
 
 
-JSON_FORMAT		"
+JSON_OBJECT		"
 {
 	*[@space?]
 	*[
@@ -17,7 +17,7 @@ JSON_FORMAT		"
 		|
 			?[@JSON_STRING]
 		|
-			?[@JSON_FORMAT]
+			?[@JSON_OBJECT]
 		|
 			?[@JSON_ARRAY]
 		@or]@G]
@@ -37,7 +37,7 @@ JSON_ARRAY		"
 		|
 			?[@JSON_STRING]
 		|
-			?[@JSON_FORMAT]
+			?[@JSON_OBJECT]
 		|
 			?[@JSON_ARRAY]
 		@or]@G]
