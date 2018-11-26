@@ -1,6 +1,6 @@
 # A simple regex interpreter
 
-Let me present you a program that uses the `ft_regex` library perfectly.
+Let me present you a program that uses the `ft_regex` library.
 
 It is a regex interpreter that will perform a search on a string.
 
