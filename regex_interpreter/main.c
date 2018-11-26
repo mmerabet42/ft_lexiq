@@ -4,6 +4,8 @@
 #include "libft/includes/ft_printf.h"
 #include "libft/includes/ft_list.h"
 
+#define USAGE_STR "Usage: ./regex [-sm] subject [regex] file ...\n"
+
 static int	getoptions(int argc, char ***argv);
 
 int main(int argc, char **argv)
@@ -20,7 +22,7 @@ int main(int argc, char **argv)
 	subject = *(argv++);
 	if (!*argv)
 	{
-		ft_printf("Usage: ./regex [-sm] subject file ...\n");
+		ft_printf(USAGE_STR);
 		return (1);
 	}
 
@@ -86,7 +88,7 @@ static int	getoptions(int argc, char ***argv)
 
 	if (argc < 3)
 	{
-		ft_printf("Usage: ./regex [-sm] subject file ...\n");
+		ft_printf(USAGE_STR);
 		return (-1);
 	}
 	ft_bzero(&opt, sizeof(t_opt));
@@ -96,7 +98,7 @@ static int	getoptions(int argc, char ***argv)
 	{
 		if (opt.ret == OPT_UNKNOWN)
 		{
-			ft_printf("Usage: ./regex [-sm] subject file ...\n");
+			ft_printf(USAGE_STR);
 			return (-1);
 		}
 		if (opt.c == 's')
@@ -106,7 +108,7 @@ static int	getoptions(int argc, char ***argv)
 	}
 	if (!**argv)
 	{
-		ft_printf("Usage: ./regex [-sm] subject file ...\n");
+		ft_printf(USAGE_STR);
 		return (-1);
 	}
 	return (options);
