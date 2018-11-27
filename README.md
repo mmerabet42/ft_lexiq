@@ -511,3 +511,12 @@ Pretty simple, we've just surrounded the `@or` with a capturing group, so everyt
 
 The `ft_print_matches` function provides us a nice output
  * ![ft_print_matches output](/screenshots/bracket_matches.png)
+ 
+The string `Lorem (ipsum (do{l}or) [sit] amet), consectetur ({ad(ip)iscing} elit)` generates the following tree:
+```
+       (ipsum (do{l}or) [sit] emet)         ({ad(ip)iscing} elit)
+              /           \                       /
+         (do{l}or)         [sit]             {ad(ip)scing}
+             |                                   |
+            {l}                                 (ip)
+```
