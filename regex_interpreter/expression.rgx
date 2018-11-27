@@ -1,0 +1,5 @@
+VALUE			"?[hewiouvbhd@write]*[@word]"
+OP_ADDITION		"?[@debug]?[@EXPRESSION]*[@space?]+*[@space?]?[@EXPRESSION]"
+OPERATOR		"?[ ?[@OP_ADDITION] @or]"
+
+EXPRESSION		"?[ ?[ ?[@VALUE] | ?[@OP_ADDITION] @or] @G]"

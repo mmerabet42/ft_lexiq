@@ -2,6 +2,8 @@
 #include "libft/includes/ft_str.h"
 #include "libft/includes/ft_mem.h"
 #include "libft/includes/ft_printf.h"
+#include "libft/includes/ft_printf_ext.h"
+#include "libft/includes/get_next_line.h"
 #include "libft/includes/ft_list.h"
 
 /*
@@ -35,6 +37,7 @@ int main(int argc, char **argv)
 	/* Otherwise use the 'MAIN' rule declared in one of the files. */
 	else
 		regex = "?[@MAIN]";
+	ft_printf("regex: '%s'\n", regex);
 	/* If files are provided, import them. */
 	while (*argv)
 	{
@@ -47,10 +50,10 @@ int main(int argc, char **argv)
 		}
 		++argv;
 	}
-	/* If the '-m' is absent, */
+	/* If the '-m' option is absent, */
 	if (!(options & 2))
 	{
-		/* We check if the 'MAIN' is declared, if it is not, we exit. */
+		/* We check if the 'MAIN' rule is declared, if it is not, we exit. */
 		void *main_ptr = NULL;
 		ft_regex(RGX_GETRULE, "MAIN", NULL, &main_ptr);
 		if (!main_ptr)
@@ -81,6 +84,9 @@ int main(int argc, char **argv)
 	*/
 	ft_regex(RGX_FREE, NULL, NULL, &matches);
 	ft_regex(RGX_CLEAN, NULL, NULL);
+	get_next_line(-1, NULL);
+	get_next_delimstr(-1, NULL, NULL);
+	ft_printf_free_formats();
 	return (0);
 }
 
