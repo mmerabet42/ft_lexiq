@@ -36,11 +36,13 @@ A regular expression (or regex) is a way to define a search pattern, wich is usu
 There are many regex engines out there in almost all programming languages, and they all follow the same syntax, there could be some differences but in general they do not vary that much.
 
 ### ft_regex
-The regex engine i am going to present you works differently, and has a different syntax. But still follows the same 'idea', meaning that each character in a regular expression is still either a metacharacter, which are in number of two, or a literal character. This will be explained later, we will first talk about how it differs from most regex engines and why it could be powerfull.
+The regex engine i am going to present you works differently, and has a different syntax. But still follows the same 'idea', meaning that each character in a regular expression is still either a metacharacter, which are in number of two, or a literal character. This will be explained later, we will first talk about how it differs from most regex engines and why it could be powerfull. 
 
 First of all, it is important to know that it has started as a school project, so it may not be perfect, and has definetely a tons of flaws.
 
 Secondly, this regex engine does not compile or precompile or whatever, it reads the regex expression character by character without using dynamic allocation. It uses the concept of 'rules' which is where the main difference and power stands, we will get to it later.
+
+Thirdly, this engine is no more a regular expression engine, it evolved into a [context free language](https://brilliant.org/wiki/context-free-languages/).
 
 So, before diving into the code, and learn how to use the `ft_regex` function, let's first have a look at the syntax.
 
@@ -406,7 +408,7 @@ Our goal will be to create a rule that can parse any json file. And by parsing i
 
 #### Nested capturing groups
 
-You might already have an idea of how capturing groups empowers the `ft_regex` engine, but this feature is already available in all regex engines. What i am about to show you, is really unique.
+You might already have an idea of how capturing groups empowers the `ft_regex` engine, but this feature is already available in all regex engines. What i am about to show you, is really unique. EDIT (It is not unique i have reinvented context free language).
 
 When the engine sees a capturing group `?[blabla@G]` it pushes it into a list of `t_regex_group` structures defined as
 ```C
