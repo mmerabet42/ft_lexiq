@@ -25,7 +25,7 @@ $> make
 ```
 
 It will generate a `./regex` executable.
-If you want to perform the search on a file, or multiple file you need to use the backquotes inside the double quotes
+If you want to perform the search on a file, or multiple files you need to use the backquotes inside the double quotes
 ```bash
 $> ./regex "`cat file`" rules.rgx
 ```
