@@ -37,7 +37,6 @@ int main(int argc, char **argv)
 	/* Otherwise use the 'MAIN' rule declared in one of the files. */
 	else
 		regex = "?[@MAIN]";
-	ft_printf("regex: '%s'\n", regex);
 	/* If files are provided, import them. */
 	while (*argv)
 	{

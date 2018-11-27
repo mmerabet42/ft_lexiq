@@ -1,5 +1,17 @@
-VALUE			"?[hewiouvbhd@write]*[@word]"
-OP_ADDITION		"?[@debug]?[@EXPRESSION]*[@space?]+*[@space?]?[@EXPRESSION]"
-OPERATOR		"?[ ?[@OP_ADDITION] @or]"
+VALUE			"*[@word]"
 
-EXPRESSION		"?[ ?[ ?[@VALUE] | ?[@OP_ADDITION] @or] @G]"
+-L1_OPERATOR	"?[ ?[@OP_ADD] | ?[@OP_SUB] @or]"
+-L1_RIGHT		"?[ ?[@L1_OPERATOR] | ?[@VALUE] @or]"
+-L1_LEFT		"?[ ?[@VALUE] @or]"
+
+OP_ADD			"?[ ?[@L1_LEFT] @G] *[@space?] + *[@space?] ?[ ?[@L1_RIGHT] @G]"
+OP_SUB			"?[ ?[@L1_LEFT] @G] *[@space?] - *[@space?] ?[ ?[@L1_RIGHT] @G]"
+
+-L2_OPERATOR	"?[ @or]"
+
+OP_MULT			"?[ ?[@L2_LEFT] @G] *[@space?] ?[*] *[@space?] ?[ ?[@L2_RIGHT] @G]"
+
+
+
+-OPERATOR		"?[ ?[@L1_OPERATOR] @or]"
+EXPRESSION		"?[ ?[ ?[@OPERATOR] | ?[@VALUE] @or] @G]"
