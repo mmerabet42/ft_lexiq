@@ -42,7 +42,7 @@ First of all, it is important to know that it has started as a school project, s
 
 Secondly, this regex engine does not compile or precompile or whatever, it reads the regex expression character by character without using dynamic allocation. It uses the concept of 'rules' which is where the main difference and power stands, we will get to it later.
 
-Thirdly, this engine is no more a regular expression engine, it evolved into a [context free grammar](https://brilliant.org/wiki/context-free-grammars/) engine.
+Thirdly, this engine is no more a regular expression engine, it evolved into a [context free grammar](https://brilliant.org/wiki/context-free-grammars/) engine, since i discovered that it can parse anything and generate [abstract syntax trees](https://en.wikipedia.org/wiki/Abstract_syntax_tree).
 
 So, before diving into the code, and learn how to use the `ft_regex` function, let's first have a look at the syntax.
 
