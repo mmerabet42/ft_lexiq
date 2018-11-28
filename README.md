@@ -24,7 +24,7 @@
   * [Default and temporary rules](#default-and-temporary-rules)
     * [Temporary rules](#temporary-rules)
   * [Flags](#flags)
-* [A powerfull and generic parser, the true power of `ft_regex`](#a-powerfull-and-generic-parser-the-true-power-of-ft_regex)
+* [The true power of `ft_regex`](#the-true-power-of-ft_regex)
 
   * [Nested capturing groups](#nested-capturing-groups)
   * [Recursive rules](#recursive-rules)
@@ -42,7 +42,7 @@ First of all, it is important to know that it has started as a school project, s
 
 Secondly, this regex engine does not compile or precompile or whatever, it reads the regex expression character by character without using dynamic allocation. It uses the concept of 'rules' which is where the main difference and power stands, we will get to it later.
 
-Thirdly, this engine is no more a regular expression engine, it evolved into a [CFG](https://brilliant.org/wiki/context-free-grammars/) engine, since i discovered that it can parse anything and generate [abstract syntax trees](https://en.wikipedia.org/wiki/Abstract_syntax_tree).
+Thirdly, this engine is no more a regular expression engine because of its various evolutions, it is explained [here](#the-true-power-of-ft_regex)
 
 So, before diving into the code, and learn how to use the `ft_regex` function, let's first have a look at the syntax.
 
@@ -400,7 +400,9 @@ And here is a table of all the possible combination with their order:
 
 ![lol](/screenshots/picture.jpg)
 
-# A powerfull and generic parser, the true power of `ft_regex`
+# The true power of `ft_regex`
+
+The truth is that `ft_regex` is no more a regular expression engine, well it is in some sort but with the recent possibilities discovered with this engine, it had to grow up into a [pushdown automaton](https://en.wikipedia.org/wiki/Pushdown_automaton) that can interpret all kind of [context-free grammars](https://brilliant.org/wiki/context-free-grammars/) as it can parse anything and generate [abstract syntax trees](https://en.wikipedia.org/wiki/Abstract_syntax_tree)
 
 In this part i will explain how the `ft_regex` function can be used to literally parse anything, by combining two major concepts; Nested capturing groups and recursive rules.
 
