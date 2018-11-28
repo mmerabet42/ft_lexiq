@@ -402,7 +402,7 @@ And here is a table of all the possible combination with their order:
 
 # The true power of `ft_regex`
 
-The truth is that `ft_regex` is no more a regular expression engine, well it is in some sort but with the recent possibilities discovered with this engine, it had to grow up into a [pushdown automaton](https://en.wikipedia.org/wiki/Pushdown_automaton) that can interpret all kind of [context-free grammars](https://brilliant.org/wiki/context-free-grammars/) as it can parse anything and generate [abstract syntax trees](https://en.wikipedia.org/wiki/Abstract_syntax_tree)
+The truth is that `ft_regex` is no more a regular expression engine, well it is in some sort but with the recent possibilities discovered with this engine, it had to grow up into a [pushdown automaton](https://en.wikipedia.org/wiki/Pushdown_automaton) that can interpret all kind of [context-free grammars](https://brilliant.org/wiki/context-free-grammars/) as it can parse anything and generate [abstract syntax trees](https://en.wikipedia.org/wiki/Abstract_syntax_tree) (see the [Chomsky hierarchy](https://en.wikipedia.org/wiki/Chomsky_hierarchy))
 
 In this part i will explain how the `ft_regex` function can be used to literally parse anything, by combining two major concepts; Nested capturing groups and recursive rules.
 
