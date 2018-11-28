@@ -1,0 +1,18 @@
+WIDTH	"?[ *[@digit] | ?[*] @or]"
+PRECISION	". ?[ ?[*] | *[@digit] @or]"
+
+MOD	"
+?[?[
+	hh | ll | ?[-+ hljtzL#0] | ?[@PRECISION] | ?[@WIDTH]
+@or]@G]
+"
+
+CONV "?"
+
+PRINTF_FORMAT	"%?[*[@MOD]@G?]?[?[@CONV]@G]"
+
+PRINTF	"
+?[
+	?[*![%]@G] | ?[?[@PRINTF_FORMAT]@G]
+@or]
+"
