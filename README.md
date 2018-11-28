@@ -410,7 +410,7 @@ Our goal will be to create a rule that can parse any json file. And by parsing i
 
 #### Nested capturing groups
 
-You might already have an idea of how capturing groups empowers the `ft_regex` engine, but this feature is already available in all regex engines. What i am about to show you, is really unique. EDIT (It is not unique i have reinvented context free language).
+You might already have an idea of how capturing groups empowers the `ft_regex` engine, but what i am about to show might blow your mind.
 
 When the engine sees a capturing group `?[blabla@G]` it pushes it into a list of `t_regex_group` structures defined as
 ```C
@@ -479,15 +479,15 @@ ROUND_BRACKET "(*)"
 ```C
 ROUND_BRACKET "( *[ ?![()] | ?[@ROUND_BRACKET] @or?] )"
 ```
-* Here we've asked the engine to match an opening round bracket, followed by zero or more times a character that is neither an opening nor a closing round bracket otherwise, if it is an opening one, retry the 'ROUND_BRACKET', or else if it is a closing one, stop the loop, then finally match a closing round bracket. Notice the question mark after the `@or`, it stands for the case of an empty parenthesis (`()`), allowing the `@or` rule to loop zero times.
+* Here we've asked the engine to match an opening round bracket, followed by zero or more times a character that is neither an opening nor a closing round bracket otherwise, if it is an opening one, retry 'ROUND_BRACKET', or else if it is a closing one, stop the loop, then finally match a closing round bracket. Notice the question mark after the `@or`, it stands for the case of an empty parenthesis (`()`), allowing the `@or` rule to loop zero times.
 * At this point, making a rule for the square and curly brackets, must be easy.
 ```C
 ROUND_BRACKET "( *[ ?![()] | ?[@ROUND_BRACKET] @or?] )"
 SQUARE_BRACKET "[ *[ ?![{[]}] | ?[@SQUARE_BRACKET] @or?] ]"
 CURLY_BRACKET "{ *[ ?![\\{}] | ?[@CURLY_BRACKET] @or?] }"
 ```
-* Notice the special character escaping used for the square and curly brackets (`[{[]}]` and `[\\{}]`), i redirect you to the [backslashing problem](#backslash-limitation) section for a full explanation of why it is needed.
-* You may think that this is done, but there is one last thing to do to accomplish our goal. Indeed, we still need a rule for matching these three possible brackets. And this is done by simply adding a rule that or's these three rules.
+* Notice the special character escaping used for the square and curly brackets (`[{[]}]` and `[\\{}]`), i redirect you to the [backslashing problem](#backslash-limitation) we encountered for a full explanation of why it is needed.
+* You may think that this is done, but there is one last thing to do to accomplish our goal. Indeed, we still need a rule for matching these three possible brackets. This is done by simply adding a rule that or's these three rules.
 ```C
 BRACKET "?[ ?[@ROUND_BRACKET] | ?[@SQUARE_BRACKET] | ?[@CURLY_BRACKET] @or]"
 
@@ -495,11 +495,11 @@ ROUND_BRACKET "( *[ ?![{(){}[]}] | ?[@BRACKET] @or?] )"
 SQUARE_BRACKET "[ *[ ?![{(){}[]}] | ?[@BRACKET] @or?] ]"
 CURLY_BRACKET "{ *[ ?![{(){}[]}] | ?[@BRACKET] @or?] }"
 ```
-* We've finally reached our objective, which is to have a rule that matches nested brackets of any types (by calling `?[@BRACKET]`). I want you to notice and understand by yourself why the changes inside the brackets rules were necessary (`?![{(){}[]}]` and why calling `?[@BRACKET]` ?).
+* We've finally reached our objective, which is to have a rule that matches nested brackets of any kind (by calling `?[@BRACKET]`). I want you to notice and understand by yourself why the changes inside the brackets rules were necessary (`?![{(){}[]}]` and why calling `?[@BRACKET]` ?).
 
 #### Combining the two
 
-Before getting into our main exercise (making a json parser), we need to do one last thing; Combining capturing groups and recursive rules.
+Before getting into our main exercise (making a json parser), we need to do one last thing; Combining nested capturing groups and recursive rules.
 
 We will reuse our last example with a slight change: capturing every nested brackets
 ```C
@@ -511,9 +511,6 @@ CURLY_BRACKET "{ *[ ?![{(){}[]}] | ?[@BRACKET] @or?] }"
 ```
 Pretty simple, we've just surrounded the `@or` with a capturing group, so everytime the `BRACKET` rule is called, the entire bracket from its opening to its corresponding closing is captured. Besides that, we can also know the type of the bracket thanks to `t_regex_group.id` which will point to `ROUND_BRACKET`, `SQUARE_BRACKET` or `CURLY_BRACKET` depending on what has been captured.
 
-The `ft_print_matches` function provides us a nice output
- * ![ft_print_matches output](/screenshots/bracket_matches.png)
- 
 The string `Lorem (ipsum (do{l}or) [sit] amet), consectetur ({ad(ip)iscing} elit)` generates the following tree:
 ```
        (ipsum (do{l}or) [sit] emet)         ({ad(ip)iscing} elit)
@@ -522,3 +519,7 @@ The string `Lorem (ipsum (do{l}or) [sit] amet), consectetur ({ad(ip)iscing} elit
              |                                   |
             {l}                                 (ip)
 ```
+
+The `ft_print_matches` function provides us this nice output
+ * ![ft_print_matches output](/screenshots/bracket_matches.png)
+ 
