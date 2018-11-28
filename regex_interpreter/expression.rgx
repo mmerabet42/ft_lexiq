@@ -1,17 +1,27 @@
 VALUE			"*[@word]"
+PARENTHESIS		"( ?[@EXPRESSION] )"
+-OPERAND		"?[ ?[@VALUE] | ?[@UNARY] | ?[@PARENTHESIS] @or]"
 
--L1_OPERATOR	"?[ ?[@OP_ADD] | ?[@OP_SUB] @or]"
--L1_RIGHT		"?[ ?[@L1_OPERATOR] | ?[@VALUE] @or]"
--L1_LEFT		"?[ ?[@VALUE] @or]"
+-L1_OPERATOR	"?[ ?[@OP_ADD] | ?[@OP_SUB] | ?[@L2_OPERATOR] @or]"
+-L1_RIGHT		"?[ ?[@L1_OPERATOR] | ?[@OPERAND] @or]"
+-L1_LEFT		"?[ ?[@L2_OPERATOR] | ?[@OPERAND] @or]"
 
 OP_ADD			"?[ ?[@L1_LEFT] @G] *[@space?] + *[@space?] ?[ ?[@L1_RIGHT] @G]"
 OP_SUB			"?[ ?[@L1_LEFT] @G] *[@space?] - *[@space?] ?[ ?[@L1_RIGHT] @G]"
 
--L2_OPERATOR	"?[ @or]"
+-L2_OPERATOR	"?[ ?[@OP_MULT] | ?[@OP_DIV] | ?[@OP_MOD] @or]"
+-L2_RIGHT		"?[ ?[@L2_OPERATOR] | ?[@OPERAND] @or]"
+-L2_LEFT		"?[ ?[@OPERAND] @or]"
 
 OP_MULT			"?[ ?[@L2_LEFT] @G] *[@space?] ?[*] *[@space?] ?[ ?[@L2_RIGHT] @G]"
+OP_DIV			"?[ ?[@L2_LEFT] @G] *[@space?] / *[@space?] ?[ ?[@L2_RIGHT] @G]"
+OP_MOD			"?[ ?[@L2_LEFT] @G] *[@space?] % *[@space?] ?[ ?[@L2_RIGHT] @G]"
 
+-L1_UNARY		"?[ ?[@OP_PLUS] | ?[@OP_MINUS] @or]"
 
+OP_PLUS			"+ *[@space?] ?[ ?[@OPERAND] @G]"
+OP_MINUS		"- *[@space?] ?[ ?[@OPERAND] @G]"
 
--OPERATOR		"?[ ?[@L1_OPERATOR] @or]"
-EXPRESSION		"?[ ?[ ?[@OPERATOR] | ?[@VALUE] @or] @G]"
+-UNARY			"?[ ?[@L1_UNARY] @or]"
+-OPERATOR		"?[ ?[@L1_OPERATOR] | ?[@L2_OPERATOR] @or]"
+EXPRESSION		"?[ ?[ ?[@OPERATOR] | ?[@OPERAND] @or] @G]"
