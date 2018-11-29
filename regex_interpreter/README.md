@@ -10,7 +10,7 @@ The search will be perfomed on `subject`, `regex` is considered as the entry poi
 
 The file(s) must follow the [`ft_regex`](https://github.com/mmerabet42/ft_regex) syntax
 ```C
-#import "other.rgx"
+#import "other.rls"
 
 MAIN "*[@space]"
 ```
@@ -27,6 +27,6 @@ $> make
 It will generate a `./regex` executable.
 If you want to perform the search on a file, or multiple files you need to use the backquotes inside the double quotes
 ```bash
-$> ./regex "`cat file`" rules.rgx
+$> ./regex "`cat file`" rules.rls
 ```
 will execute the `MAIN` rule on `file`.
