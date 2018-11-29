@@ -4,7 +4,6 @@ JSON_STRING		"\" ?[ ?[@STRING_VALUE] @G] \""
 STRING_VALUE	"*[ ?[\\\"@G] | ?![\"] @or?]"
 JSON_INTEGER	"?[-+@?]*[@digit]"
 
-
 JSON_OBJECT		"
 {
 	*[@space?]

@@ -68,7 +68,7 @@ int main(int argc, char **argv)
 	** Execute the regex on the subject string.
 	*/
 	t_list *matches = NULL;
-	int n = ft_regex(RGX_GLOBAL, regex, subject, &matches);
+	int n = ft_regex((!(options & 4) ? RGX_GLOBAL : RGX_GROUP), regex, subject, &matches);
 
 	/* Print the matches in a tree form, if the '-s' option is given, */
 	if (options & 1)
@@ -104,7 +104,7 @@ static int	getoptions(int argc, char ***argv)
 	/* We jump the program name, as the ft_getopt function assumes that it is not a part of the array. */
 	++(*argv);
 	options = 0;
-	while (ft_getopt(argv, "sm", &opt) != OPT_END)
+	while (ft_getopt(argv, "smg", &opt) != OPT_END)
 	{
 		/* If an unknown option is given, we exit. */
 		if (opt.ret == OPT_UNKNOWN)
@@ -118,6 +118,9 @@ static int	getoptions(int argc, char ***argv)
 		/* If the option 'm' is met, then enable the second bit of `options` */
 		else if (opt.c == 'm')
 			options |= 2;
+		/* If the option 'm' is met, then enable the third bit of `options` */
+		else if (opt.c == 'g')
+			options |= 4;
 	}
 	/* If no arguments after the options, then the usage isn't respected, we exit. */
 	if (!**argv)
