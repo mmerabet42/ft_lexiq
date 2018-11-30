@@ -20,7 +20,7 @@ OP_DIV			"/"
 OP_MOD			"%"
 OP_L2			"?[ ?[@L2_LEFT] @G] ?[@SPACES] ?[ ?[ ?[@OP_MULT] | ?[@OP_DIV] | ?[@OP_MOD] @or] @G] ?[@SPACES] ?[ ?[@L2_RIGHT] @G]"
 
-L1_UNARY		"?[ ?[@OP_PLUS] | ?[@OP_MINUS] @or]"
+-L1_UNARY		"?[ ?[@OP_PLUS] | ?[@OP_MINUS] @or]"
 
 OP_PLUS			"+ ?[@SPACES] ?[ ?[@OPERAND] @G]"
 OP_MINUS		"- ?[@SPACES] ?[ ?[@OPERAND] @G]"

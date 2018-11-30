@@ -1,0 +1,23 @@
+WIDTH	"?[ *[@digit] | ?[*] @or]"
+PRECISION	". ?[ ?[*] | *[@digit] @or]"
+
+LL_MOD	"ll"
+HH_MOD	"hh"
+L_MOD	"l"
+LM_MOD	"L"
+H_MOD	"h"
+FLAG_MOD	"?[-+ hljtz#0]"
+
+MOD	"
+?[?[
+	?[@HH_MOD] | ?[@LL_MOD] | ?[@H_MOD] | ?[@L_MOD] | ?[@LM_MOD] | ?[@FLAG_MOD] | ?[@PRECISION] | ?[@WIDTH]
+@or]@G]
+"
+
+CONV "?"
+
+PRINTF_FORMAT	"% ?[ *[@MOD] @G?] ?[ ?[@CONV] @G]"
+
+LITERAL_CHAR	"*![%]"
+
+PRINTF	"?[?[ ?[@LITERAL_CHAR] | ?[@PRINTF_FORMAT] @or]@G]"

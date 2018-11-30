@@ -1,4 +1,0 @@
-#import "json.rls"
-#import "bracket.rls"
-
-MAIN "?[@BRACKET]"

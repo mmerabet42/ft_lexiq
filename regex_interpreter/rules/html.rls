@@ -1,0 +1,42 @@
+#import "json.rls"
+
+SPACES			"*[@space?]"
+SPACES_			"*[@space]"
+
+STRING_VALUE	"*[ \\\" | ?![\"] @or?]"
+STRING			"\"?[ ?[@STRING_VALUE] @G]\""
+
+TAG_NAME		"*[@word]"
+TAG_JSON		"json"
+TAG_ATTR		"?[?[@TAG_NAME]@G] ?[@SPACES] = ?[@SPACES] ?[?[@STRING]@G]"
+TAG_ATTRS		"*[ ?[@SPACES_] ?[ ?[@TAG_ATTR] @G] @or]"
+
+TAG_CONTENT		"
+	?[@SPACES]
+	*[
+		?[@HTML]
+		?[@SPACES]
+	@or?]
+"
+
+HTML_A			"
+	< ?[@SPACES] ?[ ?[@TAG_NAME] @G] ?[@TAG_ATTRS?] ?[@SPACES] >
+		?[ ?[@TAG_CONTENT] @G]
+	</ ?[@SPACES] ?[1@BL] ?[@SPACES] >
+"
+
+HTML_JSON		"
+	< ?[@SPACES] ?[ ?[@TAG_JSON] @G] ?[@TAG_ATTRS?] ?[@SPACES] >
+		?[@SPACES]
+		?[ ?[@JSON_OBJECT] @G]
+		?[@SPACES]
+	</ ?[@SPACES] ?[1@BL] ?[@SPACES] >
+"
+
+HTML_B			"
+	< ?[@SPACES] ?[ ?[@TAG_NAME] @G] ?[ ?[@TAG_ATTRS?] @G] ?[@SPACES] / ?[@SPACES]>
+"
+
+HTML_C			"*![ ?[@space] | < @or]"
+
+HTML			"?[ ?[ ?[@HTML_JSON] | ?[@HTML_A] | ?[@HTML_B] | ?[@HTML_C] @or] @G]"
