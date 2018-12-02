@@ -42,9 +42,9 @@ The regex engine (used by the lexiq engine) that i am going to present you works
 
 First of all, it is important to know that it has started as a school project, so it may not be perfect, and has definetely a tons of flaws.
 
-Secondly, the lexiq engine makes no dynamic allocation (except in some specific place), which mean that it does not compile or precompile or whatever, it reads the expression character by character. It uses the concept of 'rules' which is where the main difference and power stands, we will get to it later.
+Secondly, the lexiq engine tries to avoir dynamic allocations which means that it does not compile or precompile or whatever, it reads the expression character by character. It uses the concept of 'rules' which is where the main difference and power stands, we will get to it later.
 
-Thirdly, this engine was first a regular expression engine and was not supposed to become a generic parser, meaning that is is not optimised for this task.
+Thirdly, this engine was first a regular expression engine and was not supposed to become a generic parser, meaning that it has not been optimised for this task.
 
 So, before diving into the code, and learn how to use the lexiq library, let's first have a look at the syntax it uses.
 
