@@ -1,4 +1,4 @@
-# A simplistic lexiq interpreter
+# A simplified lexiq interpreter
 
 Let me present you a program that uses the lexiq engine.
 
