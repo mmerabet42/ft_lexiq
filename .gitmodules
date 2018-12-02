@@ -1,3 +1,3 @@
-[submodule "regex_interpreter/libft"]
-	path = regex_interpreter/libft
+[submodule "lexiq_interpreter/libft"]
+	path = lexiq_interpreter/libft
 	url = https://github.com/mmerabet42/libft.git
