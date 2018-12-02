@@ -1,7 +1,7 @@
 
 **ft_lexiq** is a C library for analyzing strings ( lexically and syntactically ) from a [context-free grammar](https://brilliant.org/wiki/context-free-grammars/) defined by a set of production rules which can describes any possible [context-free languages](https://brilliant.org/wiki/context-free-languages/) (See the [Chomsky hierarchy](https://www.tutorialspoint.com/automata_theory/chomsky_classification_of_grammars.htm)).
 
-This engine may finds itself as a [pushdown automata](https://brilliant.org/wiki/pushdown-automata/), which is before [turing machines](https://brilliant.org/wiki/turing-machines/) in the [automata theory](https://en.wikipedia.org/wiki/Automata_theory).
+This engine may finds itself as a [pushdown automata](https://brilliant.org/wiki/pushdown-automata/), which is under [turing machines](https://brilliant.org/wiki/turing-machines/) in the [automata theory](https://en.wikipedia.org/wiki/Automata_theory).
 
 It is based on a rethought regular expression syntax, which is the main aspect of this engine.
 
