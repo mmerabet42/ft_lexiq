@@ -1,8 +1,0 @@
-#import "json.rls"
-#import "bracket.rls"
-#import "expression.rls"
-#import "html.rls"
-#import "printf.rls"
-#import "struct.rls"
-
-MAIN "?[@BRACKET]"

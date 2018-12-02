@@ -2,7 +2,7 @@ if exists('b:current_syntax')
 	finish
 endif
 
-let b:current_syntax = 'rls'
+let b:current_syntax = 'lq'
 
 syntax match ImportString '".*"'
 syntax match ImportKeyword '#import' nextgroup=ImportString skipwhite
