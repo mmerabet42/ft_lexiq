@@ -1,15 +1,15 @@
 
 # Rules collection
 
-A collection of files that defines the grammar for some languages.
+A collection of files that defines the grammar of some context-free languages.
 
 | Name | Description |
 | --- | --- |
-| `json.rls` | Defines the json grammar. |
-| `html.rls` | Defines the html grammar (The <style> tag is yet to be implemented with the `css.rls` grammar). |
-| `css.rls` | Not yet. |
-| `javascript.rls` | No way. |
-| `printf.rls` | Defines the printf grammar. |
-| `struct.rls` | Defines the grammar of C structures and C comments only. |
-| `expression.rls` | Defines the arithmetic grammar of the basic mathematic operations (`+`, `-`, `*`, `/`, `%` and `()`). |
-| `rules.rls` | Import all the mentionned files above. |
+| `json.lq` | Defines the json grammar. |
+| `html.lq` | Defines the html grammar (The <style> tag is yet to be implemented with the `css.lq` grammar). |
+| `css.lq` | Not yet. |
+| `javascript.lq` | No way. |
+| `printf.lq` | Defines the printf grammar. |
+| `struct.lq` | Defines the grammar of C structures and C comments only. |
+| `expression.lq` | Defines the arithmetic grammar of the basic mathematic operations (`+`, `-`, `*`, `/`, `%` and `()`). |
+| `rules.lq` | Import all the mentionned files above. |
