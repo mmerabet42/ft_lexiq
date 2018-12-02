@@ -29,4 +29,4 @@ If you want to perform an expression on a particular file, or multiple files you
 ```bash
 $> ./regex -s "`cat file`" -i rules.lq
 ```
-will execute the `MAIN` imported from `rules.lq` on the content of `file`.
+will execute the `MAIN` rule imported from `rules.lq` on the content of `file`.
