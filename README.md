@@ -1,7 +1,7 @@
 
-**ft_lexiq** is a C library for analyzing strings ( lexically and syntactically ), from a [context-free grammar](https://brilliant.org/wiki/context-free-grammars/) defined by a set of production rules which can describres any possible [context-free languages](https://brilliant.org/wiki/context-free-languages/).
+**ft_lexiq** is a C library for analyzing strings ( lexically and syntactically ) from a [context-free grammar](https://brilliant.org/wiki/context-free-grammars/) defined by a set of production rules which can describes any possible [context-free languages](https://brilliant.org/wiki/context-free-languages/).
 
-It is based on a rethought regular expression syntax, and new innovative concepts.
+It is based on a rethought regular expression syntax, and new concepts.
 
 ### Table of content
 
