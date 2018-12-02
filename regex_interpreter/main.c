@@ -1,4 +1,4 @@
-#include "libft/includes/ft_regex.h"
+#include "libft/includes/ft_lexiq.h"
 #include "libft/includes/ft_str.h"
 #include "libft/includes/ft_mem.h"
 #include "libft/includes/ft_printf.h"
@@ -9,7 +9,7 @@
 /*
 ** The usage is printed if the required argument are not provided.
 */
-#define USAGE_STR "Usage: ./regex [-sm] subject [regex] file ...\n"
+#define USAGE_STR "Usage: ./lexiq [-sm] subject [regex] [file ...]\n"
 
 static int	getoptions(int argc, char ***argv);
 
@@ -17,7 +17,7 @@ int main(int argc, char **argv)
 {
 	int		options;
 	char	*subject;
-	char	*regex;
+	char	*expr;
 
 	/* Parse the options. */
 	if ((options = getoptions(argc, &argv)) == -1)
@@ -33,17 +33,17 @@ int main(int argc, char **argv)
 
 	/* If the options '-m' is given (options & 2), then the regex is the next argument. */
 	if (options & 2)
-		regex = *(argv++);
+		expr = *(argv++);
 	/* Otherwise use the 'MAIN' rule declared in one of the files. */
 	else
-		regex = "?[@MAIN]";
+		expr = "?[@MAIN]";
 	/* If files are provided, import them. */
 	while (*argv)
 	{
 		/* If the importation of a file failed, we clean all the already imported files and exit. */
-		if (ft_regex(RGX_IMPORT, *argv, NULL) == -1)
+		if (ft_lexiq(LQ_IMPORT, *argv, NULL) == -1)
 		{
-			ft_regex(RGX_CLEAN, NULL, NULL);
+			ft_lexiq(LQ_CLEAN, NULL, NULL);
 			ft_printf("regex: Failed to open '%s'\n", *argv);
 			return (1);
 		}
@@ -54,21 +54,21 @@ int main(int argc, char **argv)
 	{
 		/* We check if the 'MAIN' rule is declared, if it is not, we exit. */
 		void *main_ptr = NULL;
-		ft_regex(RGX_GETRULE, "MAIN", NULL, &main_ptr);
+		ft_lexiq(LQ_GETRULE, "MAIN", NULL, &main_ptr);
 		if (!main_ptr)
 		{
-			ft_printf("regex: 'MAIN' rule not found\n");
+			ft_printf("lexiq: 'MAIN' rule not found\n");
 			return (1);
 		}
 		/* Set the 'MAIN' rule 'transparent' by setting its id to -2. */
-		((t_regex_func *)main_ptr)->id = -2;
+		((t_lq_func *)main_ptr)->id = -2;
 	}
 
 	/*
 	** Execute the regex on the subject string.
 	*/
 	t_list *matches = NULL;
-	int n = ft_regex((!(options & 4) ? RGX_GLOBAL : RGX_GROUP), regex, subject, &matches);
+	int n = ft_lexiq((!(options & 4) ? LQ_GLOBAL : LQ_GROUP), expr, subject, &matches);
 
 	/* Print the matches in a tree form, if the '-s' option is given, */
 	if (options & 1)
@@ -81,8 +81,8 @@ int main(int argc, char **argv)
 	/*
 	** Free the allocated matches, and rules.
 	*/
-	ft_regex(RGX_FREE, NULL, NULL, &matches);
-	ft_regex(RGX_CLEAN, NULL, NULL);
+	ft_lexiq(LQ_FREE, NULL, NULL, &matches);
+	ft_lexiq(LQ_CLEAN, NULL, NULL);
 	get_next_line(-1, NULL);
 	get_next_delimstr(-1, NULL, NULL);
 	ft_printf_free_formats();

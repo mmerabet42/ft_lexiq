@@ -1,0 +1,10 @@
+SPACES		"*[@space?]"
+
+CSS_NAME	"
+	
+"
+
+CSS			"
+	?[@CSS_NAMES] ?[@SPACES] {
+	}
+"

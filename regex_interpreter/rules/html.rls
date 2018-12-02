@@ -6,7 +6,7 @@ SPACES_			"*[@space]"
 STRING_VALUE	"*[ \\\" | ?![\"] @or?]"
 STRING			"\"?[ ?[@STRING_VALUE] @G]\""
 
-TAG_NAME		"*[@word]"
+TAG_NAME		"*[-_a-zA-Z0-9]"
 TAG_JSON		"json"
 TAG_ATTR		"?[?[@TAG_NAME]@G] ?[@SPACES] = ?[@SPACES] ?[?[@STRING]@G]"
 TAG_ATTRS		"*[ ?[@SPACES_] ?[ ?[@TAG_ATTR] @G] @or]"

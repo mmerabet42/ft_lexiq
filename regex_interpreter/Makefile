@@ -1,4 +1,4 @@
-NAME		= regex
+NAME		= lexiq
 CC			= gcc
 CC_FLAGS	= -Wall -Wextra -Werror -g3 -fsanitize=address
 
