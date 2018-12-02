@@ -3,7 +3,7 @@
 
 This engine may finds itself as a [pushdown automata](https://brilliant.org/wiki/pushdown-automata/), which is before [turing machines](https://brilliant.org/wiki/turing-machines/) in the [automata theory](https://en.wikipedia.org/wiki/Automata_theory).
 
-It is based on a rethought regular expression syntax.
+It is based on a rethought regular expression syntax, which is the main aspect of this engine.
 
 ### Table of content
 
