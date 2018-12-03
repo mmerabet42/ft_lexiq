@@ -45,7 +45,7 @@ int main(int argc, char **argv)
 		((t_lq_func *)main_ptr)->id = -2;
 	}
 
-	if (options & 3)
+	if (options & 4)
 		ft_printf("Executing '%s'\n\n", expr);
 
 	if (expr && subject)
