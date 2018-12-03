@@ -1,9 +1,9 @@
 
-**ft_lexiq** is a C library for analyzing and interpreting [context-free languages](https://brilliant.org/wiki/context-free-languages/) defined by a [context-free grammar](https://brilliant.org/wiki/context-free-grammars/) (See the [Chomsky hierarchy](https://www.tutorialspoint.com/automata_theory/chomsky_classification_of_grammars.htm)).
+**ft_lexiq** is a C library for analyzing and interpreting [context-free languages](https://brilliant.org/wiki/context-free-languages/) defined by a set of rules that makes up a [context-free grammar](https://brilliant.org/wiki/context-free-grammars/) (See the [Chomsky hierarchy](https://www.tutorialspoint.com/automata_theory/chomsky_classification_of_grammars.htm)).
 
-The engine may finds itself as a [pushdown automaton](https://brilliant.org/wiki/pushdown-automata/), which is bulow [turing machines](https://brilliant.org/wiki/turing-machines/) in the [automata theory](https://en.wikipedia.org/wiki/Automata_theory).
+The engine may finds itself as a [pushdown automaton](https://brilliant.org/wiki/pushdown-automata/), which is below [turing machines](https://brilliant.org/wiki/turing-machines/) in the [automata theory](https://en.wikipedia.org/wiki/Automata_theory).
 
-It is based on a rethought regular expression syntax, which is the main aspect of this engine.
+**ft_lexiq** can also define [regular languages](https://brilliant.org/wiki/regular-languages/) that can be expressed with regular expressions, which is the main core of the engine. So how does this engine implements regular expressions goes as the first question to answer.
 
 ### Table of content
 
