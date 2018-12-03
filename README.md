@@ -46,7 +46,7 @@ The regex engine (used by the lexiq engine) that i am going to present you works
 
 First of all, it is important to know that it has started as a school project, so it may not be perfect, and has definetely a tons of flaws.
 
-Secondly, the lexiq engine tries to avoir dynamic allocations which means that it does not compile or precompile or whatever, it reads the expression character by character. It uses the concept of 'rules' which is where the main difference and power stands, we will get to it later.
+Secondly, the lexiq engine tries to avoid dynamic allocations which means that it does not compile or precompile or whatever, it just reads the expression character by character. It uses the concept of 'rules' which is where the main difference and power stands, we will get to it later.
 
 Thirdly, this engine was first a regular expression engine and was not supposed to become a generic parser, meaning that it has not been optimised for this task.
 
@@ -116,7 +116,7 @@ To call a rule you would need to put the rule name right after the '@' sign: `?[
 
 It is mainly the case of the `or` rule, that should simply match one of the alternatives: `*[ok?[@digit]|?[@alpha]@or]` shall match one or more times; the literal characters *ok* followed by a digit; or an alphabetic character. And this could be a rule: `strange_rule:*[ok?[@digit]|?[@alpha]@or]`, you should have seen that what separates the expressions is the `|` character so in this context it loses its literal meaning, and if we wanted to match this character we would do the same as for the metacharacters `?[|]`. And in this example we understand that rules receives in reality two input, the string to match and an optional argument which is specified before the '@' sign.
 
-The truth is that everything is a rule, and even when you try to match a character set: `?[abc]` you are in fact calling a rule named 'DEFAULT', it is the same as typing `?[abc@DEFAULT]`. So at this point the `DEFAULT` rule cannot call other rules, as it is the lowest rule. Which is good, because it means that a rule doesn't need to call other rules in order to work, they can also call C functions ! We can conclude that rules are not limited to the power of other rules but of the C programming language !!
+The truth is that everything is a rule, and even when you try to match a character set: `?[abc]` you are in fact calling a rule named 'DEFAULT', so it is the same as typing `?[abc@DEFAULT]`. And at this point the `DEFAULT` rule cannot call other rules, as it is the lowest rule. Which is good, because it means that a rule doesn't need to call other rules in order to work, they can also call C functions ! We can conclude that rules are not limited to the power of other rules but of the C programming language !!
 
 It is commonly known that regex engines are limited, and this engine is no exception, but with the concept of rules we break all limitations.
 
@@ -155,8 +155,8 @@ These are the available arithmetic operators
 | Operator | Descrption |
 | --- | --- |
 | `+` | Returns the addition of the two variables |
-| `-` | Returns the subtraction the two variables |
-| `-` | Returns the multiplication the two variables |
+| `-` | Returns the subtraction of the two variables |
+| `-` | Returns the multiplication of the two variables |
 | `/` | Returns the division of the two variables |
 | `=` | Returns 1 if the two variables are equal or 0 otherwise |
 | `!` | Returns 1 if the two variables are different or 0 otherwise |
@@ -184,7 +184,7 @@ A more usefull and explicit example would be to define an expression that matche
 
 #### The latest version of the `ft_lexiq` function is available in the [libft](https://github.com/mmerabet42/libft) library.
 
-Now that we have seen how this regex engine works (and why it might be powerfull ?) let's dive into the code and let's see how we can use it.
+Now that we have seen how this engine works (and why it might be powerfull ?) let's dive into the code and let's see how we can use it.
 
 Everything is done through one and only one function:
 ```C
