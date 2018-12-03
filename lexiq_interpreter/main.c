@@ -9,7 +9,7 @@
 /*
 ** The usage is printed if the required argument are not provided.
 */
-#define USAGE_STR "Usage: ./lexiq [-t] [-s subject] [-e expression] [-i file] ...\n"
+#define USAGE_STR "Usage: ./lexiq [-tv] [-s subject] [-e expression] [-i file] ...\n"
 
 static int	getoptions(char ***argv, char **subject, char **expr);
 
@@ -44,6 +44,9 @@ int main(int argc, char **argv)
 		/* Set the 'MAIN' rule 'transparent' by setting its id to -2. */
 		((t_lq_func *)main_ptr)->id = -2;
 	}
+
+	if (options & 3)
+		ft_printf("Executing '%s'\n\n", expr);
 
 	if (expr && subject)
 	{
@@ -83,7 +86,7 @@ static int	getoptions(char ***argv, char **subject, char **expr)
 	/* We jump the program name, as the ft_getopt function assumes that it is not a part of the array. */
 	++(*argv);
 	options = 0;
-	while (ft_getopt(argv, "s.1e.1i.1t;subject.1;expression.1;import.1;tree", &opt) != OPT_END)
+	while (ft_getopt(argv, "s.1e.1i.1tv;subject.1;expression.1;import.1;tree", &opt) != OPT_END)
 	{
 		/* If the option is unknown or if its arguments are missing, we exit. */
 		if (opt.ret == OPT_UNKNOWN || opt.ret == OPT_MISSING)
@@ -115,6 +118,8 @@ static int	getoptions(char ***argv, char **subject, char **expr)
 		/* If the '-t' option is met, enable the second bit of `options` */
 		else if (opt.c == 't' || (opt.c == '-' && *opt.clong == 't'))
 			options |= 2;
+		else if (opt.c == 'v')
+			options |= 4;
 	}
 	return (options);
 }
