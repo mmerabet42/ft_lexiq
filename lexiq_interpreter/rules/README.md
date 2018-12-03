@@ -1,5 +1,5 @@
 
-# Rules collection
+# Grammar collection
 
 A collection of files that defines the grammar of some context-free languages.
 

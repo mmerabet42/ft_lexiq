@@ -1,7 +1,9 @@
 
 **ft_lexiq** is a C library for analyzing strings ( lexically and syntactically ) from a [context-free grammar](https://brilliant.org/wiki/context-free-grammars/) defined by a set of production rules which can describes any possible [context-free languages](https://brilliant.org/wiki/context-free-languages/) (See the [Chomsky hierarchy](https://www.tutorialspoint.com/automata_theory/chomsky_classification_of_grammars.htm)).
 
-It is based on a rethought regular expression syntax.
+This engine may finds itself as a [pushdown automata](https://brilliant.org/wiki/pushdown-automata/), which is under [turing machines](https://brilliant.org/wiki/turing-machines/) in the [automata theory](https://en.wikipedia.org/wiki/Automata_theory).
+
+It is based on a rethought regular expression syntax, which is the main aspect of this engine.
 
 ### Table of content
 
@@ -114,13 +116,13 @@ It is mainly the case of the `or` rule, that should simply match one of the alte
 
 The truth is that everything is a rule, and even when you try to match a character set: `?[abc]` you are in fact calling a rule named 'DEFAULT', it is the same as typing `?[abc@DEFAULT]`. So at this point the `DEFAULT` rule cannot call other rules, as it is the lowest rule. Which is good, because it means that a rule doesn't need to call other rules in order to work, they can also call C functions ! We can conclude that rules are not limited to the power of other rules but of the C programming language !!
 
-It is commonly known that regex engines are limited, and `ft_lexiq` is no exception, but with the concept of rules we break all limitations.
+It is commonly known that regex engines are limited, and this engine is no exception, but with the concept of rules we break all limitations.
 
 Here is a non-exhaustive list of available rules.
 
 | Name | Description | Method | Example | Explanation |
 | --- | --- | --- | --- | --- |
-| `@or` | One of the expression, seperated by `|`, given in argument shall match | C function | `reg?[ex?[es@or?]\|ular expression?[s@?]@or]` | Might match 'regex' 'regular expression' 'regexes' or 'regular expressions' |
+| `@or` | One of the subexpression, seperated by an `\|`, given in argument shall match | C function | `reg?[ex?[es@or?]\|ular expression?[s@?]@or]` | Might match 'regex' 'regular expression' 'regexes' or 'regular expressions' |
 | `@case` | Compare the strings ignoring case | C function | `?[hello@case] world` | Will match any possible form of the 'hello' string followed by exactly ' world' |
 | `@^` | Beginning of string | C function | `?[@^]hello` | The string '*hello*' matches only if it is at the beginning of a string |
 | `@$` | End of string | C function | `hello?[@$]` | The string '*hello*' matches only if it is at the end of a string |
@@ -130,7 +132,7 @@ Here is a non-exhaustive list of available rules.
 | `@$w` | End of string, line or word | C function | `hello?[@$w]` | The string '*hello*' matches only if it is at the end of a string, line or word |
 | `@upper` | Any uppercase letter | Inline expression | `*![@upper=3]` | Matches three characters that are not uppercase letters |
 | `@lower` | Any lowercase letter | Inline expression | `?[@upper]*[@lower]` | An uppercase letter followed by any number of lowercase letters |
-| `@and` | All of the expressions, seperated by `&`, given in argument shall match  | C function | `*[?![@upper]&?![@lower]@and]` | Any number of characters that are neither an uppercase letter nor a lowercase letter, equivalent of `*![@alpha]` |
+| `@and` | All of the subexpressions, seperated by an `&`, given in argument shall match  | C function | `*[?![@upper]&?![@lower]@and]` | Any number of characters that are neither an uppercase letter nor a lowercase letter, equivalent of `*![@alpha]` |
 | `@word` | Any word character that is either an alphabetic character, a digit or an underscore. | Inline expression | `?[@^w]*[@word=3]?[@$w]` | Three word characters between word boundaries |
 | `@space` | Any space character | Inline expression | `?![@space]` | Match any character that is not a space. |
 | `@int` | A valid integer | Inline expression | `?[@int]` | An integer might start with zero or more space followed by; a minus or a plus sign or nothing; followed by one or more digits. |
