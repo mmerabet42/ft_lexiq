@@ -37,6 +37,6 @@ HTML_B			"
 	< ?[@SPACES] ?[ ?[@TAG_NAME] @G] ?[ ?[@TAG_ATTRS?] @G] ?[@SPACES] / ?[@SPACES]>
 "
 
-HTML_C			"*![ ?[@space] | < @or]"
+HTML_C			"*![ \t\n<]"
 
 HTML			"?[ ?[ ?[@HTML_JSON] | ?[@HTML_A] | ?[@HTML_B] | ?[@HTML_C] @or] @G]"

@@ -21,9 +21,15 @@ int main(int argc, char **argv)
 
 	(void)argc;
 	expr = "?[@MAIN]";
+	subject = NULL;
 	/* Parse the options. */
 	if ((options = getoptions(&argv, &subject, &expr)) == -1)
 		return (1);
+	if (!subject)
+	{
+		ft_printf_fd(2, USAGE_STR);
+		return (1);
+	}
 	/* If the '-e' option never occured, */
 	if (!(options & 1))
 	{
