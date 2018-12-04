@@ -61,7 +61,7 @@ int main(int argc, char **argv)
 			ft_print_matches_tree(matches, 0);
 		/* Otherwise print it normally. */
 		else
-			ft_print_matches(subject, matches);
+			ft_print_matches(subject, matches, 0);
 		ft_printf("\n%d match(es)\n", n);
 
 		ft_lexiq(LQ_FREE, NULL, NULL, &matches);
