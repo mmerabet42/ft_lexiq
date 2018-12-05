@@ -1,3 +1,16 @@
-body {
-	border: 2px 5px 3px black;
+body#hover [class*="prout"]:visited  p.class   ,html  div:active a,div::before >li+ul{v:o;}
+
+#a{
+	background-color: red;
+	color:yellow;
+	border: 2px 1px 3px black   ;
+
+
+
+
+
+
+
+
+	transition: background-color 3s;
 }

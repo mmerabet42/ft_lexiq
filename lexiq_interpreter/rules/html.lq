@@ -1,4 +1,4 @@
-#import "json.lq"
+#import "css.lq"
 
 SPACES			"*[@space?]"
 SPACES_			"*[@space]"
@@ -7,7 +7,7 @@ STRING_VALUE	"*[ \\\" | ?![\"] @or?]"
 STRING			"\"?[ ?[@STRING_VALUE] @G]\""
 
 TAG_NAME		"*[-_a-zA-Z0-9]"
-TAG_JSON		"json"
+TAG_STYLE		"style"
 TAG_ATTR		"?[?[@TAG_NAME]@G] ?[@SPACES] = ?[@SPACES] ?[?[@STRING]@G]"
 TAG_ATTRS		"*[ ?[@SPACES_] ?[ ?[@TAG_ATTR] @G] @or]"
 
@@ -25,10 +25,15 @@ HTML_A			"
 	</ ?[@SPACES] ?[1@BL] ?[@SPACES] >
 "
 
-HTML_JSON		"
-	< ?[@SPACES] ?[ ?[@TAG_JSON] @G] ?[@TAG_ATTRS?] ?[@SPACES] >
+STYLE_CONTENT	"*[
+	?[@CSS]
+	?[@SPACES]
+@or]"
+
+HTML_STYLE		"
+	< ?[@SPACES] ?[ ?[@TAG_STYLE] @G] ?[@TAG_ATTRS?] ?[@SPACES] >
 		?[@SPACES]
-		?[ ?[@JSON_OBJECT] @G]
+		?[ ?[@STYLE_CONTENT] @G?]
 		?[@SPACES]
 	</ ?[@SPACES] ?[1@BL] ?[@SPACES] >
 "
@@ -39,4 +44,4 @@ HTML_B			"
 
 HTML_C			"*![ \t\n<]"
 
-HTML			"?[ ?[ ?[@HTML_JSON] | ?[@HTML_A] | ?[@HTML_B] | ?[@HTML_C] @or] @G]"
+HTML			"?[ ?[ ?[@HTML_STYLE] | ?[@HTML_A] | ?[@HTML_B] | ?[@HTML_C] @or] @G]"

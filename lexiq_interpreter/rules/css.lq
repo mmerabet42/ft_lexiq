@@ -1,10 +1,74 @@
-SPACES		"*[@space?]"
+spaces		"*[@space?]"
 
-CSS_NAME	"
-	
+css-word	"*[-a-zA-Z0-9_]"
+css-quote-value	"*[\\\"|?![\"]@or?]"
+css-quote	"\"?[?[@css-quote-value]@G]\""
+
+sep-and			","
+sep-action		":"
+sep-pseudo		"::"
+sep-child		">"
+sep-sibling		"+"
+sep-gen-sibling "~"
+
+sep-inside	"?[ ]"
+
+-css-sep	"?[
+	?[@sep-and]
+|
+	?[@sep-pseudo]
+|
+	?[@sep-action]
+|
+	?[@sep-child]
+|
+	?[@sep-sibling]
+|
+	?[@sep-gen-sibling]
+@or]
 "
 
+id-name		"#?[@spaces]?[@css-word]"
+class-name	".?[@spaces]?[@css-word]"
+
+attr-op		"?[=|~=|^=|$=|?[*]=@or]"
+attr-name	"[
+	?[ ?[@css-word] @G]
+	?[@spaces] ?[?[@attr-op]@G] ?[@spaces]
+	?[ ?[@css-quote] @G]
+]"
+
+-css-name	"?[
+	?[@id-name]
+|
+	?[@class-name]
+|
+	?[@css-word]
+|
+	?[@attr-name]
+@or]
+"
+
+css-names	"*[
+	?[ ?[@css-name] @G] ?[
+		?[?[@spaces]{@;]
+	|
+		?[@spaces] ?[ ?[@css-sep] @G] ?[@spaces]
+	|
+		?[ @?] ?[@spaces]
+	@or]
+@or]
+"
+
+css-values	"*![;]"
+
+css-var		"?[?[@css-word]@G] ?[@spaces] : ?[@spaces] ?[?[@css-values]@G] ;"
+
+css-content	"{?[@spaces]*[
+	?[?[@css-var]@G] ?[@spaces]
+@or?]}"
+
 CSS			"
-	?[@CSS_NAMES] ?[@SPACES] {
-	}
+	?[@css-names] ?[@spaces]
+		?[?[@css-content]@G]
 "

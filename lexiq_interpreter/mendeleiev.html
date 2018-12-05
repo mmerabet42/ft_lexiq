@@ -4,12 +4,123 @@
     <meta charset="utf-8" />
     <title>Tableau périodique des éléments</title>
 
+    <style>
+        body {
+			background-image: url("http://bernard.langellier.pagesperso-orange.fr/imgbiogra/mendeleiev.gif");
+			padding: 1vw;
+        }
 
-	<style>
-		a{
-			background-color: red;
+        #main-title {
+            font-size: 2vw;
+            margin: auto;
+            text-align: center;
+            color: black;
+            border-radius: 3px;
+            box-shadow: 1px 1px 10px black;
+			background-color: rgba(255, 255, 255, 0.7);
+            padding: 10px;
+        }
+
+        #table {
+            white-space: nowrap;
+            margin: auto;
+			padding: 1vw;
+            text-align: center;
+			background-color: rgba(255, 255, 255, 0.7);
+			border-radius: 5px black solid;
+			box-shadow: 1px 1px 20px black;
 		}
-	</style>
+
+        .empty-case {
+            position: relative;
+            display: inline-block;
+            margin: 0;
+            width: 4vw;
+            height: 4vw;
+        }
+
+		.case {
+			position: relative;
+			display: inline-block;
+			border-radius: 0.3vw;
+			color: black;
+			margin: 0;
+			width: 4vw;
+			height: 4vw;
+			transition: 0.2s color;
+		}
+
+        .case:hover {
+			color: white;
+        }
+
+        .symbol {
+            position: absolute;
+            font-size: 1.5vw;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            text-align: center;
+        }
+
+        .element-no {
+            font-size: 0.7vw;
+            margin: 0.3vw;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+        }
+
+        .atomic-wt {
+            font-size: 0.7vw;
+            margin: 0.3vw;
+            position: absolute;
+            top: 0;
+            right: 0;
+        }
+
+        .color-a {
+            background-color: #928aa8;
+        }
+
+        .color-b {
+            background-color: #1fc661;
+        }
+
+        .color-c {
+            background-color: #2c3844;
+        }
+
+        .color-d {
+            background-color: #ffb359;
+        }
+
+        .color-e {
+            background-color: #FFE4BA;
+        }
+
+        .color-f {
+            background-color: #FED896;
+        }
+
+        .color-g {
+            background-color: #20bc83;
+        }
+
+        .color-h {
+            background-color: #41f4a9;
+        }
+
+        .color-i {
+            background-color: #355C7D;
+        }
+
+        .color-j {
+            background-color: #A7226E;
+        }
+
+    </style>
 </head>
 
 <body>
