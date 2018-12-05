@@ -3,6 +3,8 @@
 
 The engine may finds itself as a [pushdown automaton](https://brilliant.org/wiki/pushdown-automata/), which is below [turing machines](https://brilliant.org/wiki/turing-machines/) in the [automata theory](https://en.wikipedia.org/wiki/Automata_theory).
 
+A collection of grammars can be found in the [lexiq_interpreter/rules](lexiq_interpreter/rules/) folder.
+
 **ft_lexiq** can also define [regular languages](https://brilliant.org/wiki/regular-languages/) that can be expressed with regular expressions, which is the main core of the engine.
 
 So how does this engine implements regular expressions goes as the first question to answer.
