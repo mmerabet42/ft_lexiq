@@ -2,18 +2,18 @@ if exists('b:current_syntax')
 	finish
 endif
 
-let b:current_syntax = 'lq'
+let b:current_syntax = 'rls'
 
 syntax match ImportString '".*"'
 syntax match ImportKeyword '#import' nextgroup=ImportString skipwhite
 
 syntax match RuleCall '[^\]=><?}]*' contained
-syntax match RuleCallAt '@' nextgroup=RuleCall
-syntax match Metacharacter '?!\|*!\|?\|*'
-syntax match BackSlash '\\.'
+syntax match RuleCallAt '@' nextgroup=RuleCall contained
+syntax match Metacharacter '?!\|*!\|?\|*' contained
+syntax match BackSlash '\\.' contained
 syntax region RuleDefinition start='"' end='"' contains=RuleCallAt,Metacharacter,BackSlash transparent
-syntax match RuleName '\w\+' nextgroup=RuleDefinition skipwhite
-syntax match RuleNameTransparent '-\w\+' nextgroup=RuleDefinition skipwhite
+syntax match RuleName '[^\]=><?[:space:]}]\+' nextgroup=RuleDefinition skipwhite
+syntax match RuleNameTransparent '-[^\]=><?[:space:]}]\+' nextgroup=RuleDefinition skipwhite
 
 
 hi RuleName ctermfg=85 cterm=bold
