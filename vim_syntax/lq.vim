@@ -20,6 +20,7 @@ hi RuleName ctermfg=85 cterm=bold
 hi RuleNameTransparent ctermfg=yellow cterm=bold
 hi RuleCallAt ctermfg=86 cterm=bold
 hi RuleCall ctermfg=86 cterm=bold
+
 hi Metacharacter ctermfg=white cterm=bold
 hi BackSlash cterm=bold
 
