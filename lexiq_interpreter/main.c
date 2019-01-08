@@ -53,7 +53,7 @@ int main(int argc, char **argv)
 		/*
 		** Execute the expression on the subject string.
 		*/
-		t_list *matches = NULL;
+		t_lq_list *matches = NULL;
 		int n = ft_lexiq(LQ_GLOBAL, expr, subject, &matches);
 
 		/* Print the matches in a tree, if the '-t' option is specified, */

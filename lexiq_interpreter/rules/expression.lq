@@ -9,7 +9,11 @@ PARENTHESIS		"( ?[@SPACES] ?[@EXPRESSION] ?[@SPACES] )"
 
 OP_ADD			"+"
 OP_SUB			"-"
-OP_L1			"?[ ?[@L1_LEFT] @G] ?[@SPACES] ?[ ?[ ?[@OP_ADD] | ?[@OP_SUB] @or] @G] ?[@SPACES] ?[ ?[@L1_RIGHT] @G]"
+OP_L1			"
+	?[ ?[@L1_LEFT] @G] ?[@SPACES]
+		?[ ?[ ?[@OP_ADD] | ?[@OP_SUB] @or] @G]
+	?[@SPACES] ?[ ?[@L1_RIGHT] @G]
+"
 
 -L2_OPERATOR	"?[@OP_L2]"
 -L2_RIGHT		"?[ ?[@L2_OPERATOR] | ?[@OPERAND] @or]"
@@ -18,7 +22,10 @@ OP_L1			"?[ ?[@L1_LEFT] @G] ?[@SPACES] ?[ ?[ ?[@OP_ADD] | ?[@OP_SUB] @or] @G] ?[
 OP_MULT			"?[*]"
 OP_DIV			"/"
 OP_MOD			"%"
-OP_L2			"?[ ?[@L2_LEFT] @G] ?[@SPACES] ?[ ?[ ?[@OP_MULT] | ?[@OP_DIV] | ?[@OP_MOD] @or] @G] ?[@SPACES] ?[ ?[@L2_RIGHT] @G]"
+OP_L2			"
+	?[ ?[@L2_LEFT] @G] ?[@SPACES]
+		?[ ?[ ?[@OP_MULT] | ?[@OP_DIV] | ?[@OP_MOD] @or] @G]
+	?[@SPACES] ?[ ?[@L2_RIGHT] @G]"
 
 -L1_UNARY		"?[ ?[@OP_PLUS] | ?[@OP_MINUS] @or]"
 
